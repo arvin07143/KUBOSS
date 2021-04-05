@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+                name="addRackViewModel"
+                type="com.example.kuboss.warehouse.AddRackViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".warehouse.AddRackFragment"
+            android:padding="16dp">
+
+
+        <TextView
+                android:text="Aisle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:id="@+id/aisle_label"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:ems="10"
+                android:id="@+id/edit_text_aisle"
+                app:layout_constraintStart_toStartOf="@+id/aisle_label"
+                app:layout_constraintTop_toBottomOf="@+id/aisle_label" />
+
+        <TextView
+                android:text="Unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:id="@+id/unit_label"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_text_aisle"
+                android:layout_marginTop="20dp" />
+
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:ems="10"
+                android:id="@+id/edit_text_unit"
+                app:layout_constraintStart_toStartOf="@+id/unit_label"
+                app:layout_constraintTop_toBottomOf="@+id/unit_label" />
+
+        <Button
+                android:text="Confirm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/confirm_btn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cancel_btn"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <Button
+                android:text="Cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/cancel_btn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/confirm_btn"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
