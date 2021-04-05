@@ -9,4 +9,5 @@ class Rack (
     @PrimaryKey
     var rackId: String
 
+
 )

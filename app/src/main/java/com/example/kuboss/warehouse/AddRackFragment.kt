@@ -36,7 +36,7 @@ class AddRackFragment : Fragment() {
             val newRackId = binding.editTextAisle.text.toString() + "-" + binding.editTextUnit.text.toString()
             Log.d("adding rack", newRackId)
             addRackViewModel.onAddRack(newRackId)
-            findNavController().navigate(R.id.action_addRackFragment_to_warehouseFragment)
+            //findNavController().navigate(R.id.action_addRackFragment_to_warehouseFragment)
 
         }
         return binding.root

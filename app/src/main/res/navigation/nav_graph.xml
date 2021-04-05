@@ -1,33 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
-        app:startDestination="@id/warehouseFragment">
-
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/nav_graph"
+        app:startDestination="@id/rackDetailsFragment">
     <fragment
-            android:id="@+id/warehouseFragment"
-            android:name="com.example.kuboss.warehouse.WarehouseFragment"
-            android:label="WarehouseFragment" >
-        <action
-                android:id="@+id/action_warehouseFragment_to_addRackFragment"
-                app:destination="@id/addRackFragment" />
-        <action
-                android:id="@+id/action_warehouseFragment_to_rackContentFragment"
-                app:destination="@id/rackContentFragment" />
-    </fragment>
-    <fragment
-            android:id="@+id/addRackFragment"
-            android:name="com.example.kuboss.warehouse.AddRackFragment"
-            android:label="AddRackFragment" >
-        <action
-                android:id="@+id/action_addRackFragment_to_warehouseFragment"
-                app:destination="@id/warehouseFragment" />
-    </fragment>
-    <fragment
-            android:id="@+id/rackContentFragment"
-            android:name="com.example.kuboss.warehouse.RackContentFragment"
-            android:label="RackContentFragment" >
-        <action
-                android:id="@+id/action_rackContentFragment_to_warehouseFragment"
-                app:destination="@id/warehouseFragment" />
-    </fragment>
+            android:id="@+id/rackDetailsFragment"
+            android:name="com.example.kuboss.RackDetailsFragment"
+            android:label="RackDetailsFragment" />
 </navigation>

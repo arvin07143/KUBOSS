@@ -42,7 +42,7 @@ class WarehouseFragment : Fragment() {
 
         //button listener
         binding.addRackBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_warehouseFragment_to_addRackFragment)
+            //findNavController().navigate(R.id.action_warehouseFragment_to_addRackFragment)
         }
         return binding.root
     }

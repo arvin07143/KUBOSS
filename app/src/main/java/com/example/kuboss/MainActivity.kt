@@ -7,7 +7,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.kuboss.settings.Utils
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
