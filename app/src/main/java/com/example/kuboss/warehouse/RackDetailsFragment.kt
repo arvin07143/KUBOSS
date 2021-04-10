@@ -37,7 +37,8 @@ class RackDetailsFragment : Fragment(){
 
         binding.lifecycleOwner = this
         binding.rackItemDetails.adapter = adapter
-        adapter.dataset = listOf(Pair("Item A",1),Pair("Item B",2), Pair("Item C",69),Pair("Item D",420))
+        //adapter.dataset = listOf(Pair("Item A",1),Pair("Item B",2), Pair("Item C",69),Pair("Item D",420))
+        adapter.dataset = rackDetailsViewModel.materialList
 
         //bind rack details
         rackDetailsViewModel.rackId = args.rackID

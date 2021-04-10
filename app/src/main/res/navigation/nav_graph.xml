@@ -54,6 +54,7 @@
         <action
                 android:id="@+id/action_editRackFragment_to_warehouseFragment"
                 app:destination="@id/warehouseFragment"
-                app:popUpToInclusive="true" />
+                app:popUpToInclusive="true"
+                app:popUpTo="@id/warehouseFragment" />
     </fragment>
 </navigation>

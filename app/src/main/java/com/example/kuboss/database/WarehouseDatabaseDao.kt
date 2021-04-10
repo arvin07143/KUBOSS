@@ -14,8 +14,9 @@ interface WarehouseDatabaseDao {
     @Query("DELETE FROM rack_table WHERE rackId = :rackID")
     suspend fun removeRack(rackID: String)
 
-//    @Query("SELECT * FROM rack_details_table WHERE rackId = :rackID")
-//    fun showMaterial(rackID: String): LiveData<List<Material>>
+    @Transaction
+    @Query("SELECT * FROM rack_table WHERE rackId=:rackID")
+    suspend fun showMaterial(rackID: String): List<RackWithMaterials>
 
     @Query("UPDATE rack_table SET rackId=:newRackID WHERE rackId=:oldRackID ")
     suspend fun updateRack(oldRackID: String, newRackID: String)

@@ -7,7 +7,7 @@ import androidx.room.Entity
 import androidx.room.Relation
 
 @Entity(primaryKeys = ["rackId", "materialId"])
-class RackDetails (
+data class RackDetails (
     @ColumnInfo
     var rackId: String,
 
