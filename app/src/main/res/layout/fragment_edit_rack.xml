@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+<variable
+        name="editRackViewModel"
+        type="com.example.kuboss.warehouse.EditRackViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp"
+            tools:context=".warehouse.EditRackFragment">
+
+
+        <Button
+                android:text="Delete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnDeleteRack"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rackId_text_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@{editRackViewModel.rackId}"
+                tools:text="Rack ID: 01-AA"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <Button
+                android:text="Cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnCancel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/btnDeleteRack"
+                android:layout_marginBottom="32dp" />
+
+        <Button
+                android:text="Save"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnSave"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/btnCancel" />
+
+        <TextView
+                android:text="New Aisle Number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:id="@+id/editing_aisle_label"
+                app:layout_constraintStart_toStartOf="@+id/rackId_text_view"
+                app:layout_constraintTop_toBottomOf="@+id/rackId_text_view"
+                android:layout_marginTop="32dp" />
+
+        <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:ems="10"
+                android:id="@+id/editing_edit_text_aisle"
+                app:layout_constraintStart_toStartOf="@+id/editing_aisle_label"
+                app:layout_constraintTop_toBottomOf="@+id/editing_aisle_label"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+                android:text="New Unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:id="@+id/editing_unit_label"
+                app:layout_constraintTop_toBottomOf="@+id/editing_edit_text_aisle"
+                android:layout_marginTop="32dp"
+                app:layout_constraintStart_toStartOf="@+id/editing_edit_text_aisle" />
+
+        <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:ems="10"
+                android:id="@+id/editing_edit_text_unit"
+                app:layout_constraintStart_toStartOf="@+id/editing_unit_label"
+                app:layout_constraintTop_toBottomOf="@+id/editing_unit_label"
+                app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

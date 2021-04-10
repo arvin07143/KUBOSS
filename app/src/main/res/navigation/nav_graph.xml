@@ -1,10 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/nav_graph"
-        app:startDestination="@id/rackDetailsFragment">
+        app:startDestination="@id/warehouseFragment">
     <fragment
             android:id="@+id/rackDetailsFragment"
-            android:name="com.example.kuboss.RackDetailsFragment"
-            android:label="RackDetailsFragment" />
+            android:name="com.example.kuboss.warehouse.RackDetailsFragment"
+            android:label="RackDetailsFragment" >
+        <action
+                android:id="@+id/action_rackDetailsFragment_to_warehouseFragment"
+                app:destination="@id/warehouseFragment" />
+        <argument
+                android:name="rackID"
+                app:argType="string" />
+        <action
+                android:id="@+id/action_rackDetailsFragment_to_editRackFragment"
+                app:destination="@id/editRackFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/warehouseFragment"
+            android:name="com.example.kuboss.warehouse.WarehouseFragment"
+            android:label="WarehouseFragment" >
+        <action
+                android:id="@+id/action_warehouseFragment_to_rackDetailsFragment"
+                app:destination="@id/rackDetailsFragment" />
+        <action
+                android:id="@+id/action_warehouseFragment_to_addRackFragment"
+                app:destination="@id/addRackFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/addRackFragment"
+            android:name="com.example.kuboss.warehouse.AddRackFragment"
+            android:label="AddRackFragment" >
+        <action
+                android:id="@+id/action_addRackFragment_to_warehouseFragment"
+                app:destination="@id/warehouseFragment"
+                app:popUpTo="@id/warehouseFragment"
+                app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+            android:id="@+id/editRackFragment"
+            android:name="com.example.kuboss.warehouse.EditRackFragment"
+            android:label="EditRackFragment" >
+        <action
+                android:id="@+id/action_editRackFragment_to_rackDetailsFragment"
+                app:destination="@id/rackDetailsFragment"
+                app:popUpToInclusive="true"
+                app:popUpTo="@id/rackDetailsFragment" />
+        <argument
+                android:name="rackID"
+                app:argType="string" />
+        <action
+                android:id="@+id/action_editRackFragment_to_warehouseFragment"
+                app:destination="@id/warehouseFragment"
+                app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

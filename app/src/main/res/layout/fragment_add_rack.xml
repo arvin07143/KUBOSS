@@ -69,7 +69,8 @@
                 android:id="@+id/cancel_btn"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/confirm_btn"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="10dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

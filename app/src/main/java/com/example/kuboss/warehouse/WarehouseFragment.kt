@@ -1,5 +1,6 @@
 package com.example.kuboss.warehouse
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,9 +10,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.kuboss.LiveBarcodeScanningActivity
 import com.example.kuboss.R
+import com.example.kuboss.adapter.WarehouseRackAdapter
 import com.example.kuboss.database.WarehouseDatabase
 import com.example.kuboss.databinding.FragmentWarehouseBinding
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class WarehouseFragment : Fragment() {
 
@@ -40,10 +44,12 @@ class WarehouseFragment : Fragment() {
             }
         })
 
-        //button listener
-        binding.addRackBtn.setOnClickListener {
-            //findNavController().navigate(R.id.action_warehouseFragment_to_addRackFragment)
+        //setup floating action button
+        val btnAdd: FloatingActionButton = binding.expandableFabLayoutHome.findViewById(R.id.add_rack_btn)
+        btnAdd.setOnClickListener {
+            findNavController().navigate(R.id.action_warehouseFragment_to_addRackFragment)
         }
+
         return binding.root
     }
 

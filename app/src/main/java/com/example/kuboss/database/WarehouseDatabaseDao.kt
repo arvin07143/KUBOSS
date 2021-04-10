@@ -11,11 +11,14 @@ interface WarehouseDatabaseDao {
     @Update
     suspend fun update(rack: Rack)
 
-//    @Delete
-//    suspend fun delete(rack: Rack)
-//
-//    @Delete
-//    suspend fun deleteAll()
+    @Query("DELETE FROM rack_table WHERE rackId = :rackID")
+    suspend fun removeRack(rackID: String)
+
+//    @Query("SELECT * FROM rack_details_table WHERE rackId = :rackID")
+//    fun showMaterial(rackID: String): LiveData<List<Material>>
+
+    @Query("UPDATE rack_table SET rackId=:newRackID WHERE rackId=:oldRackID ")
+    suspend fun updateRack(oldRackID: String, newRackID: String)
 
     @Query("SELECT * FROM rack_table ORDER BY rackId")
     fun getAllRacks(): LiveData<List<Rack>>
