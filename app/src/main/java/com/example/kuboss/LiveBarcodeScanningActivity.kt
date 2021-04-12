@@ -54,11 +54,13 @@ class LiveBarcodeScanningActivity : AppCompatActivity(), OnClickListener {
     private var workflowModel: WorkflowModel? = null
     private var currentWorkflowState: WorkflowState? = null
 
-    private val mode = intent?.extras?.getInt("mode")
+    private var mode : Int = 0
+    private var rackId : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        rackId = intent.getStringExtra("rackID").toString()
+        mode = intent.getIntExtra("mode",0)
         setContentView(R.layout.activity_live_barcode)
         preview = findViewById(R.id.camera_preview)
         graphicOverlay = findViewById<GraphicOverlay>(R.id.camera_preview_graphic_overlay).apply {
@@ -202,8 +204,10 @@ class LiveBarcodeScanningActivity : AppCompatActivity(), OnClickListener {
         workflowModel?.detectedBarcode?.observe(this, Observer { barcode ->
             if (barcode != null) {
                 val barcodeFieldList = ArrayList<BarcodeField>()
+                Log.e(TAG,mode.toString())
+                Log.e(TAG,rackId)
                 barcodeFieldList.add(BarcodeField("Raw Value", barcode.rawValue ?: ""))
-                BarcodeResultFragment.show(supportFragmentManager, barcodeFieldList,mode ?: 0)
+                BarcodeResultFragment.show(supportFragmentManager, barcodeFieldList,mode,rackId)
             }
         })
     }
