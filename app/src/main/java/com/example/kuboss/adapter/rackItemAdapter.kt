@@ -16,8 +16,10 @@ class RackItemAdapter(): RecyclerView.Adapter<RackItemAdapter.ItemViewHolder>() 
             notifyDataSetChanged()
         }
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val itemNameView: TextView = itemView.findViewById(R.id.item_title)
-        val itemCountView: TextView = itemView.findViewById(R.id.item_amount)
+        val itemIdView: TextView = itemView.findViewById(R.id.material_id)
+        val itemNameView: TextView = itemView.findViewById(R.id.material_name)
+        val itemSkuView: TextView = itemView.findViewById(R.id.material_SKU)
+        val itemQtyView: TextView = itemView.findViewById(R.id.material_qty)
     }
 
     override fun onCreateViewHolder(
@@ -36,8 +38,10 @@ class RackItemAdapter(): RecyclerView.Adapter<RackItemAdapter.ItemViewHolder>() 
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset[position]
-        holder.itemNameView.text = item.materialId
-        holder.itemCountView.text = item.mRackId
+        holder.itemIdView.text = item.materialId
+        holder.itemNameView.text = item.materialName
+        holder.itemSkuView.text = item.SKU
+        holder.itemQtyView.text = item.quantity.toString()
     }
 
     override fun getItemCount(): Int {
