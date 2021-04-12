@@ -21,6 +21,7 @@ class RackDetailsViewModel(
     fun storeMaterial(mat: Material){
         viewModelScope.launch {
             database.insert(mat)
+            Log.e("DB","ADD SUCCESSFUL")
         }
     }
 

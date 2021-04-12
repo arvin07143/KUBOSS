@@ -24,6 +24,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,6 +32,10 @@ import com.example.kuboss.R
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.example.kuboss.camera.WorkflowModel
 import com.example.kuboss.camera.WorkflowModel.WorkflowState
+import com.example.kuboss.database.Material
+import com.example.kuboss.database.WarehouseDatabase
+import com.example.kuboss.warehouse.RackDetailsViewModel
+import com.example.kuboss.warehouse.RackDetailsViewModelFactory
 
 /** Displays the bottom sheet to present barcode fields contained in the detected barcode.  */
 class BarcodeResultFragment : BottomSheetDialogFragment() {
@@ -51,10 +56,39 @@ class BarcodeResultFragment : BottomSheetDialogFragment() {
                 Log.e(TAG, "No barcode field list passed in!")
                 ArrayList()
             }
+        val rackID: String =
+            if (arguments?.containsKey("rackID") == true){
+                arguments.getString("rackID") ?: ""
+            } else{
+                Log.e(TAG,"No rack id passed in!")
+                String()
+            }
+
+        val mode: Int =
+            if(arguments?.containsKey("saveMode") == true){
+                arguments.getInt("saveMode") ?: 1
+            } else{
+                Log.e(TAG,"No save mode passed in!")
+                1
+            }
+
+        val application = requireNotNull(this.activity).application
+        val dataSource = WarehouseDatabase.getInstance(application).warehouseDatabaseDao
+        val viewModelFactory = RackDetailsViewModelFactory(dataSource, application,rackID)
+        val rackDetailsViewModel = ViewModelProvider(
+            this, viewModelFactory).get(RackDetailsViewModel::class.java)
 
         confirmButton.setOnClickListener {
-            if (arguments?.getInt("saveMode") == 1){
-                //add
+            if (mode == 1){
+                val rawData = barcodeFieldList[0].value
+                val barcodeData = rawData.split(',')
+                Log.e("test",barcodeData[0])
+                Log.e("test",barcodeData[1])
+                Log.e("test",barcodeData[2])
+                Log.e("test",barcodeData[3])
+                Log.e("test",rackID)
+                val addMat = Material(barcodeData[0],barcodeData[1],barcodeData[2],barcodeData[3].toInt(),rackID)
+                rackDetailsViewModel.storeMaterial(addMat)
                 activity?.finish()
             } else {
                 // minus
@@ -85,11 +119,17 @@ class BarcodeResultFragment : BottomSheetDialogFragment() {
         private const val TAG = "BarcodeResultFragment"
         private const val ARG_BARCODE_FIELD_LIST = "arg_barcode_field_list"
 
-        fun show(fragmentManager: FragmentManager, barcodeFieldArrayList: ArrayList<BarcodeField>, saveMode:Int) {
+        fun show(
+            fragmentManager: FragmentManager,
+            barcodeFieldArrayList: ArrayList<BarcodeField>,
+            saveMode: Int,
+            rackId: String?
+        ) {
             val barcodeResultFragment = BarcodeResultFragment()
             barcodeResultFragment.arguments = Bundle().apply {
                 putParcelableArrayList(ARG_BARCODE_FIELD_LIST, barcodeFieldArrayList)
                 putInt("saveMode",saveMode)
+                putString("rackID",rackId)
             }
             barcodeResultFragment.show(fragmentManager, TAG)
         }
