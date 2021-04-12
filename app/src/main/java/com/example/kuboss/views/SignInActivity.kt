@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import com.example.kuboss.MainActivity
 import com.example.kuboss.R
 import com.example.kuboss.extensions.Extensions.toast
 import com.example.kuboss.utils.FirebaseUtils.firebaseAuth
@@ -35,7 +36,8 @@ class SignInActivity : AppCompatActivity() {
             firebaseAuth.signInWithEmailAndPassword(signInEmail, signInPassword)
                 .addOnCompleteListener { signIn ->
                     if (signIn.isSuccessful) {
-                        startActivity(Intent(this, HomeActivity::class.java))
+                        //startActivity(Intent(this, HomeActivity::class.java))
+                        startActivity(Intent(this, MainActivity::class.java))
                         toast("signed in successfully")
                         finish()
                     } else {
