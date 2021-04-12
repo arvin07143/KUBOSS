@@ -9,14 +9,14 @@ data class Rack (
     val rackId: String
 )
 
-@Entity(tableName = "material_table")
+@Entity(tableName = "material_table", foreignKeys = [ForeignKey(entity = Rack::class, parentColumns = ["rackId"], childColumns = ["mRackId"], onUpdate = ForeignKey.CASCADE)])
 data class Material(
     @PrimaryKey
     val materialId: String,
     val SKU: String,
+    val materialName: String,
     val quantity: Int,
-    val mRackId: String,
-    val materialName: String
+    val mRackId: String
 )
 
 data class RackWithMaterials(

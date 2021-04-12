@@ -9,10 +9,12 @@ import com.example.kuboss.R
 import com.example.kuboss.database.Material
 import com.example.kuboss.database.RackWithMaterials
 
-class RackItemAdapter: RecyclerView.Adapter<RackItemAdapter.ItemViewHolder>() {
-    //var dataset = listOf<Pair<String,Int>>()
-    var dataset: List<RackWithMaterials>? = null
-
+class RackItemAdapter(): RecyclerView.Adapter<RackItemAdapter.ItemViewHolder>() {
+    var dataset = listOf<Material>()
+        set(value){
+            field = value
+            notifyDataSetChanged()
+        }
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val itemNameView: TextView = itemView.findViewById(R.id.item_title)
         val itemCountView: TextView = itemView.findViewById(R.id.item_amount)
@@ -33,13 +35,12 @@ class RackItemAdapter: RecyclerView.Adapter<RackItemAdapter.ItemViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item = dataset!![position]
-//        holder.itemNameView.text = item.first
-//        holder.itemCountView.text = item.second.toString()
-
+        val item = dataset[position]
+        holder.itemNameView.text = item.materialId
+        holder.itemCountView.text = item.mRackId
     }
 
     override fun getItemCount(): Int {
-        return dataset!!.size
+        return dataset.size
     }
 }

@@ -2,6 +2,7 @@ package com.example.kuboss.warehouse
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.kuboss.database.Rack
 import com.example.kuboss.database.WarehouseDatabaseDao
 import kotlinx.coroutines.launch
 
@@ -20,6 +21,7 @@ class EditRackViewModel(
     fun updateRack(oldRackId: String, newRackId: String){
         viewModelScope.launch {
             database.updateRack(oldRackId, newRackId)
+            database.updateMaterialRack(oldRackId, newRackId)
         }
     }
 }

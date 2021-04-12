@@ -1,29 +1,28 @@
 package com.example.kuboss.warehouse
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.util.Log
+import androidx.lifecycle.*
 import com.example.kuboss.database.Material
+import com.example.kuboss.database.Rack
 import com.example.kuboss.database.RackWithMaterials
 import com.example.kuboss.database.WarehouseDatabaseDao
 import kotlinx.coroutines.launch
 
 class RackDetailsViewModel(
     val database: WarehouseDatabaseDao,
-    application: Application
+    application: Application,
+    var rackId: String
     ): AndroidViewModel(application) {
 
-    var rackId = ""
-    var materialList: List<RackWithMaterials>? = null
-    fun onShowRackDetails(){
+    val materialList = database.getMaterials(rackId)
+
+
+    fun storeMaterial(mat: Material){
         viewModelScope.launch {
-            materialList = database.showMaterial(rackId)
+            database.insert(mat)
         }
     }
-
-
 
 
 

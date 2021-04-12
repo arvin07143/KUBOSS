@@ -2,22 +2,27 @@ package com.example.kuboss.warehouse
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.kuboss.LiveBarcodeScanningActivity
 import com.example.kuboss.R
 import com.example.kuboss.adapter.RackItemAdapter
+import com.example.kuboss.database.Material
+import com.example.kuboss.database.RackWithMaterials
 import com.example.kuboss.database.WarehouseDatabase
 import com.example.kuboss.databinding.FragmentRackDetailsBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class RackDetailsFragment : Fragment(){
+    var count = 1
     val args: RackDetailsFragmentArgs by navArgs()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -26,30 +31,30 @@ class RackDetailsFragment : Fragment(){
             inflater, R.layout.fragment_rack_details, container, false)
         val application = requireNotNull(this.activity).application
         val dataSource = WarehouseDatabase.getInstance(application).warehouseDatabaseDao
-        val viewModelFactory = RackDetailsViewModelFactory(dataSource, application)
+        val viewModelFactory = RackDetailsViewModelFactory(dataSource, application, args.rackID)
         val rackDetailsViewModel = ViewModelProvider(
             this, viewModelFactory).get(RackDetailsViewModel::class.java)
         binding.lifecycleOwner = this
         binding.rackDetailsViewModel = rackDetailsViewModel
-
+        Log.d("rackid", rackDetailsViewModel.rackId)
         //setup material's adapter
         val adapter = RackItemAdapter()
-
-        binding.lifecycleOwner = this
         binding.rackItemDetails.adapter = adapter
-        //adapter.dataset = listOf(Pair("Item A",1),Pair("Item B",2), Pair("Item C",69),Pair("Item D",420))
-        adapter.dataset = rackDetailsViewModel.materialList
-
-        //bind rack details
-        rackDetailsViewModel.rackId = args.rackID
-
+        rackDetailsViewModel.materialList.observe(viewLifecycleOwner, Observer{
+            it?.let{
+                adapter.dataset = it.materials
+            }
+        })
 
         //setup floating action button
         val btnAdd:FloatingActionButton = binding.expandableFabLayout.findViewById(R.id.btnAdd)
         btnAdd.setOnClickListener {
-            val intent = Intent(this.context, LiveBarcodeScanningActivity::class.java)
-            intent.putExtra("mode",1)
-            startActivity(intent)
+//            val intent = Intent(this.context, LiveBarcodeScanningActivity::class.java)
+//            intent.putExtra("mode",1)
+//            startActivity(intent)
+            val mat = Material(count.toString(), "sku", "cola", 1, rackDetailsViewModel.rackId)
+            rackDetailsViewModel.storeMaterial(mat)
+            count += 1
         }
 
         val btnRemove:FloatingActionButton = binding.expandableFabLayout.findViewById(R.id.btnRemove)
