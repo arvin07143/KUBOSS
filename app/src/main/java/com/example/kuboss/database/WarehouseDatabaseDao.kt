@@ -6,10 +6,10 @@ import androidx.room.*
 
 @Dao
 interface WarehouseDatabaseDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insert(rack: Rack)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insert(material: Material)
 
     @Update

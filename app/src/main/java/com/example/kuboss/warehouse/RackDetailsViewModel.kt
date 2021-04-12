@@ -1,6 +1,7 @@
 package com.example.kuboss.warehouse
 
 import android.app.Application
+import android.database.sqlite.SQLiteConstraintException
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.kuboss.database.Material
@@ -16,15 +17,23 @@ class RackDetailsViewModel(
     ): AndroidViewModel(application) {
 
     val materialList = database.getMaterials(rackId)
-
+    private var _isSqlError = MutableLiveData<Boolean>(false)
+    val isSqlError: LiveData<Boolean> get() = _isSqlError
 
     fun storeMaterial(mat: Material){
         viewModelScope.launch {
-            database.insert(mat)
+            try {
+                database.insert(mat)
+            }catch(e: SQLiteConstraintException){
+                _isSqlError.value = true
+            }
             Log.e("DB","ADD SUCCESSFUL")
         }
     }
 
+    fun finishShowingDialog(){
+        _isSqlError.value = false
+    }
 
 
 }

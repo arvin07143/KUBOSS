@@ -17,13 +17,18 @@
 package com.example.kuboss.barcodedetection
 
 import android.content.DialogInterface
+import android.database.SQLException
+import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -36,6 +41,7 @@ import com.example.kuboss.database.Material
 import com.example.kuboss.database.WarehouseDatabase
 import com.example.kuboss.warehouse.RackDetailsViewModel
 import com.example.kuboss.warehouse.RackDetailsViewModelFactory
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /** Displays the bottom sheet to present barcode fields contained in the detected barcode.  */
 class BarcodeResultFragment : BottomSheetDialogFragment() {
@@ -77,19 +83,26 @@ class BarcodeResultFragment : BottomSheetDialogFragment() {
         val viewModelFactory = RackDetailsViewModelFactory(dataSource, application,rackID)
         val rackDetailsViewModel = ViewModelProvider(
             this, viewModelFactory).get(RackDetailsViewModel::class.java)
-
+        rackDetailsViewModel.isSqlError.observe(viewLifecycleOwner, Observer{
+            if(it == true){
+                MaterialAlertDialogBuilder(requireContext())
+                        .setTitle("Store Material")
+                        .setMessage("This material is already stored.")
+                        .setCancelable(false)
+                        .setPositiveButton("Ok") { _, _ ->
+                        }
+                        .show()
+                rackDetailsViewModel.finishShowingDialog()
+            }
+        })
         confirmButton.setOnClickListener {
             if (mode == 1){
                 val rawData = barcodeFieldList[0].value
                 val barcodeData = rawData.split(',')
-                Log.e("test",barcodeData[0])
-                Log.e("test",barcodeData[1])
-                Log.e("test",barcodeData[2])
-                Log.e("test",barcodeData[3])
-                Log.e("test",rackID)
                 val addMat = Material(barcodeData[0],barcodeData[1],barcodeData[2],barcodeData[3].toInt(),rackID)
+
                 rackDetailsViewModel.storeMaterial(addMat)
-                activity?.finish()
+
             } else {
                 // minus
                 activity?.finish()
