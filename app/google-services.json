@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "964844606463",
+    "project_id": "kuboss-6be0a",
+    "storage_bucket": "kuboss-6be0a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:964844606463:android:1a13aa381b508cac038dca",
+        "android_client_info": {
+          "package_name": "com.example.kuboss"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "964844606463-f04bc9k7136uoj42tlqto1op8ae78fe5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhN0szuqNkEg6vE7u0qsqOdYSlAcNxJwc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "964844606463-f04bc9k7136uoj42tlqto1op8ae78fe5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
