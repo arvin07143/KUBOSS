@@ -26,7 +26,7 @@ class SearchItemFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding: SearchItemFragmentBinding = DataBindingUtil.inflate(inflater,R.layout.search_item_fragment,container,false)
         val application = requireNotNull(this.activity).application
         val dataSource = WarehouseDatabase.getInstance(application).warehouseDatabaseDao
