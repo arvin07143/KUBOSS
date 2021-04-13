@@ -78,9 +78,6 @@ class LiveBarcodeScanningActivity : AppCompatActivity(), OnClickListener {
         flashButton = findViewById<View>(R.id.flash_button).apply {
             setOnClickListener(this@LiveBarcodeScanningActivity)
         }
-        settingsButton = findViewById<View>(R.id.settings_button).apply {
-            setOnClickListener(this@LiveBarcodeScanningActivity)
-        }
 
         setUpWorkflowModel()
     }
@@ -125,10 +122,6 @@ class LiveBarcodeScanningActivity : AppCompatActivity(), OnClickListener {
                         cameraSource!!.updateFlashMode(Camera.Parameters.FLASH_MODE_TORCH)
                     }
                 }
-            }
-            R.id.settings_button -> {
-                settingsButton?.isEnabled = false
-                startActivity(Intent(this, SettingsActivity::class.java))
             }
         }
     }
