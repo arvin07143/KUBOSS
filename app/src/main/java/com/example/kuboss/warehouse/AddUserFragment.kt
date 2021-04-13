@@ -17,14 +17,15 @@ import com.example.kuboss.databinding.FragmentAddUserBinding
 import com.example.kuboss.extensions.Extensions.toast
 import com.example.kuboss.utils.FirebaseUtils
 import com.example.kuboss.views.HomeActivity
+import kotlinx.android.synthetic.main.activity_sign_in.*
 import kotlinx.android.synthetic.main.fragment_add_user.*
 
 
 class AddUserFragment : Fragment() {
 
-
-    lateinit var type: String
-
+    var type: String = ""
+    lateinit var signInInputsArray: Array<EditText>
+    private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,39 +42,71 @@ class AddUserFragment : Fragment() {
             R.layout.fragment_add_user, container, false
         )
 
+
+
+
         binding.btnAddUser.setOnClickListener{
-            if(binding.rbManager.isChecked && binding.rbWorker.isChecked){
-                Toast.makeText(activity, "Choose only one type.", Toast.LENGTH_SHORT).show()
-            }else if(binding.rbManager.isChecked){
+
+            if(binding.rbManager.isChecked){
                 type = "manager"
             }else if(binding.rbWorker.isChecked){
                 type = "worker"
-            }else{
-                Toast.makeText(activity, "Please choose user type.", Toast.LENGTH_SHORT).show()
+
             }
             if(binding.etEmail.text.toString().isNotEmpty() &&
                 binding.etPassword.text.toString().isNotEmpty() &&
                 binding.etName.text.toString().isNotEmpty() &&
                 binding.etConfirmPassword.text.toString().isNotEmpty()&&
                 binding.etPassword.text.toString() == binding.etConfirmPassword.text.toString()&&
-                    type != ""){
+                    type != "") {
 
-                FirebaseUtils.firebaseAuth.createUserWithEmailAndPassword(binding.etEmail.text.toString().trim(), binding.etPassword.text.toString().trim())
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            Toast.makeText(activity, "Successfully added!", Toast.LENGTH_SHORT).show()
-                            addUserViewModel.onAddUser(
-                                binding.etEmail.text.toString(),
-                                binding.etPassword.text.toString(),
-                                binding.etName.text.toString(),
-                                type
-                            )
-                        } else {
-                            Toast.makeText(activity, "failed to Authenticate !", Toast.LENGTH_SHORT).show()
+                if ((binding.etEmail.text.toString().trim().matches(emailPattern.toRegex()))) {
+                    FirebaseUtils.firebaseAuth.createUserWithEmailAndPassword(
+                        binding.etEmail.text.toString().trim(),
+                        binding.etPassword.text.toString().trim()
+                    )
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                Toast.makeText(activity, "Successfully added!", Toast.LENGTH_SHORT)
+                                    .show()
+                                addUserViewModel.onAddUser(
+                                    binding.etEmail.text.toString(),
+                                    binding.etPassword.text.toString(),
+                                    binding.etName.text.toString(),
+                                    type
+                                )
+                                type = ""
+                            } else {
+                                Toast.makeText(
+                                    activity,
+                                    "failed to Authenticate !",
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
+                            }
                         }
+                } else{
+                    Toast.makeText(activity, "Invalid email.", Toast.LENGTH_SHORT).show()
+                }
+            }else{
+                if(binding.etPassword.text.toString() != binding.etConfirmPassword.text.toString()){
+                    Toast.makeText(activity, "Password not match", Toast.LENGTH_SHORT).show()
+                } else if(type == ""){
+                    Toast.makeText(activity, "Please choose user type.", Toast.LENGTH_SHORT).show()
+                }
+                signInInputsArray = arrayOf(binding.etName, binding.etConfirmPassword, binding.etPassword, binding.etEmail)
+                signInInputsArray.forEach { input ->
+                    if (input.text.toString().isEmpty()) {
+                        Toast.makeText(activity, "${input.hint} is required", Toast.LENGTH_SHORT).show()
+
                     }
+                }
 
             }
+
+
+
+
 
 
         }
