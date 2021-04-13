@@ -27,3 +27,12 @@ data class RackWithMaterials(
     )
     val materials: List<Material>
 )
+
+@Entity(tableName="user_table")
+data class User (
+    @PrimaryKey
+    val email: String,
+    val password: String,
+    val name: String,
+    val type: String
+)

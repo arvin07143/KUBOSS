@@ -50,10 +50,6 @@ class WarehouseFragment : Fragment() {
             findNavController().navigate(R.id.action_warehouseFragment_to_addRackFragment)
         }
 
-        val btnSearch: FloatingActionButton = binding.expandableFabLayoutHome.findViewById(R.id.search_btn)
-        btnSearch.setOnClickListener{
-            findNavController().navigate(R.id.action_warehouseFragment_to_searchItemFragment)
-        }
 
         return binding.root
     }
