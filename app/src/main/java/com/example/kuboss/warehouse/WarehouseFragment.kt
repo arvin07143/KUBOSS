@@ -50,6 +50,10 @@ class WarehouseFragment : Fragment() {
             findNavController().navigate(R.id.action_warehouseFragment_to_addRackFragment)
         }
 
+        val btnReceive:FloatingActionButton = binding.expandableFabLayoutHome.findViewById(R.id.receive_mat_btn)
+        btnReceive.setOnClickListener {
+            findNavController().navigate(R.id.action_warehouseFragment_to_receiveMatFragment)
+        }
 
         return binding.root
     }

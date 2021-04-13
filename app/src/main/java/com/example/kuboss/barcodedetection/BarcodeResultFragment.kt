@@ -87,7 +87,7 @@ class BarcodeResultFragment : BottomSheetDialogFragment() {
             val barcodeData = rawData.split(',')
             val scannedMat = Material(barcodeData[0], barcodeData[1], barcodeData[2], barcodeData[3].toInt(), rackID)
             if (mode == 1) {
-                rackDetailsViewModel.storeMaterial(scannedMat).observe(viewLifecycleOwner, Observer {
+                rackDetailsViewModel.storeMaterial(barcodeData[0],rackID).observe(viewLifecycleOwner, Observer {
                     if (it) {
                         MaterialAlertDialogBuilder(requireContext())
                             .setTitle("Store Material")
