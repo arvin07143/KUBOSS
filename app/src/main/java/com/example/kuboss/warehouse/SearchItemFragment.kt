@@ -12,8 +12,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.kuboss.R
 import com.example.kuboss.adapter.SearchItemAdapter
-import com.example.kuboss.databinding.SearchItemFragmentBinding
 import com.example.kuboss.database.WarehouseDatabase
+import com.example.kuboss.databinding.SearchItemFragmentBinding
 
 class SearchItemFragment : Fragment() {
 
@@ -27,7 +27,7 @@ class SearchItemFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding:SearchItemFragmentBinding = DataBindingUtil.inflate(inflater,R.layout.search_item_fragment,container,false)
+        val binding: SearchItemFragmentBinding = DataBindingUtil.inflate(inflater,R.layout.search_item_fragment,container,false)
         val application = requireNotNull(this.activity).application
         val dataSource = WarehouseDatabase.getInstance(application).warehouseDatabaseDao
         val viewModelFactory = SearchItemViewModelFactory(dataSource, application)
