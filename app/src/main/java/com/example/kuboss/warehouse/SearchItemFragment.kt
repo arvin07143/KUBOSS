@@ -47,7 +47,7 @@ class SearchItemFragment : Fragment() {
 
         binding.searchField.editText?.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                viewModel.searchStringChange(binding.searchField.editText?.text.toString())
+                viewModel.searchStringChange("%"+binding.searchField.editText?.text.toString()+"%")
                 true
             } else {
                 false
@@ -55,7 +55,7 @@ class SearchItemFragment : Fragment() {
         }
 
         binding.searchField.setEndIconOnClickListener {
-            viewModel.searchStringChange(binding.searchField.editText?.text.toString())
+            viewModel.searchStringChange("%"+binding.searchField.editText?.text.toString()+"%")
             Log.e("Test","Search Done")
         }
 
