@@ -23,7 +23,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -47,7 +49,7 @@ class BarcodeResultFragment : BottomSheetDialogFragment() {
         bundle: Bundle?
     ): View {
         val view = layoutInflater.inflate(R.layout.barcode_bottom_sheet, viewGroup)
-        val confirmButton : Button = view.findViewById(R.id.btnConfirm)
+        val confirmButton: Button = view.findViewById(R.id.btnConfirm)
 
         val arguments = arguments
         val barcodeFieldList: ArrayList<BarcodeField> =
@@ -58,59 +60,63 @@ class BarcodeResultFragment : BottomSheetDialogFragment() {
                 ArrayList()
             }
         val rackID: String =
-            if (arguments?.containsKey("rackID") == true){
+            if (arguments?.containsKey("rackID") == true) {
                 arguments.getString("rackID") ?: ""
-            } else{
-                Log.e(TAG,"No rack id passed in!")
+            } else {
+                Log.e(TAG, "No rack id passed in!")
                 String()
             }
 
         val mode: Int =
-            if(arguments?.containsKey("saveMode") == true){
+            if (arguments?.containsKey("saveMode") == true) {
                 arguments.getInt("saveMode") ?: 1
-            } else{
-                Log.e(TAG,"No save mode passed in!")
+            } else {
+                Log.e(TAG, "No save mode passed in!")
                 1
             }
 
         val application = requireNotNull(this.activity).application
         val dataSource = WarehouseDatabase.getInstance(application).warehouseDatabaseDao
-        val viewModelFactory = RackDetailsViewModelFactory(dataSource, application,rackID)
+        val viewModelFactory = RackDetailsViewModelFactory(dataSource, application, rackID)
         val rackDetailsViewModel = ViewModelProvider(
-            this, viewModelFactory).get(RackDetailsViewModel::class.java)
-//        rackDetailsViewModel.isSqlError.observe(viewLifecycleOwner, Observer{
-//            if(it == true){
-//                MaterialAlertDialogBuilder(requireContext())
-//                        .setTitle("Store Material")
-//                        .setMessage("This material is already stored.")
-//                        .setCancelable(false)
-//                        .setPositiveButton("Ok") { _, _ ->
-//                        }
-//                        .show()
-//                rackDetailsViewModel.finishShowingDialog()
-//            }
-//        })
+            this, viewModelFactory
+        ).get(RackDetailsViewModel::class.java)
+
         confirmButton.setOnClickListener {
-            if (mode == 1){
-                val rawData = barcodeFieldList[0].value
-                val barcodeData = rawData.split(',')
-                val addMat = Material(barcodeData[0],barcodeData[1],barcodeData[2],barcodeData[3].toInt(),rackID)
-                if(rackDetailsViewModel.storeMaterial(addMat) == 1){
-                    MaterialAlertDialogBuilder(requireContext())
-                        .setTitle("Store Material")
-                        .setMessage("This material is already stored.")
-                        .setCancelable(false)
-                        .setPositiveButton("Ok") { _, _ ->
-                        }
-                        .show()
-                    Log.e("Test","SHow")
-                    rackDetailsViewModel.finishShowingDialog()
-                } else{
-                    activity?.finish()
-                }
+            val rawData = barcodeFieldList[0].value
+            val barcodeData = rawData.split(',')
+            val scannedMat = Material(barcodeData[0], barcodeData[1], barcodeData[2], barcodeData[3].toInt(), rackID)
+            if (mode == 1) {
+                rackDetailsViewModel.storeMaterial(scannedMat).observe(viewLifecycleOwner, Observer {
+                    if (it) {
+                        MaterialAlertDialogBuilder(requireContext())
+                            .setTitle("Store Material")
+                            .setMessage("This material is already stored.")
+                            .setCancelable(false)
+                            .setPositiveButton("Ok") { _, _ ->
+                            }
+                            .show()
+                    } else {
+                        Toast.makeText(context, "Item Added Successfully", Toast.LENGTH_SHORT).show()
+                        activity?.finish()
+                    }
+                })
             } else {
-                // minus
-                activity?.finish()
+                rackDetailsViewModel.pickMaterial(scannedMat).observe(viewLifecycleOwner, Observer {
+                    Log.e("ts",it.toString())
+                    if (it == 0) {
+                        MaterialAlertDialogBuilder(requireContext())
+                            .setTitle("Pick Material")
+                            .setMessage("This material does not exist.")
+                            .setCancelable(false)
+                            .setPositiveButton("Ok") { _, _ ->
+                            }
+                            .show()
+                    } else {
+                        Toast.makeText(context, "Item Picked Successfully", Toast.LENGTH_SHORT).show()
+                        activity?.finish()
+                    }
+                })
             }
         }
         view.findViewById<RecyclerView>(R.id.barcode_field_recycler_view).apply {
@@ -146,8 +152,8 @@ class BarcodeResultFragment : BottomSheetDialogFragment() {
             val barcodeResultFragment = BarcodeResultFragment()
             barcodeResultFragment.arguments = Bundle().apply {
                 putParcelableArrayList(ARG_BARCODE_FIELD_LIST, barcodeFieldArrayList)
-                putInt("saveMode",saveMode)
-                putString("rackID",rackId)
+                putInt("saveMode", saveMode)
+                putString("rackID", rackId)
             }
             barcodeResultFragment.show(fragmentManager, TAG)
         }

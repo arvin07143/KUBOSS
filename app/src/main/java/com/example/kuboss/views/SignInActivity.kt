@@ -20,7 +20,7 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
 
-        signInInputsArray = arrayOf(etLoginEmail, etLoginPassword)
+        signInInputsArray = arrayOf(etLoginEmail.editText!!, etLoginPassword.editText!!)
         btn_login.setOnClickListener {
             signInUser()
         }
@@ -29,8 +29,8 @@ class SignInActivity : AppCompatActivity() {
     private fun notEmpty(): Boolean = signInEmail.isNotEmpty() && signInPassword.isNotEmpty()
 
     private fun signInUser() {
-        signInEmail = etLoginEmail.text.toString().trim()
-        signInPassword = etLoginPassword.text.toString().trim()
+        signInEmail = etLoginEmail.editText?.text.toString().trim()
+        signInPassword = etLoginPassword.editText?.text.toString().trim()
 
         if (notEmpty()) {
             firebaseAuth.signInWithEmailAndPassword(signInEmail, signInPassword)

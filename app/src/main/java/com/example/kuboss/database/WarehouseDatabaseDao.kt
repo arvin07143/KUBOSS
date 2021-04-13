@@ -34,15 +34,18 @@ interface WarehouseDatabaseDao {
     @Query("SELECT * FROM rack_table ORDER BY rackId")
     fun getAllRacks(): LiveData<List<Rack>>
 
-    @Query("SELECT * FROM material_table WHERE sku=:searchSKU")
+    @Query("SELECT * FROM material_table WHERE sku LIKE :searchSKU")
     fun searchBySKU(searchSKU: String): LiveData<List<Material>>
 
-    @Insert
-    suspend fun addUser(user: User)
+    @Delete
+    suspend fun pickMaterial(pickedMat:Material):Int
 
-    @Query("DELETE FROM user_table WHERE name = :userName")
-    suspend fun removeUser(userName: String)
-
-    @Query("SELECT * FROM user_table ORDER BY name")
-    fun getAllUsers(): LiveData<List<User>>
+//    @Insert
+//    suspend fun addUser(user: User)
+//
+//    @Query("DELETE FROM user_table WHERE name = :userName")
+//    suspend fun removeUser(userName: String)
+//
+//    @Query("SELECT * FROM user_table ORDER BY name")
+//    fun getAllUsers(): LiveData<List<User>>
 }
