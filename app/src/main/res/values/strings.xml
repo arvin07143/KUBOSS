@@ -76,5 +76,7 @@
     <string name="fab_content_desc">Add New Item</string>
     <string name="rack_details_fragment">Rack Details</string>
     <string name="sku_search">SKU Search</string>
+    <string name="password">Password</string>
+    <string name="name">Name</string>
 
 </resources>
