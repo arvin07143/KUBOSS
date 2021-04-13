@@ -1,6 +1,6 @@
 package com.example.kuboss.views
 
-import CreateAccountActivity
+
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
