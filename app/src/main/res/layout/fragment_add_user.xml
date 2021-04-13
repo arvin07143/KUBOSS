@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent" android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <EditText
+    <data>
+        <variable
+            name="addRackViewModel"
+            type="com.example.kuboss.warehouse.AddRackViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".warehouse.AddRackFragment"
+        android:padding="16dp">
+
+
+
+        <EditText
             android:id="@+id/etPassword"
             android:layout_height="53dp"
             android:layout_width="308dp"
@@ -21,7 +33,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="200dp" />
 
-    <EditText
+        <EditText
             android:id="@+id/etConfirmPassword"
             android:layout_height="53dp"
             android:layout_width="308dp"
@@ -37,7 +49,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="272dp" />
 
-    <EditText
+        <EditText
             android:id="@+id/etEmail"
             android:layout_height="53dp"
             android:layout_width="308dp"
@@ -53,23 +65,23 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="128dp" />
 
-    <EditText
+        <EditText
             android:id="@+id/etName"
-            android:layout_height="53dp"
             android:layout_width="308dp"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:autofillHints=""
+            android:layout_height="53dp"
+            android:layout_marginTop="348dp"
             android:layout_marginBottom="32dp"
-            app:layout_constraintBottom_toTopOf="@+id/etLoginPassword"
+            android:autofillHints=""
             android:ems="10"
-            android:text="Name"
             android:inputType="textPersonName"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="348dp" />
+            android:text="Name"
+            app:layout_constraintBottom_toTopOf="@+id/etLoginPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+        <Button
             android:id="@+id/btnAddUser"
             android:layout_height="53dp"
             android:layout_width="250dp"
@@ -81,7 +93,7 @@
             android:text="Add"
             app:layout_constraintVertical_bias="0.769" />
 
-    <TextView
+        <TextView
             android:text="Add User"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -95,5 +107,28 @@
             android:layout_marginTop="44dp"
             app:layout_constraintBottom_toTopOf="@+id/etEmail" />
 
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etName">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <RadioButton
+                android:id="@+id/rbManager"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:text="Manager" />
+
+            <RadioButton
+                android:id="@+id/rbWorker"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:text="Worker" />
+        </RadioGroup>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

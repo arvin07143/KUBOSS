@@ -64,4 +64,13 @@
                 app:popUpToInclusive="true"
                 app:popUpTo="@id/warehouseFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/addUserFragment"
+        android:name="com.example.kuboss.warehouse.AddUserFragment"
+        android:label="AddUserFragment" >
+        <action
+            android:id="@+id/action_addUserFragment_to_editRackFragment"
+            app:destination="@id/editRackFragment" />
+
+    </fragment>
 </navigation>
