@@ -19,6 +19,10 @@
                 app:destination="@id/editRackFragment" />
     </fragment>
     <fragment
+        android:id="@+id/searchItemFragment"
+        android:name="com.example.kuboss.warehouse.SearchItemFragment"
+        android:label="SearchItemFragment" />
+    <fragment
             android:id="@+id/warehouseFragment"
             android:name="com.example.kuboss.warehouse.WarehouseFragment"
             android:label="WarehouseFragment" >
@@ -28,6 +32,9 @@
         <action
                 android:id="@+id/action_warehouseFragment_to_addRackFragment"
                 app:destination="@id/addRackFragment" />
+        <action
+            android:id="@+id/action_warehouseFragment_to_searchItemFragment"
+            app:destination="@id/searchItemFragment" />
     </fragment>
     <fragment
             android:id="@+id/addRackFragment"

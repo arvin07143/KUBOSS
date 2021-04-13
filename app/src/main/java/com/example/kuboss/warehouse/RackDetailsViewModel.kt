@@ -9,6 +9,7 @@ import com.example.kuboss.database.Rack
 import com.example.kuboss.database.RackWithMaterials
 import com.example.kuboss.database.WarehouseDatabaseDao
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class RackDetailsViewModel(
     val database: WarehouseDatabaseDao,
@@ -20,15 +21,23 @@ class RackDetailsViewModel(
     private var _isSqlError = MutableLiveData<Boolean>(false)
     val isSqlError: LiveData<Boolean> get() = _isSqlError
 
-    fun storeMaterial(mat: Material){
+    fun storeMaterial(mat: Material): Int {
+        var errorCode: Int = 1
         viewModelScope.launch {
-            try {
+//            try {
+//                database.insert(mat)
+//            }catch(e: SQLiteConstraintException){
+//                _isSqlError.value = true
+//            }
+            errorCode = try {
                 database.insert(mat)
-            }catch(e: SQLiteConstraintException){
-                _isSqlError.value = true
+                0
+            } catch (e:Exception){
+                Log.e("DB",e.toString())
+                1
             }
-            Log.e("DB","ADD SUCCESSFUL")
         }
+        return errorCode
     }
 
     fun finishShowingDialog(){

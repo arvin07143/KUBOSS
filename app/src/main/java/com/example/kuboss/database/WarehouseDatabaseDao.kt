@@ -33,4 +33,7 @@ interface WarehouseDatabaseDao {
 
     @Query("SELECT * FROM rack_table ORDER BY rackId")
     fun getAllRacks(): LiveData<List<Rack>>
+
+    @Query("SELECT * FROM material_table WHERE sku=:searchSKU")
+    fun searchBySKU(searchSKU: String): LiveData<List<Material>>
 }

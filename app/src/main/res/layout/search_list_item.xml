@@ -11,17 +11,25 @@
         >
 
     <TextView
+            tools:text="Rack ID"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/search_rack_id"
+            android:layout_weight="1"
+            android:textAlignment="center"/>
+
+    <TextView
             tools:text="Material ID"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/material_id"
+            android:id="@+id/search_material_id"
             android:layout_weight="1"
             android:textAlignment="center"/>
 
     <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/material_name"
+            android:id="@+id/search_material_name"
             tools:text="Name"
             android:layout_weight="1"
             android:textAlignment="center"/>
@@ -29,9 +37,7 @@
     <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/material_SKU"
-            app:layout_constraintTop_toTopOf="@+id/material_name"
-            app:layout_constraintStart_toEndOf="@+id/material_name"
+            android:id="@+id/search_material_SKU"
             tools:text="SKU"
             android:layout_weight="1"
             android:textAlignment="center"/>
@@ -41,7 +47,7 @@
             android:width="0dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/material_qty"
+            android:id="@+id/search_material_qty"
             android:layout_weight="1"
             android:textAlignment="center"/>
 
