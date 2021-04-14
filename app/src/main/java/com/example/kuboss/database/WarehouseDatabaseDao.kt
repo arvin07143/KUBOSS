@@ -31,6 +31,9 @@ interface WarehouseDatabaseDao {
     @Query("UPDATE material_table SET mRackId=:newRackID WHERE mRackId=:oldRackID")
     suspend fun updateMaterialRack(oldRackID: String, newRackID: String)
 
+    @Query("UPDATE material_table SET mRackId=NULL WHERE mRackId=:rackID")
+    suspend fun moveMaterialOnDeleteRack(rackID: String)
+
     @Query("SELECT * FROM rack_table ORDER BY rackId")
     fun getAllRacks(): LiveData<List<Rack>>
 
