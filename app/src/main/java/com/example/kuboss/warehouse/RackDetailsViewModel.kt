@@ -56,6 +56,7 @@ class RackDetailsViewModel(
     fun onDeleteRack(){
         viewModelScope.launch {
             database.removeRack(rackId)
+            database.moveMaterialOnDeleteRack(rackId)
         }
     }
 
