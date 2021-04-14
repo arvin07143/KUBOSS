@@ -70,6 +70,10 @@
                 app:popUpTo="@id/warehouseFragment" />
     </fragment>
     <fragment
+        android:id="@+id/viewUserFragment"
+        android:name="com.example.kuboss.warehouse.ViewUserFragment"
+        android:label="ViewUserFragment" />
+    <fragment
         android:id="@+id/addUserFragment"
         android:name="com.example.kuboss.warehouse.AddUserFragment"
         android:label="AddUserFragment" />
