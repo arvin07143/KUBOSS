@@ -32,6 +32,9 @@
         <action
                 android:id="@+id/action_warehouseFragment_to_addRackFragment"
                 app:destination="@id/addRackFragment" />
+        <action
+            android:id="@+id/action_warehouseFragment_to_warehouseMapFragment"
+            app:destination="@id/warehouseMapFragment" />
     </fragment>
     <fragment
             android:id="@+id/addRackFragment"
@@ -60,5 +63,16 @@
                 app:destination="@id/warehouseFragment"
                 app:popUpToInclusive="true"
                 app:popUpTo="@id/warehouseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/warehouseMapFragment"
+        android:name="com.example.kuboss.warehouse.WarehouseMapFragment"
+        android:label="Warehouse Map"
+        tools:layout="@layout/fragment_warehouse_map" >
+        <action
+            android:id="@+id/action_warehouseMapFragment_to_warehouseFragment"
+            app:destination="@id/warehouseFragment"
+            app:popUpTo="@id/warehouseFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
