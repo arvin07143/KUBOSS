@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -50,6 +49,10 @@ class WarehouseFragment : Fragment() {
             findNavController().navigate(R.id.action_warehouseFragment_to_addRackFragment)
         }
 
+        val btnReceive:FloatingActionButton = binding.expandableFabLayoutHome.findViewById(R.id.receive_mat_btn)
+        btnReceive.setOnClickListener {
+            findNavController().navigate(R.id.action_warehouseFragment_to_receiveMatFragment)
+        }
         val btnMap: FloatingActionButton = binding.expandableFabLayoutHome.findViewById(R.id.view_map_btn)
         btnMap.setOnClickListener {
             findNavController().navigate(R.id.action_warehouseFragment_to_warehouseMapFragment)

@@ -16,7 +16,7 @@ data class Material(
     val SKU: String,
     val materialName: String,
     val quantity: Int,
-    val mRackId: String
+    val mRackId: String?
 )
 
 data class RackWithMaterials(
@@ -26,4 +26,13 @@ data class RackWithMaterials(
         entityColumn = "mRackId"
     )
     val materials: List<Material>
+)
+
+@Entity(tableName="user_table")
+data class User (
+    @PrimaryKey
+    val email: String,
+    val password: String,
+    val name: String,
+    val type: String
 )

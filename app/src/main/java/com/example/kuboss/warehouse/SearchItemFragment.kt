@@ -26,7 +26,7 @@ class SearchItemFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding: SearchItemFragmentBinding = DataBindingUtil.inflate(inflater,R.layout.search_item_fragment,container,false)
         val application = requireNotNull(this.activity).application
         val dataSource = WarehouseDatabase.getInstance(application).warehouseDatabaseDao
@@ -47,7 +47,7 @@ class SearchItemFragment : Fragment() {
 
         binding.searchField.editText?.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                viewModel.searchStringChange(binding.searchField.editText?.text.toString())
+                viewModel.searchStringChange("%"+binding.searchField.editText?.text.toString()+"%")
                 true
             } else {
                 false
@@ -55,7 +55,7 @@ class SearchItemFragment : Fragment() {
         }
 
         binding.searchField.setEndIconOnClickListener {
-            viewModel.searchStringChange(binding.searchField.editText?.text.toString())
+            viewModel.searchStringChange("%"+binding.searchField.editText?.text.toString()+"%")
             Log.e("Test","Search Done")
         }
 
