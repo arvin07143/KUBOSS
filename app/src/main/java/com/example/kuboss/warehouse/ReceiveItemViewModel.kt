@@ -18,7 +18,7 @@ class ReceiveItemViewModel(
     application: Application,
 ): AndroidViewModel(application) {
     private val allMaterialID = database.getAllMaterialID()
-
+    val receivedItems = database.getReceivedItems()
     fun getNewMaterialID() : String{
         val currentExistMaterialID = allMaterialID.value?.toSet()
         var tempID: Int
