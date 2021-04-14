@@ -1,8 +1,12 @@
 package com.example.kuboss.warehouse
 
 import android.app.Application
+import android.content.Context
 import android.database.sqlite.SQLiteConstraintException
+import android.graphics.Bitmap
+import android.os.Environment
 import android.util.Log
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,6 +14,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.kuboss.database.Rack
 import com.example.kuboss.database.WarehouseDatabaseDao
 import kotlinx.coroutines.launch
+import java.io.File
 
 
 class WarehouseViewModel(
@@ -44,11 +49,6 @@ class WarehouseViewModel(
     fun finishShowingDialog(){
         _isSqlError.value = false
         _isAddRackSuccess.value = false
-    }
-
-    init{
-//        getMap()
-        Log.d("warehouseVM", "init")
     }
 
 

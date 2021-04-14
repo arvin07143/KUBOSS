@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     app:fab_color="#FF8800"
                     app:fab_icon="@drawable/ic_baseline_add_24"
-                    app:label_text="Add"
+                    app:label_text="Add New Rack"
                     app:label_backgroundColor="#808080"
                     app:label_textColor="#FFC0CB" />
 
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 app:fab_color="#FF8800"
                 app:fab_icon="@drawable/ic_baseline_add_24"
-                app:label_text="Add"
+                app:label_text="Receive Material"
                 app:label_backgroundColor="#808080"
                 app:label_textColor="#FFC0CB" />
 
@@ -71,7 +71,17 @@
                 android:layout_height="wrap_content"
                 app:fab_color="#FF8800"
                 app:fab_icon="@drawable/ic_baseline_search_24"
-                app:label_text="View Map"
+                app:label_text="View Warehouse Map"
+                app:label_backgroundColor="#808080"
+                app:label_textColor="#FFC0CB" />
+
+            <com.nambimobile.widgets.efab.FabOption
+                android:id="@+id/generate_report_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_color="#FF8800"
+                app:fab_icon="@drawable/ic_close_vd_white_24"
+                app:label_text="Generate Material Report"
                 app:label_backgroundColor="#808080"
                 app:label_textColor="#FFC0CB" />
 

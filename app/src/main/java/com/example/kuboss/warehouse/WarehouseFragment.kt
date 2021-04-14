@@ -1,11 +1,20 @@
 package com.example.kuboss.warehouse
 
+import android.app.Activity
+import android.content.ContentResolver
+import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,7 +24,10 @@ import com.example.kuboss.R
 import com.example.kuboss.adapter.WarehouseRackAdapter
 import com.example.kuboss.database.WarehouseDatabase
 import com.example.kuboss.databinding.FragmentWarehouseBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.io.File
+import java.io.FileOutputStream
 
 class WarehouseFragment : Fragment() {
     override fun onCreateView(
@@ -57,8 +69,44 @@ class WarehouseFragment : Fragment() {
         btnMap.setOnClickListener {
             findNavController().navigate(R.id.action_warehouseFragment_to_warehouseMapFragment)
         }
+        val btnReport: FloatingActionButton = binding.expandableFabLayoutHome.findViewById(R.id.generate_report_btn)
+        btnReport.setOnClickListener{
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Generate Report")
+                .setMessage("Are you sure that you want to generate material report?")
+                .setCancelable(true)
+                .setNegativeButton("Cancel"){ _,_ ->
+
+                }
+                .setPositiveButton("Ok") { _, _ ->
+                    generateReport()
+                }
+                .show()
+        }
 
         return binding.root
     }
 
+    private fun generateReport(){
+
+        val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TITLE, "invoice.pdf")
+
+        }
+
+        startActivityForResult(intent, 1)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val uri = data?.data
+        if(requestCode == 1 && resultCode == Activity.RESULT_OK){
+            val os = requireContext().contentResolver.openOutputStream(uri!!)
+            os?.write("hellowrot".toByteArray())
+            os?.close()
+
+        }
+    }
 }

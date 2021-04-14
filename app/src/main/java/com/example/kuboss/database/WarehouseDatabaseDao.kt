@@ -12,6 +12,8 @@ interface WarehouseDatabaseDao {
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insert(material: Material)
 
+    @Delete
+    suspend fun delete(rack: Rack)
     @Update
     suspend fun update(rack: Rack)
 
@@ -65,7 +67,9 @@ interface WarehouseDatabaseDao {
     @Query("SELECT * FROM user_table WHERE name LIKE :userName")
     fun searchByUserName(userName: String): LiveData<List<User>>
 
-
+    @Transaction
+    @Query("SELECT * FROM rack_table")
+    suspend fun getRackWithMaterials(): List<RackWithMaterials>
 
 
 }
