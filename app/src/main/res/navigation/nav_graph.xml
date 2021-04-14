@@ -51,7 +51,10 @@
     <fragment
         android:id="@+id/receiveMatFragment"
         android:name="com.example.kuboss.warehouse.ReceiveItemFragment"
-        android:label="Receive Material"/>
+        android:label="Receive Material">
+        <action android:id="@+id/action_receiveMatFragment_to_warehouseFragment"
+                app:destination="@id/warehouseFragment"/>
+    </fragment>
 
 
     <fragment

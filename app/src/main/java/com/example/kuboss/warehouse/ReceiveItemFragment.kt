@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.adapter.FragmentViewHolder
 import androidx.viewpager2.widget.ViewPager2
@@ -98,26 +99,57 @@ class ReceiveItemFragment : Fragment() {
             binding.lifecycleOwner = this
             binding.receiveItemViewModel = receiveItemViewModel
 
+            binding.receiveConfirmBtn.tag = "CONFIRM" //Confirm
             binding.receiveMaterialId.editText?.setText(receiveItemViewModel.getNewMaterialID())
             binding.receiveConfirmBtn.setOnClickListener {
-                binding.receiveSku.isEnabled = false
-                binding.receiveName.isEnabled = false
-                binding.receiveQuantity.isEnabled = false
+                if (binding.receiveConfirmBtn.tag == "CONFIRM"){ //Confirm
+                    binding.receiveSku.isEnabled = false
+                    binding.receiveName.isEnabled = false
+                    binding.receiveQuantity.isEnabled = false
 
-                val receiveId = binding.receiveMaterialId.editText?.text.toString()
-                val receiveSKU = binding.receiveSku.editText?.text.toString()
-                val receiveName = binding.receiveName.editText?.text.toString()
-                val receiveQty = binding.receiveQuantity.editText?.text.toString().toInt()
+                    val receiveId = binding.receiveMaterialId.editText?.text.toString()
+                    val receiveSKU = binding.receiveSku.editText?.text.toString()
+                    val receiveName = binding.receiveName.editText?.text.toString()
+                    val receiveQty = binding.receiveQuantity.editText?.text.toString().toInt()
 
-                val newReceiveMat = Material(receiveId, receiveSKU, receiveName, receiveQty, null)
-                receiveItemViewModel.storeMaterial(newReceiveMat)
+                    val newReceiveMat = Material(receiveId, receiveSKU, receiveName, receiveQty, null)
+                    receiveItemViewModel.storeMaterial(newReceiveMat)
 
-                val img: Bitmap = getQrCodeBitmap(receiveId, receiveSKU, receiveName, receiveQty.toString())
-                binding.qrView.setImageBitmap(img)
-                saveImage(img, this.activity!!,receiveId)
+                    val img: Bitmap = getQrCodeBitmap(receiveId, receiveSKU, receiveName, receiveQty.toString())
+                    binding.qrView.setImageBitmap(img)
+                    saveImage(img, this.activity!!,receiveId)
+                    binding.receiveConfirmBtn.text = getString(R.string.print)
+                    binding.receiveConfirmBtn.tag = "PRINT"
+                    binding.receiveCancelBtn.tag = "CREATE NEW"
+                    binding.receiveCancelBtn.text = getString(R.string.create_new)
+                } else{ //Print
+                    // print logic
+                }
+
+            }
+
+            binding.receiveCancelBtn.setTag("CANCEL") //Cancel
+            binding.receiveCancelBtn.setOnClickListener{
+                if (binding.receiveCancelBtn.tag == "CANCEL"){
+                    findNavController().navigate(R.id.action_receiveMatFragment_to_warehouseFragment)
+                } else{
+                    binding.receiveMaterialId.editText?.setText(receiveItemViewModel.getNewMaterialID())
+                    binding.receiveSku.isEnabled = true
+                    binding.receiveSku.editText?.setText("")
+                    binding.receiveName.isEnabled = true
+                    binding.receiveName.editText?.setText("")
+                    binding.receiveQuantity.isEnabled = true
+                    binding.receiveQuantity.editText?.setText("")
+                    binding.receiveConfirmBtn.tag = "CONFIRM" //Confirm
+                    binding.receiveConfirmBtn.text = getString(R.string.confirm)
+                    binding.receiveCancelBtn.tag = "CANCEL"
+                    binding.receiveCancelBtn.text = getString(R.string.cancel)
+                }
             }
             return binding.root
         }
+
+
         private fun getQrCodeBitmap(
             receiveId: String,
             receiveSKU: String,

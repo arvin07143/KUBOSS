@@ -60,8 +60,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:fab_color="#FF8800"
-                app:fab_icon="@drawable/ic_baseline_add_24"
-                app:label_text="Add"
+                app:fab_icon="@drawable/ic_baseline_local_shipping_24"
+                app:label_text="Receive Shipment"
                 app:label_backgroundColor="#808080"
                 app:label_textColor="#FFC0CB" />
 

@@ -84,5 +84,7 @@
     <string name="receiving_quantity">Receiving Quantity</string>
     <string name="cancel">Cancel</string>
     <string name="confirm">Confirm</string>
+    <string name="print">Print</string>
+    <string name="create_new">Create New</string>
 
 </resources>
