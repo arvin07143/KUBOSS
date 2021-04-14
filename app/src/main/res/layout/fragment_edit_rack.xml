@@ -6,7 +6,7 @@
     <data>
 <variable
         name="editRackViewModel"
-        type="com.example.kuboss.warehouse.EditRackViewModel" />
+        type="com.example.kuboss.warehouse.RackDetailsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

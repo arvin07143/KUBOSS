@@ -78,5 +78,11 @@
     <string name="sku_search">SKU Search</string>
     <string name="password">Password</string>
     <string name="name">Name</string>
+    <string name="receiving_material_id">Receiving Material ID</string>
+    <string name="receiving_sku">Receiving SKU</string>
+    <string name="receiving_name">Receiving Name</string>
+    <string name="receiving_quantity">Receiving Quantity</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
 
 </resources>
