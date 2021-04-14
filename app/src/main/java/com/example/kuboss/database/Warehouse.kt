@@ -16,7 +16,7 @@ data class Material(
     val SKU: String,
     val materialName: String,
     val quantity: Int,
-    val mRackId: String
+    val mRackId: String?
 )
 
 data class RackWithMaterials(

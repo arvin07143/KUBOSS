@@ -11,20 +11,36 @@ import com.example.kuboss.database.WarehouseDatabaseDao
 import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
 import java.lang.Exception
+import kotlin.random.Random
 
-class RackDetailsViewModel(
+class ReceiveItemViewModel(
     val database: WarehouseDatabaseDao,
     application: Application,
-    var rackId: String
-    ): AndroidViewModel(application) {
+): AndroidViewModel(application) {
+    private val allMaterialID = database.getAllMaterialID()
 
-    val materialList = database.getMaterials(rackId)
+    fun getNewMaterialID() : String{
+        val currentExistMaterialID = allMaterialID.value?.toSet()
+        var tempID: Int
+        var idString : String
+        if (currentExistMaterialID == null){
+            tempID = Random.nextInt(0,9999)
+            idString = tempID.toString().padStart(4,'0')
+            return idString
+        }
+        do {
+            tempID = Random.nextInt(0,9999)
+            idString = tempID.toString().padStart(4,'0')
+        }while (!currentExistMaterialID.contains(idString))
 
-    fun storeMaterial(materialID:String,newRackID:String): LiveData<Boolean> {
+        return idString
+    }
+
+    fun storeMaterial(mat: Material): LiveData<Boolean> {
         val error = MutableLiveData<Boolean>()
         viewModelScope.launch {
             try {
-                database.updateMatLocation(materialID,newRackID)
+                database.insert(mat)
                 error.value = false
             } catch (e:Exception){
                 Log.e("DB",e.toString())
@@ -33,22 +49,4 @@ class RackDetailsViewModel(
         }
         return error
     }
-
-
-    fun pickMaterial(pickedMat:Material): LiveData<Int> {
-        val error = MutableLiveData<Int>()
-        viewModelScope.launch {
-            try {
-                error.value = database.pickMaterial(pickedMat)
-
-            } catch (e:Exception){
-                Log.e("DB",e.toString())
-                Log.e("test",error.value.toString())
-            }
-        }
-        return error
-    }
-
-
-
 }

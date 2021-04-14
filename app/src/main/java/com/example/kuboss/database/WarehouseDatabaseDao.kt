@@ -40,6 +40,13 @@ interface WarehouseDatabaseDao {
     @Delete
     suspend fun pickMaterial(pickedMat:Material):Int
 
+    @Query("SELECT materialId FROM material_table")
+    fun getAllMaterialID(): LiveData<List<String>>
+
+    @Transaction
+    @Query("UPDATE material_table SET mRackId=:newRackID WHERE materialId=:materialID")
+    suspend fun updateMatLocation(materialID:String,newRackID: String)
+
 //    @Insert
 //    suspend fun addUser(user: User)
 //
