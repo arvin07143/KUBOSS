@@ -18,7 +18,6 @@ import com.example.kuboss.databinding.FragmentWarehouseBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class WarehouseFragment : Fragment() {
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,7 +29,7 @@ class WarehouseFragment : Fragment() {
         val dataSource = WarehouseDatabase.getInstance(application).warehouseDatabaseDao
         val viewModelFactory = WarehouseViewModelFactory(dataSource, application)
         val warehouseViewModel = ViewModelProvider(
-            this, viewModelFactory).get(WarehouseViewModel::class.java)
+            requireActivity().viewModelStore, viewModelFactory).get(WarehouseViewModel::class.java)
         binding.lifecycleOwner = this
         binding.warehouseViewModel = warehouseViewModel
 
@@ -54,11 +53,12 @@ class WarehouseFragment : Fragment() {
         btnReceive.setOnClickListener {
             findNavController().navigate(R.id.action_warehouseFragment_to_receiveMatFragment)
         }
+        val btnMap: FloatingActionButton = binding.expandableFabLayoutHome.findViewById(R.id.view_map_btn)
+        btnMap.setOnClickListener {
+            findNavController().navigate(R.id.action_warehouseFragment_to_warehouseMapFragment)
+        }
 
         return binding.root
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 }

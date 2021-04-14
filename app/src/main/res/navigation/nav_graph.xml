@@ -34,6 +34,9 @@
                 app:destination="@id/addRackFragment" />
         <action android:id="@+id/action_warehouseFragment_to_receiveMatFragment"
                 app:destination="@id/receiveMatFragment"/>
+        <action
+            android:id="@+id/action_warehouseFragment_to_warehouseMapFragment"
+            app:destination="@id/warehouseMapFragment" />
     </fragment>
     <fragment
             android:id="@+id/addRackFragment"
@@ -70,7 +73,22 @@
                 app:popUpTo="@id/warehouseFragment" />
     </fragment>
     <fragment
+        android:id="@+id/warehouseMapFragment"
+        android:name="com.example.kuboss.warehouse.WarehouseMapFragment"
+        android:label="Warehouse Map"
+        tools:layout="@layout/fragment_warehouse_map" >
+        <action
+            android:id="@+id/action_warehouseMapFragment_to_warehouseFragment"
+            app:destination="@id/warehouseFragment"
+            app:popUpTo="@id/warehouseFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
         android:id="@+id/addUserFragment"
         android:name="com.example.kuboss.warehouse.AddUserFragment"
         android:label="AddUserFragment" />
+    <fragment
+        android:id="@+id/viewUserFragment"
+        android:name="com.example.kuboss.warehouse.ViewUserFragment"
+        android:label="ViewUserFragment" />
 </navigation>

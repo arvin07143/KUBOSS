@@ -50,12 +50,19 @@ interface WarehouseDatabaseDao {
     @Query("UPDATE material_table SET mRackId=:newRackID WHERE materialId=:materialID")
     suspend fun updateMatLocation(materialID:String,newRackID: String)
 
-//    @Insert
-//    suspend fun addUser(user: User)
-//
-//    @Query("DELETE FROM user_table WHERE name = :userName")
-//    suspend fun removeUser(userName: String)
-//
-//    @Query("SELECT * FROM user_table ORDER BY name")
-//    fun getAllUsers(): LiveData<List<User>>
+    @Insert
+    suspend fun addUser(user: User)
+
+    @Query("DELETE FROM user_table WHERE name = :userName")
+    suspend fun removeUser(userName: String)
+
+    @Query("SELECT * FROM user_table ORDER BY name")
+    fun getAllUsers(): LiveData<List<User>>
+
+    @Query("SELECT * FROM user_table WHERE name LIKE :userName")
+    fun searchByUserName(userName: String): LiveData<List<User>>
+
+
+
+
 }
