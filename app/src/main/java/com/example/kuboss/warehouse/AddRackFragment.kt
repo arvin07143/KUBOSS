@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.kuboss.R
 import com.example.kuboss.database.WarehouseDatabase
 import com.example.kuboss.databinding.FragmentAddRackBinding
-import com.example.kuboss.databinding.FragmentWarehouseBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class AddRackFragment : Fragment() {
@@ -35,18 +34,15 @@ class AddRackFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
         val dataSource = WarehouseDatabase.getInstance(application).warehouseDatabaseDao
-        val viewModelFactory = AddRackViewModelFactory(dataSource)
+        val viewModelFactory = WarehouseViewModelFactory(dataSource, application)
         val addRackViewModel = ViewModelProvider(
-            this, viewModelFactory).get(AddRackViewModel::class.java)
+            requireActivity().viewModelStore, viewModelFactory).get(WarehouseViewModel::class.java)
 
-        binding?.addRackViewModel = addRackViewModel
 
         //set confirm button listener
         binding!!.confirmBtn.setOnClickListener {
             val newRackId = binding!!.editTextAisle.text.toString() + "-" + binding!!.editTextUnit.text.toString()
             addRackViewModel.onAddRack(newRackId)
-            //findNavController().navigate(R.id.action_addRackFragment_to_warehouseFragment)
-
         }
         binding!!.cancelBtn.setOnClickListener {
             findNavController().navigate(R.id.action_addRackFragment_to_warehouseFragment)
@@ -72,6 +68,7 @@ class AddRackFragment : Fragment() {
                         .setMessage("Rack added successfully.")
                         .setCancelable(false)
                         .setPositiveButton("Ok") { _, _ ->
+
                         }
                         .show()
                 addRackViewModel.finishShowingDialog()

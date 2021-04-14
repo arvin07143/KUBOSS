@@ -51,25 +51,22 @@ class RackDetailsFragment : Fragment(){
         btnAdd.setOnClickListener {
             val intent = Intent(this.context, LiveBarcodeScanningActivity::class.java)
             intent.putExtra("mode",1)
-            intent.putExtra("rackID",args.rackID)
-            Log.e("Test",args.rackID)
+            intent.putExtra("rackID",rackDetailsViewModel.rackId)
+            Log.e("Test",rackDetailsViewModel.rackId)
             startActivity(intent)
-//            val mat = Material(count.toString(), "sku", "cola", 1, rackDetailsViewModel.rackId)
-//            rackDetailsViewModel.storeMaterial(mat)
-//            count += 1
         }
 
         val btnRemove:FloatingActionButton = binding.expandableFabLayout.findViewById(R.id.btnRemove)
         btnRemove.setOnClickListener {
             val intent = Intent(this.context, LiveBarcodeScanningActivity::class.java)
             intent.putExtra("mode",0)
-            intent.putExtra("rackID",args.rackID)
+            intent.putExtra("rackID",rackDetailsViewModel.rackId)
             startActivity(intent)
         }
 
         val btnEdit:FloatingActionButton = binding.expandableFabLayout.findViewById(R.id.btnEdit)
         btnEdit.setOnClickListener{
-            val action = RackDetailsFragmentDirections.actionRackDetailsFragmentToEditRackFragment(args.rackID)
+            val action = RackDetailsFragmentDirections.actionRackDetailsFragmentToEditRackFragment(rackDetailsViewModel.rackId)
             findNavController().navigate(action)
         }
 
