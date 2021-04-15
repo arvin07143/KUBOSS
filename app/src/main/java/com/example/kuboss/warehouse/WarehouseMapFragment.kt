@@ -41,6 +41,8 @@ class WarehouseMapFragment : Fragment() {
         imgView = view.findViewById(R.id.map_img)
         val file = File(requireContext().filesDir, "warehousemap.jpg")
         imgView.setImageBitmap(BitmapFactory.decodeFile(file.absolutePath))
+        imgView.layoutParams.width = 1000
+        imgView.requestLayout()
 
         val getImg = registerForActivityResult(ActivityResultContracts.GetContent()){ uri: Uri? ->
             imgView.setImageURI(uri)
