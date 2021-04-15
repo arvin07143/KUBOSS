@@ -54,54 +54,54 @@
 
                 <LinearLayout
                     android:id="@+id/header_row"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
+                    android:layout_marginStart="4dp"
+                    android:orientation="horizontal"
                     app:layout_constraintBottom_toTopOf="@+id/search_item_details"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginTop="10dp">
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:text="Rack ID"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Rack"
+                        android:textAlignment="textStart"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:text="Mat ID"
+                        android:textAlignment="textStart"/>
+
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textAlignment="center" />
-
-                    <TextView
-                        android:text="Material ID"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textAlignment="center" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
                         android:text="Name"
-                        android:layout_weight="1"
-                        android:textAlignment="center" />
+                        android:textAlignment="textStart"/>
 
                     <TextView
+                        android:id="@+id/material_SKU"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/material_SKU"
+                        android:layout_weight="0.6"
                         android:text="SKU"
-                        android:layout_weight="1"
-                        android:textAlignment="center" />
+                        android:textAlignment="textStart"/>
 
                     <TextView
-                        android:text="Quantity"
-                        android:width="0dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textAlignment="center" />
+                        android:layout_weight="0.5"
+                        android:width="0dp"
+                        android:text="Quantity"
+                        android:layout_marginStart="4dp"
+                        android:textAlignment="textStart"/>
 
                 </LinearLayout>
 
@@ -109,16 +109,15 @@
                     android:id="@+id/search_item_details"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="4dp"
                     android:scrollbars="vertical"
                     app:layoutManager="LinearLayoutManager"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginTop="6dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/header_row"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginBottom="10dp" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/header_row"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>

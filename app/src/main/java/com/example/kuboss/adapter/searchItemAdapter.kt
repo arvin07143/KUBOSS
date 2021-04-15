@@ -49,4 +49,5 @@ class SearchItemAdapter(): RecyclerView.Adapter<SearchItemAdapter.ItemViewHolder
     override fun getItemCount(): Int {
         return dataset.size
     }
+
 }
