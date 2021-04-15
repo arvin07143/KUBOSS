@@ -31,7 +31,7 @@ class AddUserViewModel(
     fun onAddUser(email: String, password:String, name:String,type: String){
         viewModelScope.launch {
             val newUser = User(email, password, name, type)
-            //database.addUser(newUser)
+            database.addUser(newUser)
         }
     }
 

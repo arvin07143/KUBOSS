@@ -93,5 +93,23 @@
     <fragment
         android:id="@+id/viewUserFragment"
         android:name="com.example.kuboss.warehouse.ViewUserFragment"
-        android:label="ViewUserFragment" />
+        android:label="ViewUserFragment" >
+        <action
+            android:id="@+id/action_viewUserFragment_to_addUserFragment"
+            app:destination="@id/addUserFragment" />
+        <action
+            android:id="@+id/action_viewUserFragment_to_deleteUserFragment"
+            app:destination="@id/deleteUserFragment" />
+        <action
+            android:id="@+id/action_viewUserFragment_to_searchUserFragment"
+            app:destination="@id/searchUserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/deleteUserFragment"
+        android:name="com.example.kuboss.warehouse.DeleteUserFragment"
+        android:label="DeleteUserFragment" />
+    <fragment
+        android:id="@+id/searchUserFragment"
+        android:name="com.example.kuboss.warehouse.SearchUserFragment"
+        android:label="SearchUserFragment" />
 </navigation>

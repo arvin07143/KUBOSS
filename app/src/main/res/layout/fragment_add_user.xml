@@ -5,7 +5,7 @@
 
     <data>
         <variable
-            name="addRackViewModel"
+            name="addUserViewModel"
             type="com.example.kuboss.warehouse.AddUserViewModel" />
     </data>
 

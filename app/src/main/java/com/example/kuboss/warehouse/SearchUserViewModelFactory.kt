@@ -11,8 +11,8 @@ class SearchUserViewModelFactory (
     ) : ViewModelProvider.Factory {
         @Suppress("unchecked_cast")
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(ViewUserViewModel::class.java)) {
-                return ViewUserViewModel(dataSource, application) as T
+            if (modelClass.isAssignableFrom(SearchUserViewModel::class.java)) {
+                return SearchUserViewModel(dataSource, application) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }

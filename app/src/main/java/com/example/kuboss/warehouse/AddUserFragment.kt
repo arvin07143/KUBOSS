@@ -58,6 +58,7 @@ class AddUserFragment : Fragment() {
                 binding.etName.text.toString().isNotEmpty() &&
                 binding.etConfirmPassword.text.toString().isNotEmpty()&&
                 binding.etPassword.text.toString() == binding.etConfirmPassword.text.toString()&&
+                binding.etPassword.text.toString().length > 5 &&
                     type != "") {
 
                 if ((binding.etEmail.text.toString().trim().matches(emailPattern.toRegex()))) {
@@ -67,8 +68,7 @@ class AddUserFragment : Fragment() {
                     )
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
-                                Toast.makeText(activity, "Successfully added!", Toast.LENGTH_SHORT)
-                                    .show()
+
                                 addUserViewModel.onAddUser(
                                     binding.etEmail.text.toString(),
                                     binding.etPassword.text.toString(),
@@ -76,10 +76,11 @@ class AddUserFragment : Fragment() {
                                     type
                                 )
                                 type = ""
+                                Toast.makeText(activity, "Successfully added!", Toast.LENGTH_SHORT).show()
                             } else {
                                 Toast.makeText(
                                     activity,
-                                    "failed to Authenticate !",
+                                    "Email already exist!",
                                     Toast.LENGTH_SHORT
                                 )
                                     .show()
@@ -91,15 +92,32 @@ class AddUserFragment : Fragment() {
             }else{
                 if(binding.etPassword.text.toString() != binding.etConfirmPassword.text.toString()){
                     Toast.makeText(activity, "Password not match", Toast.LENGTH_SHORT).show()
-                } else if(type == ""){
+                }else if(binding.etPassword.text.toString().length < 6){
+                    Toast.makeText(activity, "Password need to have at least 6 character!", Toast.LENGTH_SHORT).show()
+                }else if(type == ""){
                     Toast.makeText(activity, "Please choose user type.", Toast.LENGTH_SHORT).show()
-                }
-                signInInputsArray = arrayOf(binding.etName, binding.etConfirmPassword, binding.etPassword, binding.etEmail)
-                signInInputsArray.forEach { input ->
-                    if (input.text.toString().isEmpty()) {
-                        Toast.makeText(activity, "${input.hint} is required", Toast.LENGTH_SHORT).show()
+                }else {
+                    signInInputsArray = arrayOf(
+                        binding.etName,
+                        binding.etConfirmPassword,
+                        binding.etPassword,
+                        binding.etEmail
+                    )
+                    signInInputsArray.forEach { input ->
+                        if (input.text.toString().isEmpty()) {
+                            Toast.makeText(
+                                activity,
+                                "${input.hint} is required",
+                                Toast.LENGTH_SHORT
+                            ).show()
 
+                        }
                     }
+                    Toast.makeText(
+                        activity,
+                        "error",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
 
             }
