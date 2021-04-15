@@ -11,7 +11,7 @@
 
 
         <TextView
-                android:text="Aisle"
+                android:text="@string/aisle_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -27,10 +27,10 @@
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/aisle_label"
-            app:layout_constraintTop_toBottomOf="@+id/aisle_label" />
+            app:layout_constraintTop_toBottomOf="@+id/aisle_label"/>
 
         <TextView
-                android:text="Unit"
+                android:text="@string/unit_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -50,7 +50,7 @@
             app:layout_constraintTop_toBottomOf="@+id/unit_label" />
 
         <Button
-                android:text="Confirm"
+                android:text="@string/confirm"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/confirm_btn"
@@ -59,7 +59,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
         <Button
-                android:text="Cancel"
+                android:text="@string/cancel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/cancel_btn"
