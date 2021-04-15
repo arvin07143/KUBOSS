@@ -62,7 +62,7 @@ interface WarehouseDatabaseDao {
     suspend fun addUser(user: User)
 
     @Query("DELETE FROM user_table WHERE name = :userName")
-    suspend fun removeUser(userName: String)
+    suspend fun removeUserByName(userName: String)
 
     @Query("SELECT * FROM user_table ORDER BY name")
     fun getAllUsers(): LiveData<List<User>>
@@ -70,6 +70,11 @@ interface WarehouseDatabaseDao {
     @Query("SELECT * FROM user_table WHERE name LIKE :userName")
     fun searchByUserName(userName: String): LiveData<List<User>>
 
+    @Query("SELECT email FROM user_table WHERE name = :userName")
+    suspend fun getEmailByName(userName: String):String
+
+    @Query("SELECT password FROM user_table WHERE name = :userName")
+    suspend fun getPasswordByName(userName: String):String
 
 
 
