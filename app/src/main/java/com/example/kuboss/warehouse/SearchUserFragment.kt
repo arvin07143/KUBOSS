@@ -16,10 +16,11 @@ import com.example.kuboss.database.WarehouseDatabase
 import com.example.kuboss.databinding.FragmentSearchUserBinding
 
 
+
 class SearchUserFragment : Fragment() {
 
     companion object {
-        fun newInstance() = ViewUserFragment()
+        fun newInstance() = SearchUserFragment()
     }
 
     private lateinit var viewModel: SearchUserViewModel

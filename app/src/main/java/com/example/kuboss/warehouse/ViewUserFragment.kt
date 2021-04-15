@@ -17,6 +17,7 @@ import com.example.kuboss.adapter.SearchItemAdapter
 import com.example.kuboss.adapter.ViewUserAdapter
 import com.example.kuboss.database.WarehouseDatabase
 import com.example.kuboss.databinding.FragmentViewUserBinding
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class ViewUserFragment : Fragment() {
@@ -50,12 +51,23 @@ class ViewUserFragment : Fragment() {
             }
         })
 
-        binding.addUserBtn.setOnClickListener{
+        //setup floating action button
+        val btnAddUser: FloatingActionButton = binding.expandableFabLayoutUser.findViewById(R.id.add_user_btn)
+        btnAddUser.setOnClickListener {
             findNavController().navigate(R.id.action_viewUserFragment_to_addUserFragment)
         }
-        binding.removeUserBtn.setOnClickListener{
+
+        val btnRemoveUser: FloatingActionButton = binding.expandableFabLayoutUser.findViewById(R.id.remove_user_btn)
+        btnRemoveUser.setOnClickListener {
             findNavController().navigate(R.id.action_viewUserFragment_to_deleteUserFragment)
         }
+        val btnSearchUser: FloatingActionButton = binding.expandableFabLayoutUser.findViewById(R.id.search_user_btn)
+        btnSearchUser.setOnClickListener {
+            findNavController().navigate(R.id.action_viewUserFragment_to_searchUserFragment)
+        }
+
+
+
         return binding.root
     }
 

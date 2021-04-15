@@ -89,11 +89,7 @@
     <fragment
         android:id="@+id/addUserFragment"
         android:name="com.example.kuboss.warehouse.AddUserFragment"
-        android:label="AddUserFragment" >
-        <action
-            android:id="@+id/action_addUserFragment_to_viewUserFragment"
-            app:destination="@id/viewUserFragment" />
-    </fragment>
+        android:label="AddUserFragment" />
     <fragment
         android:id="@+id/viewUserFragment"
         android:name="com.example.kuboss.warehouse.ViewUserFragment"
@@ -104,13 +100,16 @@
         <action
             android:id="@+id/action_viewUserFragment_to_deleteUserFragment"
             app:destination="@id/deleteUserFragment" />
+        <action
+            android:id="@+id/action_viewUserFragment_to_searchUserFragment"
+            app:destination="@id/searchUserFragment" />
     </fragment>
     <fragment
         android:id="@+id/deleteUserFragment"
         android:name="com.example.kuboss.warehouse.DeleteUserFragment"
-        android:label="DeleteUserFragment" >
-        <action
-            android:id="@+id/action_deleteUserFragment_to_viewUserFragment"
-            app:destination="@id/viewUserFragment" />
-    </fragment>
+        android:label="DeleteUserFragment" />
+    <fragment
+        android:id="@+id/searchUserFragment"
+        android:name="com.example.kuboss.warehouse.SearchUserFragment"
+        android:label="SearchUserFragment" />
 </navigation>
