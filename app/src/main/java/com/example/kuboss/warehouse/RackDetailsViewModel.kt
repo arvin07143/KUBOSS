@@ -22,7 +22,7 @@ class RackDetailsViewModel(
     private var rackList = listOf<String>()
 
     fun storeMaterial(materialID:String,newRackID:String): LiveData<Int> {
-        val error = MutableLiveData<Boolean>()
+        val error = MutableLiveData<Int>()
         viewModelScope.launch {
             try {
                 error.value = database.updateMatLocation(materialID,newRackID)
