@@ -19,6 +19,7 @@ class RackDetailsViewModel(
     ): AndroidViewModel(application) {
 
     val materialList = database.getMaterials(rackId)
+    val allMaterialID = database.getAllMaterialID()
     private var rackList = listOf<String>()
 
     fun storeMaterial(materialID:String,newRackID:String): LiveData<Int> {

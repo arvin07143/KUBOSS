@@ -15,7 +15,6 @@
         tools:context=".warehouse.AddRackFragment"
         android:padding="16dp">
 
-
         <EditText
             android:id="@+id/etPassword"
             android:layout_width="308dp"
@@ -127,7 +126,5 @@
                 android:layout_height="50dp"
                 android:text="Worker" />
         </RadioGroup>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

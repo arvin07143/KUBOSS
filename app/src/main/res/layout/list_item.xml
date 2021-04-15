@@ -1,50 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    app:cardElevation="8dp"
+>
 
-    <TextView
-            tools:text="Material ID"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/material_id"
-            android:layout_weight="0.5"
-            android:textAlignment="textStart"/>
-
-    <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                       android:layout_height="match_parent">
+        <TextView
             android:id="@+id/material_name"
-            tools:text="Name"
-            android:layout_marginStart="4dp"
-            android:layout_weight="1"
-            android:textAlignment="textStart"/>
-
-    <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/material_SKU"
-            app:layout_constraintTop_toTopOf="@+id/material_name"
-            app:layout_constraintStart_toEndOf="@+id/material_name"
-            tools:text="SKU"
-            android:layout_marginStart="4dp"
-            android:layout_weight="0.5"
-            android:textAlignment="textStart"/>
-
-    <TextView
-            tools:text="Quantity"
-            android:width="0dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/material_qty"
-            android:layout_weight="0.5"
-            android:textAlignment="textEnd"/>
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:textAlignment="textStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
+            tools:text="Material ABC Intel Core I7"/>
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/material_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent" tools:text="4896"/>
+
+        <TextView
+            android:id="@+id/sku_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/sku"
+            android:textAlignment="textStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/material_id"
+            tools:text="SKU : "/>
+
+        <TextView
+            android:id="@+id/material_SKU"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:textAlignment="textStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintStart_toEndOf="@+id/sku_label"
+            app:layout_constraintTop_toBottomOf="@+id/material_id" tools:text="12345678"/>
+
+        <TextView
+            android:id="@+id/material_qty_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Quantity : "
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sku_label" tools:text="Quantity"/>
+
+        <TextView
+            android:id="@+id/material_qty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toEndOf="@id/material_qty_label"
+            app:layout_constraintTop_toBottomOf="@id/material_SKU" tools:text="Quantity"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
+
