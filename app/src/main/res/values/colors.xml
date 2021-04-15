@@ -9,4 +9,9 @@
   <color name="barcode_reticle_stroke">#40000000</color>
   <color name="barcode_field_value">#797979</color>
   <color name="barcode_field_box_stroke">#757575</color>
+
+  <color name="reply_blue_600">#4A6572</color>
+  <color name="reply_blue_700">#344955</color>
+  <color name="reply_blue_800">#232F34</color>
+  <color name="reply_orange_500">#f9aa33</color>
 </resources>

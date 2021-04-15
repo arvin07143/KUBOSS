@@ -92,4 +92,6 @@
     <string name="rack_id">Rack ID: %s</string>
     <string name="new_aisle_number">New Aisle Number</string>
     <string name="new_unit">New Unit</string>
+    <string name="home">Home</string>
+    <string name="user">User</string>
 </resources>
