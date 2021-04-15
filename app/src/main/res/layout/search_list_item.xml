@@ -11,20 +11,20 @@
         >
 
     <TextView
-            tools:text="Rack ID"
+            tools:text="Rack"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/search_rack_id"
-            android:layout_weight="1"
-            android:textAlignment="center"/>
+            android:layout_weight="0.4"
+            android:textAlignment="textStart"/>
 
     <TextView
-            tools:text="Material ID"
+            tools:text="Mat. ID"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/search_material_id"
-            android:layout_weight="1"
-            android:textAlignment="center"/>
+            android:layout_weight="0.5"
+            android:textAlignment="textStart"/>
 
     <TextView
             android:layout_width="0dp"
@@ -32,23 +32,24 @@
             android:id="@+id/search_material_name"
             tools:text="Name"
             android:layout_weight="1"
-            android:textAlignment="center"/>
+            android:textAlignment="textStart"/>
 
     <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/search_material_SKU"
             tools:text="SKU"
-            android:layout_weight="1"
-            android:textAlignment="center"/>
+            android:layout_weight="0.6"
+            android:textAlignment="textStart"/>
 
     <TextView
             tools:text="Quantity"
             android:width="0dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:id="@+id/search_material_qty"
-            android:layout_weight="1"
-            android:textAlignment="center"/>
+            android:layout_weight="0.5"
+            android:textAlignment="textStart"/>
 
 </LinearLayout>

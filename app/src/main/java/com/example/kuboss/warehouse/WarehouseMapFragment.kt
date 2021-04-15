@@ -39,14 +39,14 @@ class WarehouseMapFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         imgView = view.findViewById(R.id.map_img)
-        val file = File(requireContext().filesDir, "warehousemap")
+        val file = File(requireContext().filesDir, "warehousemap.jpg")
         imgView.setImageBitmap(BitmapFactory.decodeFile(file.absolutePath))
 
         val getImg = registerForActivityResult(ActivityResultContracts.GetContent()){ uri: Uri? ->
             imgView.setImageURI(uri)
             val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uri)
 
-            requireContext().openFileOutput("warehousemap", Context.MODE_PRIVATE).use{
+            requireContext().openFileOutput("warehousemap.jpg", Context.MODE_PRIVATE).use{
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
             }
 

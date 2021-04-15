@@ -12,6 +12,8 @@ interface WarehouseDatabaseDao {
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insert(material: Material)
 
+    @Delete
+    suspend fun delete(rack: Rack)
     @Update
     suspend fun update(rack: Rack)
 
@@ -20,6 +22,9 @@ interface WarehouseDatabaseDao {
 
     @Query("SELECT * FROM rack_table WHERE rackId=:rackID")
     suspend fun getRack(rackID: String): Rack
+
+    @Query("SELECT * FROM material_table ORDER BY mRackId ASC")
+    suspend fun getAllMaterials(): List<Material>
 
     @Transaction
     @Query("SELECT * FROM rack_table WHERE rackId=:rackID")
@@ -30,6 +35,9 @@ interface WarehouseDatabaseDao {
 
     @Query("UPDATE material_table SET mRackId=:newRackID WHERE mRackId=:oldRackID")
     suspend fun updateMaterialRack(oldRackID: String, newRackID: String)
+
+    @Query("UPDATE material_table SET mRackId=NULL WHERE mRackId=:rackID")
+    suspend fun moveMaterialOnDeleteRack(rackID: String)
 
     @Query("SELECT * FROM rack_table ORDER BY rackId")
     fun getAllRacks(): LiveData<List<Rack>>
@@ -42,6 +50,9 @@ interface WarehouseDatabaseDao {
 
     @Query("SELECT materialId FROM material_table")
     fun getAllMaterialID(): LiveData<List<String>>
+
+    @Query("SELECT * FROM material_table WHERE mRackID IS NULL")
+    fun getReceivedItems(): LiveData<List<Material>>
 
     @Transaction
     @Query("UPDATE material_table SET mRackId=:newRackID WHERE materialId=:materialID")

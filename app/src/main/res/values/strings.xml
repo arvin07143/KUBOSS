@@ -84,5 +84,14 @@
     <string name="receiving_quantity">Receiving Quantity</string>
     <string name="cancel">Cancel</string>
     <string name="confirm">Confirm</string>
-
+    <string name="print">Print</string>
+    <string name="create_new">Create New</string>
+    <string name="aisle_label">Aisle</string>
+    <string name="unit_label">Unit</string>
+    <string name="delete">Delete</string>
+    <string name="rack_id">Rack ID: %s</string>
+    <string name="new_aisle_number">New Aisle Number</string>
+    <string name="new_unit">New Unit</string>
+    <string name="home">Home</string>
+    <string name="user">User</string>
 </resources>

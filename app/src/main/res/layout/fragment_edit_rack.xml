@@ -17,7 +17,7 @@
 
 
         <Button
-                android:text="Delete"
+                android:text="@string/delete"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnDeleteRack"
@@ -31,12 +31,12 @@
                 android:id="@+id/rackId_text_view"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:text="@{editRackViewModel.rackId}"
+                android:text="@{@string/rack_id(editRackViewModel.rackId)}"
                 tools:text="Rack ID: 01-AA"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <Button
-                android:text="Cancel"
+                android:text="@string/cancel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnCancel"
@@ -46,7 +46,7 @@
                 android:layout_marginBottom="32dp" />
 
         <Button
-                android:text="Save"
+                android:text="@string/confirm"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnSave"
@@ -55,7 +55,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/btnCancel" />
 
         <TextView
-                android:text="New Aisle Number"
+                android:text="@string/new_aisle_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -75,7 +75,7 @@
                 app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
-                android:text="New Unit"
+                android:text="@string/new_unit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
