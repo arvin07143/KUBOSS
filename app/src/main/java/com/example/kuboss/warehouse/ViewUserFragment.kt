@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kuboss.R
 import com.example.kuboss.adapter.SearchItemAdapter
@@ -49,8 +50,12 @@ class ViewUserFragment : Fragment() {
             }
         })
 
-
-
+        binding.addUserBtn.setOnClickListener{
+            findNavController().navigate(R.id.action_viewUserFragment_to_addUserFragment)
+        }
+        binding.removeUserBtn.setOnClickListener{
+            findNavController().navigate(R.id.action_viewUserFragment_to_deleteUserFragment)
+        }
         return binding.root
     }
 

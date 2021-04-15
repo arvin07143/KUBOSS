@@ -40,8 +40,8 @@
                     android:layout_gravity="bottom|end"
                     android:layout_marginBottom="@dimen/ui_margin_medium"
                     android:layout_marginEnd="@dimen/ui_margin_medium"
-                    app:efab_color="@color/reply_blue_700"
-                    app:efab_icon="@drawable/ic_baseline_menu_white_24"
+                    app:efab_color="#bdbdbd"
+                    app:efab_icon="@drawable/ic_baseline_menu_24"
                     app:efab_iconAnimationRotationDeg="0"
                     app:efab_closingAnticipateTension="0" />
 

@@ -20,8 +20,8 @@ interface WarehouseDatabaseDao {
     @Query("DELETE FROM rack_table WHERE rackId = :rackID")
     suspend fun removeRack(rackID: String)
 
-    @Query("SELECT * FROM rack_table WHERE rackId=:rackID")
-    suspend fun getRack(rackID: String): Rack
+    @Query("SELECT rackId FROM rack_table ORDER BY rackId")
+    suspend fun getRackList(): List<String>
 
     @Query("SELECT * FROM material_table ORDER BY mRackId ASC")
     suspend fun getAllMaterials(): List<Material>
