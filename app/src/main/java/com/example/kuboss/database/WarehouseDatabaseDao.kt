@@ -23,6 +23,9 @@ interface WarehouseDatabaseDao {
     @Query("SELECT * FROM rack_table WHERE rackId=:rackID")
     suspend fun getRack(rackID: String): Rack
 
+    @Query("SELECT * FROM material_table ORDER BY mRackId ASC")
+    suspend fun getAllMaterials(): List<Material>
+
     @Transaction
     @Query("SELECT * FROM rack_table WHERE rackId=:rackID")
     fun getMaterials(rackID: String): LiveData<RackWithMaterials>
@@ -67,9 +70,7 @@ interface WarehouseDatabaseDao {
     @Query("SELECT * FROM user_table WHERE name LIKE :userName")
     fun searchByUserName(userName: String): LiveData<List<User>>
 
-    @Transaction
-    @Query("SELECT * FROM rack_table")
-    suspend fun getRackWithMaterials(): List<RackWithMaterials>
+
 
 
 }

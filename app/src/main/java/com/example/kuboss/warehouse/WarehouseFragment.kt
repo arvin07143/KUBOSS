@@ -26,10 +26,15 @@ import com.example.kuboss.database.WarehouseDatabase
 import com.example.kuboss.databinding.FragmentWarehouseBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.*
 import java.io.File
 import java.io.FileOutputStream
+import java.text.DateFormat.getDateTimeInstance
+import java.text.SimpleDateFormat
+import java.util.*
 
 class WarehouseFragment : Fragment() {
+    private lateinit var warehouseViewModel: WarehouseViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,7 +45,7 @@ class WarehouseFragment : Fragment() {
         val application = requireNotNull(this.activity).application
         val dataSource = WarehouseDatabase.getInstance(application).warehouseDatabaseDao
         val viewModelFactory = WarehouseViewModelFactory(dataSource, application)
-        val warehouseViewModel = ViewModelProvider(
+        warehouseViewModel = ViewModelProvider(
             requireActivity().viewModelStore, viewModelFactory).get(WarehouseViewModel::class.java)
         binding.lifecycleOwner = this
         binding.warehouseViewModel = warehouseViewModel
@@ -88,11 +93,13 @@ class WarehouseFragment : Fragment() {
     }
 
     private fun generateReport(){
-
+        val sdf = SimpleDateFormat.getDateTimeInstance()
+        val currentDate = sdf.format(Date())
+        val fileName = "Material Report-$currentDate"
         val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
-            type = "text/plain"
-            putExtra(Intent.EXTRA_TITLE, "invoice.pdf")
+            type = "text/csv"
+            putExtra(Intent.EXTRA_TITLE, fileName)
 
         }
 
@@ -102,11 +109,17 @@ class WarehouseFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         val uri = data?.data
-        if(requestCode == 1 && resultCode == Activity.RESULT_OK){
-            val os = requireContext().contentResolver.openOutputStream(uri!!)
-            os?.write("hellowrot".toByteArray())
-            os?.close()
+        val reportJob = GlobalScope.launch{
+            val matList = warehouseViewModel.getReportString()
+            if(requestCode == 1 && resultCode == Activity.RESULT_OK){
+                val os = requireContext().contentResolver.openOutputStream(uri!!)
+                os?.write(matList.toByteArray())
+                os?.close()
 
+            }
         }
+        reportJob.start()
     }
+
+
 }

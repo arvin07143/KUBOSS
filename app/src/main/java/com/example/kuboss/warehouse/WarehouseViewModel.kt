@@ -11,10 +11,13 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.kuboss.database.Material
 import com.example.kuboss.database.Rack
+import com.example.kuboss.database.RackWithMaterials
 import com.example.kuboss.database.WarehouseDatabaseDao
 import kotlinx.coroutines.launch
 import java.io.File
+import java.lang.IllegalStateException
 
 
 class WarehouseViewModel(
@@ -22,6 +25,8 @@ class WarehouseViewModel(
     application: Application): AndroidViewModel(application) {
 
     val racks = database.getAllRacks()
+    private var materialList = listOf<Material>()
+
     private var _isSqlError = MutableLiveData<Boolean>(false)
     val isSqlError: LiveData<Boolean>
         get() = _isSqlError
@@ -51,10 +56,22 @@ class WarehouseViewModel(
         _isAddRackSuccess.value = false
     }
 
+    suspend fun getReportString():String{
+        val scope = viewModelScope.launch {
+            materialList = database.getAllMaterials()
+        }
+        scope.join()
+        var reportStr = "Rack ID, Material, Name, SKU, Quantity \n"
+        for(mat: Material in materialList){
+            val rackId = (mat.mRackId ?: "Not Assigned")
+            val matId = mat.materialId
+            val matName = mat.materialName
+            val sku = mat.SKU
+            val qty = mat.quantity.toString()
+            reportStr += "$rackId,$matId,$matName,$sku,$qty\n"
+        }
 
-
-
-
-
+        return reportStr
+    }
 
 }
