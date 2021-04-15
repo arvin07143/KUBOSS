@@ -69,7 +69,7 @@ class BarcodeResultFragment : BottomSheetDialogFragment() {
 
         val mode: Int =
             if (arguments?.containsKey("saveMode") == true) {
-                arguments.getInt("saveMode") ?: 1
+                arguments.getInt("saveMode")
             } else {
                 Log.e(TAG, "No save mode passed in!")
                 1
@@ -87,12 +87,12 @@ class BarcodeResultFragment : BottomSheetDialogFragment() {
             val barcodeData = rawData.split(',')
             val scannedMat = Material(barcodeData[0], barcodeData[1], barcodeData[2], barcodeData[3].toInt(), rackID)
             if (mode == 1) {
-                rackDetailsViewModel.storeMaterial(barcodeData[0],rackID).observe(viewLifecycleOwner, Observer {
-                    if (it) {
+                rackDetailsViewModel.storeMaterial(barcodeData[0], rackID).observe(viewLifecycleOwner, Observer {
+                    if (it == 0) {
                         MaterialAlertDialogBuilder(requireContext())
-                            .setTitle("Store Material")
-                            .setMessage("This material is already stored.")
+                            .setTitle("Store Material Error")
                             .setCancelable(false)
+                            .setMessage("Material Not Found / Already In Another Rack")
                             .setPositiveButton("Ok") { _, _ ->
                             }
                             .show()
@@ -103,7 +103,7 @@ class BarcodeResultFragment : BottomSheetDialogFragment() {
                 })
             } else {
                 rackDetailsViewModel.pickMaterial(scannedMat).observe(viewLifecycleOwner, Observer {
-                    Log.e("ts",it.toString())
+                    Log.e("ts", it.toString())
                     if (it == 0) {
                         MaterialAlertDialogBuilder(requireContext())
                             .setTitle("Pick Material")

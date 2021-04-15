@@ -24,18 +24,20 @@ class RackDetailsViewModel(
         getRack()
         Log.d("materialList", materialList.value?.materials?.size.toString())
     }
-    fun storeMaterial(materialID:String,newRackID:String): LiveData<Boolean> {
-        val error = MutableLiveData<Boolean>()
+    fun storeMaterial(materialID:String,newRackID:String): LiveData<Int> {
+        val error = MutableLiveData<Int>()
         viewModelScope.launch {
             try {
-                database.updateMatLocation(materialID,newRackID)
-                error.value = false
+                error.value = database.updateMatLocation(materialID,newRackID)
             } catch (e:Exception){
                 Log.e("DB",e.toString())
-                error.value = true
             }
         }
         return error
+    }
+
+    fun findRackID(materialID: String):LiveData<String>{
+        return database.findRack(materialID)
     }
 
 
@@ -47,7 +49,6 @@ class RackDetailsViewModel(
 
             } catch (e:Exception){
                 Log.e("DB",e.toString())
-                Log.e("test",error.value.toString())
             }
         }
         return error
