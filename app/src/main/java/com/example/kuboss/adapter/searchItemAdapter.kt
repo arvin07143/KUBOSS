@@ -20,7 +20,7 @@ class SearchItemAdapter(): RecyclerView.Adapter<SearchItemAdapter.ItemViewHolder
         val itemNameView: TextView = itemView.findViewById(R.id.search_material_name)
         val itemSkuView: TextView = itemView.findViewById(R.id.search_material_SKU)
         val itemQtyView: TextView = itemView.findViewById(R.id.search_material_qty)
-        val rackIdView : TextView = itemView.findViewById(R.id.search_rack_id)
+        val rackIdView : TextView = itemView.findViewById(R.id.search_material_rack)
     }
 
     override fun onCreateViewHolder(
