@@ -1,14 +1,12 @@
 package com.example.kuboss.warehouse
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -25,35 +23,64 @@ class EditRackFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val binding: FragmentEditRackBinding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_edit_rack, container, false)
+            inflater, R.layout.fragment_edit_rack, container, false
+        )
         val application = requireNotNull(this.activity).application
         val dataSource = WarehouseDatabase.getInstance(application).warehouseDatabaseDao
         val viewModelFactory = RackDetailsViewModelFactory(dataSource, application, args.rackID)
         val editRackViewModel = ViewModelProvider(
-            this, viewModelFactory).get(RackDetailsViewModel::class.java)
-
+            this, viewModelFactory
+        ).get(RackDetailsViewModel::class.java)
         binding.editRackViewModel = editRackViewModel
-        Log.d("editrackid", editRackViewModel.rackId)
-        binding.btnDeleteRack.setOnClickListener{
-            editRackViewModel.onDeleteRack()
-            findNavController().navigate(R.id.action_editRackFragment_to_warehouseFragment)
+        editRackViewModel.getRackList()
+        binding.btnDeleteRack.setOnClickListener {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Warning")
+                .setMessage("Are you sure that you want to remove this rack?\nThe material stored will be transferred to received list.")
+                .setCancelable(true)
+                .setNegativeButton("Cancel") { _, _ -> }
+                .setPositiveButton("Ok") { _, _ ->
+                    editRackViewModel.onDeleteRack()
+                    findNavController().navigate(R.id.action_editRackFragment_to_warehouseFragment)
+                }
+                .show()
+
         }
-        binding.btnCancel.setOnClickListener{
-            val action = EditRackFragmentDirections.actionEditRackFragmentToRackDetailsFragment(editRackViewModel.rackId)
+        binding.btnCancel.setOnClickListener {
+            val action = EditRackFragmentDirections.actionEditRackFragmentToRackDetailsFragment(
+                editRackViewModel.rackId
+            )
             findNavController().navigate(action)
         }
-        binding.btnSave.setOnClickListener{
-            val newRackId = binding.editingEditTextAisle.text.toString() + "-" + binding.editingEditTextUnit.text.toString()
-            if(newRackId != editRackViewModel.rackId ) {
-                editRackViewModel.updateRack(editRackViewModel.rackId, newRackId)
-                val action =
-                    EditRackFragmentDirections.actionEditRackFragmentToRackDetailsFragment(newRackId)
-                findNavController().navigate(action)
-            }else{
-                Toast.makeText(requireContext(), "Rack already exist", Toast.LENGTH_LONG).show()
+        binding.btnSave.setOnClickListener {
+            val aisle = binding.editingEditTextAisle.text.toString()
+            val unit = binding.editingEditTextUnit.text.toString()
+            val newRackId = when {
+                (aisle != "" && unit == "") -> aisle
+                (aisle == "" && unit != "") -> unit
+                (aisle != "" && unit != "") -> "$aisle-$unit"
+                else -> ""
             }
-        }
-
+            if (newRackId == "") {
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Error")
+                    .setMessage("Aisle and Unit cannot be empty")
+                    .setCancelable(false)
+                    .setPositiveButton("Ok") { _, _ ->
+                    }
+                    .show()
+            } else if (newRackId != editRackViewModel.rackId
+                && !editRackViewModel.isRackExist(newRackId)) {
+                    editRackViewModel.updateRack(editRackViewModel.rackId, newRackId)
+                    val action =
+                        EditRackFragmentDirections.actionEditRackFragmentToRackDetailsFragment(
+                            newRackId
+                        )
+                    findNavController().navigate(action)
+                } else {
+                    Toast.makeText(requireContext(), "Rack already exist", Toast.LENGTH_LONG).show()
+                }
+            }
         return binding.root
     }
 

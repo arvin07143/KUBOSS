@@ -19,13 +19,10 @@ class RackDetailsViewModel(
     ): AndroidViewModel(application) {
 
     val materialList = database.getMaterials(rackId)
-    private lateinit var rack: Rack
-    init{
-        getRack()
-        Log.d("materialList", materialList.value?.materials?.size.toString())
-    }
+    private var rackList = listOf<String>()
+
     fun storeMaterial(materialID:String,newRackID:String): LiveData<Int> {
-        val error = MutableLiveData<Int>()
+        val error = MutableLiveData<Boolean>()
         viewModelScope.launch {
             try {
                 error.value = database.updateMatLocation(materialID,newRackID)
@@ -80,10 +77,19 @@ class RackDetailsViewModel(
             }
         }
     }
-    private fun getRack(){
+    fun getRackList(){
         viewModelScope.launch {
-            rack = database.getRack(rackId)
+            rackList = database.getRackList()
         }
     }
 
+    fun isRackExist(newRackId: String): Boolean{
+        for(rack: String in rackList){
+            if(newRackId == rack){
+                Log.d("exist", newRackId)
+                return true
+            }
+        }
+        return false
+    }
 }
