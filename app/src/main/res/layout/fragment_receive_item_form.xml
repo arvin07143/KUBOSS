@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/ui_margin_medium"
-                android:layout_marginBottom="@dimen/ui_margin_medium"
+                android:layout_marginBottom="16dp"
                 android:enabled="false"
                 android:hint="@string/receiving_material_id">
 
@@ -46,7 +46,7 @@
                 app:endIconMode="clear_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/ui_margin_medium"
+                android:layout_marginBottom="16dp"
                 android:hint="@string/receiving_sku">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -63,7 +63,7 @@
                 app:endIconMode="clear_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/ui_margin_medium"
+                android:layout_marginBottom="16dp"
                 android:hint="@string/receiving_name">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -79,7 +79,7 @@
                 app:endIconMode="clear_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/ui_margin_medium"
+                android:layout_marginBottom="16dp"
                 android:hint="@string/receiving_quantity">
 
                 <com.google.android.material.textfield.TextInputEditText
