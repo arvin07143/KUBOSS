@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="userViewModel"
+            type="com.example.kuboss.warehouse.UserViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/nav_header"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="@color/colorAccent"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:gravity="bottom"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:textSize="32sp"
+                app:layout_constraintBottom_toTopOf="@+id/email"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Name" />
+
+            <TextView
+                android:id="@+id/type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingBottom="16dp"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/name"
+                tools:text="type" />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnEditProfile"
+            android:layout_width="411dp"
+            android:layout_height="85dp"
+            android:backgroundTint="#FFFFFF"
+            android:gravity="left|center_vertical"
+            android:text="Edit Profile"
+            android:textAllCaps="false"
+            android:textColor="#000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nav_header"
+            app:rippleColor="@color/white"
+            android:textSize="18sp"/>
+
+        <Button
+            android:id="@+id/btnManageUser"
+            android:layout_width="411dp"
+            android:layout_height="85dp"
+            android:layout_marginTop="84dp"
+            android:backgroundTint="#FFFFFF"
+            android:gravity="left|center_vertical"
+            android:text="Manage User"
+            android:textAllCaps="false"
+            android:textColor="#000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nav_header"
+            android:textSize="18sp"/>
+
+        <Button
+            android:id="@+id/btnRemoveAccount"
+            android:layout_width="411dp"
+            android:layout_height="85dp"
+            android:layout_marginTop="168dp"
+            android:backgroundTint="#FFFFFF"
+            android:text="Remove Account"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nav_header"
+            android:textColor="#000"
+            android:gravity="left|center_vertical"
+            android:textAllCaps="false"
+            android:textSize="18sp"/>
+
+        <Button
+            android:id="@+id/btnSignout"
+            android:layout_width="411dp"
+            android:layout_height="85dp"
+            android:layout_marginTop="252dp"
+            android:backgroundTint="#FFFFFF"
+            android:text="Logout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nav_header"
+            android:textColor="#000"
+            android:gravity="left|center_vertical"
+            android:textAllCaps="false"
+            android:textSize="18sp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

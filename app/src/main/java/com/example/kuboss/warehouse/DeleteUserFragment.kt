@@ -74,9 +74,10 @@ class DeleteUserFragment : Fragment() {
                 selectedUserForDelete = adapter.returnUserForDelete()
 
                 selectedUserForDelete.forEach { user ->
+                    viewModel.onDeleteUser(user)
 
-                    email = viewModel.getUserEmail(user)
-                    password = viewModel.getUserPassword(user)
+//                    email = viewModel.getUserEmail(user)
+//                    password = viewModel.getUserPassword(user)
 //                    Toast.makeText(activity, email + password, Toast.LENGTH_SHORT).show()
 //                    FirebaseUtils.firebaseAuth.signOut()
 //                    FirebaseUtils.firebaseAuth.signInWithEmailAndPassword(email, password)
@@ -98,16 +99,16 @@ class DeleteUserFragment : Fragment() {
 //                        }
 
                     //viewModel.firebaseRemove(email,password)
-                   //viewModel.onDeleteUser(user)
+
                 }
-                FirebaseUtils.firebaseAuth.signOut()
-                FirebaseUtils.firebaseAuth.signInWithEmailAndPassword(email, password)
-                val currentUser = FirebaseAuth.getInstance().getCurrentUser()
-                if(currentUser == null){
-                    Toast.makeText(activity, "empty", Toast.LENGTH_SHORT).show()
-                }else{
-                    Toast.makeText(activity, "successfully", Toast.LENGTH_SHORT).show()
-                }
+//                FirebaseUtils.firebaseAuth.signOut()
+//                FirebaseUtils.firebaseAuth.signInWithEmailAndPassword(email, password)
+//                val currentUser = FirebaseAuth.getInstance().getCurrentUser()
+//                if(currentUser == null){
+//                    Toast.makeText(activity, "empty", Toast.LENGTH_SHORT).show()
+//                }else{
+//                    Toast.makeText(activity, "successfully", Toast.LENGTH_SHORT).show()
+//                }
 
             }
 

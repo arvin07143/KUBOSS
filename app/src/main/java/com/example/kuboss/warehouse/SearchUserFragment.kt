@@ -25,16 +25,15 @@ class SearchUserFragment : Fragment() {
 
     private lateinit var viewModel: SearchUserViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding: FragmentSearchUserBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_search_user,container,false)
         val application = requireNotNull(this.activity).application
         val dataSource = WarehouseDatabase.getInstance(application).warehouseDatabaseDao
         val viewModelFactory = SearchUserViewModelFactory(dataSource, application)
+
         viewModel = ViewModelProvider(
             this, viewModelFactory).get(SearchUserViewModel::class.java)
+
         binding.lifecycleOwner = this
         binding.searchUserViewModel = viewModel
 
@@ -45,6 +44,7 @@ class SearchUserFragment : Fragment() {
             it?.let {
                 adapter.dataset = it
                 Log.e("Test","Update")
+
             }
         })
 
@@ -52,18 +52,18 @@ class SearchUserFragment : Fragment() {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 viewModel.searchStringChange("%"+binding.searchField.editText?.text.toString()+"%")
                 true
+
             } else {
                 false
+
             }
         }
 
         binding.searchField.setEndIconOnClickListener {
             viewModel.searchStringChange("%"+binding.searchField.editText?.text.toString()+"%")
             Log.e("Test","Search Done")
-        }
 
+        }
         return binding.root
     }
-
-
 }

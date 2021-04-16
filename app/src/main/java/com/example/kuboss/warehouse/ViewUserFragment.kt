@@ -28,19 +28,17 @@ class ViewUserFragment : Fragment() {
 
     private lateinit var viewModel: ViewUserViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding: FragmentViewUserBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_view_user,container,false)
         val application = requireNotNull(this.activity).application
         val dataSource = WarehouseDatabase.getInstance(application).warehouseDatabaseDao
         val viewModelFactory = ViewUserViewModelFactory(dataSource, application)
+
         viewModel = ViewModelProvider(
             this, viewModelFactory).get(ViewUserViewModel::class.java)
+
         binding.lifecycleOwner = this
         binding.viewUserViewModel = viewModel
-
 
         val adapter = ViewUserAdapter()
         binding.viewUser.adapter = adapter
@@ -48,13 +46,14 @@ class ViewUserFragment : Fragment() {
             it?.let {
                 adapter.dataset = it
                 Log.e("Test","Update")
+
             }
         })
 
         //setup floating action button
         val btnAddUser: FloatingActionButton = binding.expandableFabLayoutUser.findViewById(R.id.add_user_btn)
         btnAddUser.setOnClickListener {
-            findNavController().navigate(R.id.action_viewUserFragment_to_addUserFragment)
+
         }
 
         val btnRemoveUser: FloatingActionButton = binding.expandableFabLayoutUser.findViewById(R.id.remove_user_btn)
@@ -65,11 +64,6 @@ class ViewUserFragment : Fragment() {
         btnSearchUser.setOnClickListener {
             findNavController().navigate(R.id.action_viewUserFragment_to_searchUserFragment)
         }
-
-
-
         return binding.root
     }
-
-
 }

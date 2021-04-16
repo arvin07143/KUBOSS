@@ -9,7 +9,7 @@
         android:icon="@drawable/ic_baseline_search_24"
         android:title="@string/search"/>
     <item
-        android:id="@+id/viewUserFragment"
+        android:id="@+id/userFragment"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="@string/user"/>
 </menu>

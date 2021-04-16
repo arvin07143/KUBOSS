@@ -76,6 +76,9 @@ interface WarehouseDatabaseDao {
     @Query("SELECT password FROM user_table WHERE name = :userName")
     suspend fun getPasswordByName(userName: String):String
 
+    @Query("SELECT type FROM user_table WHERE name = :userName")
+    suspend fun getuserTypeByName(userName: String):String
+
 
 
 }

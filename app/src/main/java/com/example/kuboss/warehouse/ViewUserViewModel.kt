@@ -11,9 +11,9 @@ class ViewUserViewModel (
     application: Application
 ) : ViewModel() {
 
-
     val searchResults = database.getAllUsers()
-    }
+
+}
 
 
 
