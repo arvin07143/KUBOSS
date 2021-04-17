@@ -42,7 +42,7 @@ class LoginFragment : Fragment() {
         ).get(LoginViewModel::class.java)
 
 
-        //add all input into array
+
 
         val binding = DataBindingUtil.inflate<FragmentLoginBinding>(
             inflater,
@@ -65,7 +65,8 @@ class LoginFragment : Fragment() {
                     FirebaseAuth . getInstance ().sendPasswordResetEmail(resetEmail)
                         .addOnCompleteListener(OnCompleteListener<Void?> { task ->
                             if (task.isSuccessful) {
-                                    Log.d(TAG, "Email sent.")
+                                Toast.makeText(activity, "Email sent.", Toast.LENGTH_SHORT).show()
+
                             }
                         })
                 })
@@ -97,13 +98,14 @@ class LoginFragment : Fragment() {
                                 signInPassword,
                                 currentUsername
                             )
+                            //check if the current user' record exist in database if no then add in
                             if(currentUserProfileEmail == null){
                                 loginViewModel.addUser(signInEmail, currentUsername)
                             }
                             //navigate to main activity
                             findNavController().navigate(R.id.action_loginFragment2_to_mainActivity)
                             Toast.makeText(activity, "Logged in successfully!", Toast.LENGTH_SHORT).show()
-                            this.activity!!.finish()
+                            this.requireActivity().finish()
 
                         } else {
                             Toast.makeText(
