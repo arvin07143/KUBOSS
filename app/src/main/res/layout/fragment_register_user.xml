@@ -116,16 +116,16 @@
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/rbManager"
+                    android:id="@+id/rbAdmin"
                     android:layout_width="100dp"
                     android:layout_height="50dp"
-                    android:text="admin" />
+                    android:text="Admin" />
 
                 <RadioButton
                     android:id="@+id/rbWorker"
                     android:layout_width="100dp"
                     android:layout_height="50dp"
-                    android:text="worker" />
+                    android:text="Worker" />
             </RadioGroup>
 
             <Button

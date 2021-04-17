@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.kuboss.database.WarehouseDatabaseDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -27,6 +28,11 @@ class UserViewModel(
             job.join()
         }
         return userType
+    }
+    fun onDeleteUser(name:String){
+        viewModelScope.launch {
+            database.removeUserByName(name)
+        }
     }
 
 

@@ -115,9 +115,16 @@
         <action
             android:id="@+id/action_userFragment_to_loginActivity"
             app:destination="@id/loginActivity" />
+        <action
+            android:id="@+id/action_userFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
     </fragment>
     <activity
         android:id="@+id/loginActivity"
         android:name="com.example.kuboss.LoginActivity"
         android:label="LoginActivity" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.kuboss.warehouse.EditProfileFragment"
+        android:label="EditProfileFragment" />
 </navigation>

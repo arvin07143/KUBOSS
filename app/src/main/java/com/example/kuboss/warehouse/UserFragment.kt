@@ -1,5 +1,6 @@
 package com.example.kuboss.warehouse
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -23,7 +24,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 
 class UserFragment : Fragment() {
-    lateinit var currentUsername: String
+    var currentUsername: String = ""
     companion object {
         fun newInstance() = UserFragment()
     }
@@ -44,14 +45,13 @@ class UserFragment : Fragment() {
         binding.userViewModel = viewModel
 
         val currentUser = FirebaseAuth.getInstance().getCurrentUser()
-        val currentUserType = viewModel.getUserType(currentUsername)
-
         if (currentUser != null) {
             currentUsername = currentUser.displayName
 
         }
-
-
+        //check got that name or not
+        val currentUserType = viewModel.getUserType(currentUsername)
+        //val currentUserType:String = ""
         binding.name.text = currentUsername
 
         if(currentUserType !="") {
@@ -61,11 +61,11 @@ class UserFragment : Fragment() {
         }
 
         binding.btnEditProfile.setOnClickListener{
-
+            findNavController().navigate(R.id.action_userFragment_to_editProfileFragment)
         }
 
         binding.btnManageUser.setOnClickListener{
-            if(currentUserType == "admin") {
+            if(currentUserType == "Admin") {
                 findNavController().navigate(R.id.action_userFragment_to_viewUserFragment)
             }else{
                 Toast.makeText(activity, "Only admin is allowed to manage user!", Toast.LENGTH_SHORT).show()
@@ -73,35 +73,71 @@ class UserFragment : Fragment() {
         }
 
         binding.btnRemoveAccount.setOnClickListener{
+                val builder = AlertDialog.Builder(activity)
+                builder.setMessage("Are you sure you want to Delete?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes") { dialog, id ->
+                        // Delete selected note from database
+                        if (currentUser != null)
+                        {
+                            //remove from firebase
+                            currentUser.delete()
+                                .addOnCompleteListener(object: OnCompleteListener<Void> {
+                                    override fun onComplete(@NonNull task: Task<Void>) {
+                                        if (task.isSuccessful())
+                                        {
+                                            //remove from local database
+                                            viewModel.onDeleteUser(currentUsername)
 
-            if (currentUser != null)
-            {
-                currentUser.delete()
-                    .addOnCompleteListener(object: OnCompleteListener<Void> {
-                        override fun onComplete(@NonNull task: Task<Void>) {
-                            if (task.isSuccessful())
-                            {
-                                //still need to remove from database
-                                    findNavController().navigate(R.id.action_userFragment_to_loginActivity)
-                                    Toast.makeText(activity, "User account deleted!", Toast.LENGTH_SHORT).show()
+                                            findNavController().navigate(R.id.action_userFragment_to_loginActivity)
+                                            Toast.makeText(activity, "User account deleted!", Toast.LENGTH_SHORT).show()
 
 
-                            }else{
-                                Toast.makeText(activity, "Fail to deleted.!", Toast.LENGTH_SHORT).show()
-                            }
+                                        }else{
+                                            Toast.makeText(activity, "Fail to deleted.!", Toast.LENGTH_SHORT).show()
+                                        }
+                                    }
+                                })
+
+                        }else{
+                            Toast.makeText(activity, "User account empty.", Toast.LENGTH_SHORT).show()
+
                         }
-                    })
 
-            }else{
-                Toast.makeText(activity, "User account empty.", Toast.LENGTH_SHORT).show()
-
+                    }
+                    .setNegativeButton("No") { dialog, id ->
+                        // Dismiss the dialog
+                        dialog.dismiss()
+                    }
+                val alert = builder.create()
+                alert.show()
             }
-        }
+
 
         binding.btnSignout.setOnClickListener{
-            FirebaseUtils.firebaseAuth.signOut()
-            findNavController().navigate(R.id.action_userFragment_to_loginActivity)
-            Toast.makeText(activity, "Signed out!", Toast.LENGTH_SHORT).show()
+            val builder = AlertDialog.Builder(activity)
+            builder.setMessage("Are you sure you want to logout?")
+                .setCancelable(false)
+                .setPositiveButton("Yes") { dialog, id ->
+                    // Delete selected note from database
+                    if (currentUser != null)
+                    {
+                        FirebaseUtils.firebaseAuth.signOut()
+                        findNavController().navigate(R.id.action_userFragment_to_loginActivity)
+                        Toast.makeText(activity, "Logged out successfully!", Toast.LENGTH_SHORT).show()
+                    }else{
+                        Toast.makeText(activity, "User account empty.", Toast.LENGTH_SHORT).show()
+
+                    }
+
+                }
+                .setNegativeButton("No") { dialog, id ->
+                    // Dismiss the dialog
+                    dialog.dismiss()
+                }
+            val alert = builder.create()
+            alert.show()
+
         }
 
 

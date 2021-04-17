@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.kuboss.R
 import com.example.kuboss.database.WarehouseDatabase
 import com.example.kuboss.databinding.FragmentRegisterUserBinding
@@ -22,7 +23,7 @@ class RegisterFragment :  Fragment(){
     lateinit var registerPassword: String
     lateinit var registerConfirmPassword: String
     lateinit var registerName: String
-    lateinit var registerType: String
+    var registerType: String = ""
     lateinit var registerInputsArray: Array<EditText>
     val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
 
@@ -33,7 +34,7 @@ class RegisterFragment :  Fragment(){
 
         val application = requireNotNull(this.activity).application
         val dataSource = WarehouseDatabase.getInstance(application).warehouseDatabaseDao
-        val viewModelFactory = RegisterModelFactory(dataSource)
+        val viewModelFactory = RegisterViewModelFactory(dataSource)
         val addUserViewModel = ViewModelProvider(
             this, viewModelFactory
         ).get(RegisterViewModel::class.java)
@@ -44,15 +45,7 @@ class RegisterFragment :  Fragment(){
         )
 
         binding.tvReturnLogin.setOnClickListener{
-            val currentUser = FirebaseAuth.getInstance().getCurrentUser()
-            lateinit var name: String
-
-
-            if (currentUser != null) {
-                name = currentUser.displayName
-                Toast.makeText(activity, name, Toast.LENGTH_SHORT).show()
-            }
- //           findNavController().navigate(R.id.action_registerFragment2_to_loginFragment2)
+            findNavController().navigate(R.id.action_registerFragment2_to_loginFragment2)
         }
 
         binding.btnAddUser.setOnClickListener {
@@ -60,11 +53,11 @@ class RegisterFragment :  Fragment(){
             registerPassword = binding.etRegisterPassword.editText?.text.toString().trim()
             registerConfirmPassword = binding.etRegisterConfirmPassword.editText?.text.toString().trim()
             registerName = binding.etRegisterName.editText?.text.toString().trim()
-            if(binding.rbManager.isChecked){
-                registerType = "admin"
+            if(binding.rbAdmin.isChecked){
+                registerType = "Admin"
 
             }else if(binding.rbWorker.isChecked){
-                registerType = "worker"
+                registerType = "Worker"
 
             }
             fun notEmpty(): Boolean = (registerEmail.isNotEmpty() && registerPassword.isNotEmpty()&&registerConfirmPassword.isNotEmpty()&&registerName.isNotEmpty()&&registerType.isNotEmpty())
@@ -84,17 +77,17 @@ class RegisterFragment :  Fragment(){
                                     registerName,
                                     registerType
                                 )
-                                FirebaseUtils.firebaseAuth.signInWithEmailAndPassword(
-                                    registerEmail,
-                                    registerPassword
-                                )
                                 val user = FirebaseAuth.getInstance().currentUser
 
                                 val profileUpdates = UserProfileChangeRequest.Builder()
                                     .setDisplayName(registerName).build()
 
                                 user.updateProfile(profileUpdates)
-//                                findNavController().navigate(R.id.action_registerFragment2_to_loginFragment2)
+                                findNavController().navigate(R.id.action_registerFragment2_to_mainActivity)
+                                FirebaseUtils.firebaseAuth.signInWithEmailAndPassword(
+                                    registerEmail,
+                                    registerPassword
+                                )
                                 Toast.makeText(activity, "Successfully added!", Toast.LENGTH_SHORT).show()
 
                             } else {

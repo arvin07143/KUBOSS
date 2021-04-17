@@ -16,7 +16,7 @@ class LoginActivity  : AppCompatActivity(R.layout.activity_login){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.fragment_login)
+
 
 
         //setup nav host

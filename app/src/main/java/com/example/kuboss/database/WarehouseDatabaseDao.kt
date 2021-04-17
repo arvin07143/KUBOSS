@@ -79,6 +79,18 @@ interface WarehouseDatabaseDao {
     @Query("SELECT type FROM user_table WHERE name = :userName")
     suspend fun getuserTypeByName(userName: String):String
 
+    @Query("SELECT * FROM user_table WHERE name = :userName")
+    suspend fun getUserByName(userName: String):User
+
+
+    @Query("UPDATE user_table SET name=:newName WHERE name=:oldName")
+    suspend fun updateUserName(newName:String, oldName:String)
+
+    @Query("UPDATE user_table SET email=:newEmail WHERE name=:oldName")
+    suspend fun updateUserEmail(newEmail:String, oldName:String)
+
+    @Query("UPDATE user_table SET password=:newPassword WHERE name=:oldName")
+    suspend fun updateUserPassword(newPassword:String, oldName:String)
 
 
 }

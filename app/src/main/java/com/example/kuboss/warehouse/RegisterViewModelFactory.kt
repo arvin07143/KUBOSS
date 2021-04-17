@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.kuboss.database.WarehouseDatabaseDao
 
-class RegisterModelFactory(private val dataSource: WarehouseDatabaseDao) : ViewModelProvider.Factory {
+class RegisterViewModelFactory(private val dataSource: WarehouseDatabaseDao) : ViewModelProvider.Factory {
 
     @Suppress("unchecked_cast")
 
