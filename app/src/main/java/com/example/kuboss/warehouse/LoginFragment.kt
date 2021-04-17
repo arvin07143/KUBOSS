@@ -52,19 +52,13 @@ class LoginFragment : Fragment() {
         binding.tvForgetPassword.setOnClickListener {
             var resetEmail:String
             val builder = AlertDialog.Builder(activity)
-            builder.setMessage("Are you sure you want to logout?")
+            builder.setMessage("Please enter your email.")
 
-// Set up the input
-
-// Set up the input
             val input = EditText(activity)
 
             input.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_WEB_EMAIL_ADDRESS
             builder.setView(input)
 
-// Set up the buttons
-
-// Set up the buttons
             builder.setPositiveButton("Send",
                 DialogInterface.OnClickListener { dialog, which ->
                     resetEmail = input.text.toString()

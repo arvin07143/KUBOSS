@@ -87,7 +87,6 @@ class RackDetailsViewModel(
     fun isRackExist(newRackId: String): Boolean{
         for(rack: String in rackList){
             if(newRackId == rack){
-                Log.d("exist", newRackId)
                 return true
             }
         }

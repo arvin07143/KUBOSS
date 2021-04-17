@@ -41,14 +41,14 @@ class AddRackFragment : Fragment() {
         binding!!.confirmBtn.setOnClickListener {
             val aisle = binding!!.editTextAisle.text.toString()
             val unit = binding!!.editTextUnit.text.toString()
-            val newRackId = when{
+            val newRackId = when {
                 (aisle != "" && unit == "") -> aisle
                 (aisle == "" && unit != "") -> unit
                 (aisle != "" && unit != "") -> "$aisle-$unit"
                 else -> ""
             }
 
-            if(newRackId == ""){
+            if (newRackId == "") {
                 MaterialAlertDialogBuilder(requireContext())
                     .setTitle("Error")
                     .setMessage("Aisle and Unit cannot be empty")
@@ -56,7 +56,7 @@ class AddRackFragment : Fragment() {
                     .setPositiveButton("Ok") { _, _ ->
                     }
                     .show()
-            }else{
+            } else {
                 addRackViewModel.onAddRack(newRackId)
             }
 

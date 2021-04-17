@@ -70,17 +70,18 @@ class EditRackFragment : Fragment() {
                     }
                     .show()
             } else if (newRackId != editRackViewModel.rackId
-                && !editRackViewModel.isRackExist(newRackId)) {
-                    editRackViewModel.updateRack(editRackViewModel.rackId, newRackId)
-                    val action =
-                        EditRackFragmentDirections.actionEditRackFragmentToRackDetailsFragment(
-                            newRackId
-                        )
-                    findNavController().navigate(action)
-                } else {
-                    Toast.makeText(requireContext(), "Rack already exist", Toast.LENGTH_LONG).show()
-                }
+                && !editRackViewModel.isRackExist(newRackId)
+            ) {
+                editRackViewModel.updateRack(editRackViewModel.rackId, newRackId)
+                val action =
+                    EditRackFragmentDirections.actionEditRackFragmentToRackDetailsFragment(
+                        newRackId
+                    )
+                findNavController().navigate(action)
+            } else {
+                Toast.makeText(requireContext(), "Rack already exist", Toast.LENGTH_LONG).show()
             }
+        }
         return binding.root
     }
 
