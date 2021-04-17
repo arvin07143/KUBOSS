@@ -1,28 +1,21 @@
 package com.example.kuboss.warehouse
 
 import android.app.Application
-import android.content.Context
 import android.database.sqlite.SQLiteConstraintException
-import android.graphics.Bitmap
-import android.os.Environment
-import android.util.Log
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.kuboss.database.Material
 import com.example.kuboss.database.Rack
-import com.example.kuboss.database.RackWithMaterials
 import com.example.kuboss.database.WarehouseDatabaseDao
 import kotlinx.coroutines.launch
-import java.io.File
-import java.lang.IllegalStateException
 
 
 class WarehouseViewModel(
     val database: WarehouseDatabaseDao,
-    application: Application): AndroidViewModel(application) {
+    application: Application
+) : AndroidViewModel(application) {
 
     val racks = database.getAllRacks()
     private var materialList = listOf<Material>()
@@ -35,34 +28,35 @@ class WarehouseViewModel(
     val isAddRackSuccess: LiveData<Boolean>
         get() = _isAddRackSuccess
 
-    fun onAddRack(rackId: String){
+    fun onAddRack(rackId: String) {
         viewModelScope.launch {
             val newRack = Rack(rackId)
             insert(newRack)
 
         }
     }
-    private suspend fun insert(rack: Rack){
+
+    private suspend fun insert(rack: Rack) {
         try {
             database.insert(rack)
             _isAddRackSuccess.value = true
-        }catch(e: SQLiteConstraintException){
+        } catch (e: SQLiteConstraintException) {
             _isSqlError.value = true
         }
     }
 
-    fun finishShowingDialog(){
+    fun finishShowingDialog() {
         _isSqlError.value = false
         _isAddRackSuccess.value = false
     }
 
-    suspend fun getReportString():String{
+    suspend fun getReportString(): String {
         val scope = viewModelScope.launch {
             materialList = database.getAllMaterials()
         }
         scope.join()
         var reportStr = "Rack ID, Material, Name, SKU, Quantity \n"
-        for(mat: Material in materialList){
+        for (mat: Material in materialList) {
             val rackId = (mat.mRackId ?: "Not Assigned")
             val matId = mat.materialId
             val matName = mat.materialName

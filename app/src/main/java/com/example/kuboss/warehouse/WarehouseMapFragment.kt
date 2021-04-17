@@ -6,18 +6,16 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.kuboss.R
 import com.example.kuboss.database.WarehouseDatabase
-import kotlinx.android.synthetic.main.fragment_warehouse_map.*
 import java.io.File
 
 class WarehouseMapFragment : Fragment() {
@@ -32,7 +30,8 @@ class WarehouseMapFragment : Fragment() {
         val dataSource = WarehouseDatabase.getInstance(application).warehouseDatabaseDao
         val viewModelFactory = WarehouseViewModelFactory(dataSource, application)
         viewModel = ViewModelProvider(
-            requireActivity().viewModelStore, viewModelFactory).get(WarehouseViewModel::class.java)
+            requireActivity().viewModelStore, viewModelFactory
+        ).get(WarehouseViewModel::class.java)
         return inflater.inflate(R.layout.fragment_warehouse_map, container, false)
     }
 
@@ -44,8 +43,8 @@ class WarehouseMapFragment : Fragment() {
         imgView.layoutParams.width = 1000
         imgView.requestLayout()
 
-        val getImg = registerForActivityResult(ActivityResultContracts.GetContent()){ uri: Uri? ->
-            if(uri != null) {
+        val getImg = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            if (uri != null) {
                 imgView.setImageURI(uri)
                 val bitmap =
                     MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uri)
@@ -57,7 +56,7 @@ class WarehouseMapFragment : Fragment() {
 
         }
         val changeMapBtn: Button = view.findViewById(R.id.change_map_btn)
-        changeMapBtn.setOnClickListener{
+        changeMapBtn.setOnClickListener {
 
             getImg.launch("image/*")
 
