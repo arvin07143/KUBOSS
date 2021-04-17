@@ -99,6 +99,7 @@
                     android:id="@+id/receive_cancel_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="?attr/materialButtonOutlinedStyle"
                     android:layout_marginEnd="@dimen/ui_margin_medium"
                     android:layout_weight="1"
                     android:text="@string/cancel"/>

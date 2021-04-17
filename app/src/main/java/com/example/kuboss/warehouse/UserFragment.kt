@@ -85,6 +85,7 @@ class UserFragment : Fragment() {
 
                                             findNavController().navigate(R.id.action_userFragment_to_loginActivity)
                                             Toast.makeText(activity, "User account deleted!", Toast.LENGTH_SHORT).show()
+                                            activity?.finish()
 
 
                                         }else{
@@ -119,6 +120,7 @@ class UserFragment : Fragment() {
                         FirebaseUtils.firebaseAuth.signOut()
                         findNavController().navigate(R.id.action_userFragment_to_loginActivity)
                         Toast.makeText(activity, "Logged out successfully!", Toast.LENGTH_SHORT).show()
+                        activity?.finish()
                     }else{
                         Toast.makeText(activity, "User account empty.", Toast.LENGTH_SHORT).show()
 

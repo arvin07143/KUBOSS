@@ -69,6 +69,7 @@ class LoginFragment : Fragment() {
                             //navigate to main activity
                             findNavController().navigate(R.id.action_loginFragment2_to_mainActivity)
                             Toast.makeText(activity, "Logged in successfully!", Toast.LENGTH_SHORT).show()
+                            this.activity!!.finish()
 
                         } else {
                             Toast.makeText(activity, "Invalid email and password combination!", Toast.LENGTH_SHORT).show()

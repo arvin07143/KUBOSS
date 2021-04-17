@@ -81,6 +81,7 @@ class RegisterFragment :  Fragment(){
                                     registerPassword
                                 )
                                 Toast.makeText(activity, "Successfully added!", Toast.LENGTH_SHORT).show()
+                                this.activity!!.finish()
 
                             } else {
                                 Toast.makeText(activity, "Email already exist!", Toast.LENGTH_SHORT).show()
