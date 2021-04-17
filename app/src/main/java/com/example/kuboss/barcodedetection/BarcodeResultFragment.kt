@@ -93,56 +93,67 @@ class BarcodeResultFragment : BottomSheetDialogFragment() {
 
         var potentialRack = ""
         rackDetailsViewModel.findRackID(barcodeData[0]).observe(viewLifecycleOwner, Observer {
-            potentialRack = it?:""
+            potentialRack = it ?: ""
         })
 
         confirmButton.setOnClickListener {
             if (mode == 1) {
-                if(matExist){
-                    Log.e("Test",potentialRack.toString())
-                    if(potentialRack != ""){ //item in other rack
-                        MaterialAlertDialogBuilder(requireContext())
-                            .setTitle("Store Material Error")
-                            .setCancelable(false)
-                            .setMessage("Material Currently at Rack $potentialRack")
-                            .setPositiveButton("Ok") { _, _ ->
-                            }
-                            .show()
-                    } else{
-                        rackDetailsViewModel.storeMaterial(barcodeData[0], rackID).observe(viewLifecycleOwner, Observer {
-                            if(it != 0){
-                                Toast.makeText(context, "Item Stored Successfully", Toast.LENGTH_SHORT).show()
-                                activity?.finish()
-                            }
-                        })
+                val storeMaterialError = MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Store Material Error")
+                    .setCancelable(false)
+                    .setPositiveButton("Ok") { _, _ ->
                     }
-                } else{
-                    MaterialAlertDialogBuilder(requireContext())
-                        .setTitle("Store Material Error")
-                        .setCancelable(false)
-                        .setMessage("Material Does Not Exist")
-                        .setPositiveButton("Ok") { _, _ ->
-                        }
-                        .show()
-                }
 
-            } else {
-                rackDetailsViewModel.pickMaterial(scannedMat).observe(viewLifecycleOwner, Observer {
-                    Log.e("ts", it.toString())
-                    if (it == 0) {
-                        MaterialAlertDialogBuilder(requireContext())
-                            .setTitle("Pick Material")
-                            .setMessage("This material does not exist.")
-                            .setCancelable(false)
-                            .setPositiveButton("Ok") { _, _ ->
-                            }
+                if (matExist) {
+                    Log.e("Test", potentialRack.toString())
+                    if (potentialRack != "") { //item in other rack
+                        storeMaterialError
+                            .setMessage("Material Currently at Rack $potentialRack,\n\nYou are currently at Rack $rackID")
                             .show()
                     } else {
-                        Toast.makeText(context, "Item Picked Successfully", Toast.LENGTH_SHORT).show()
-                        activity?.finish()
+                        rackDetailsViewModel.storeMaterial(barcodeData[0], rackID)
+                            .observe(viewLifecycleOwner, Observer {
+                                if (it != 0) {
+                                    Toast.makeText(context, "Item Stored Successfully", Toast.LENGTH_SHORT).show()
+                                    activity?.finish()
+                                }
+                            })
                     }
-                })
+                } else {
+                    storeMaterialError
+                        .setMessage("Material Does Not Exist")
+                        .show()
+                }
+            } else {
+                val pickErrorDialog = MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Pick Material Error")
+                    .setCancelable(false)
+                    .setPositiveButton("Ok") { _, _ ->
+                    }
+                if (matExist) {
+                    when {
+                        potentialRack == "" -> {
+                            pickErrorDialog.setMessage("Material has no assigned rack")
+                            pickErrorDialog.show()
+                        }
+                        potentialRack != rackID -> {
+                            pickErrorDialog.setMessage("Material Currently at Rack $potentialRack\n\nYou are currently on $rackID")
+                            pickErrorDialog.show()
+                        }
+                        else -> {
+                            rackDetailsViewModel.pickMaterial(scannedMat).observe(viewLifecycleOwner, Observer {
+                                if (it == 1) {
+                                    Toast.makeText(context, "Item Picked Successfully", Toast.LENGTH_SHORT).show()
+                                    activity?.finish()
+                                }
+                            })
+                        }
+                    }
+                } else {
+                    pickErrorDialog.setMessage("Material Does Not Exist").show()
+                }
             }
+
         }
         view.findViewById<RecyclerView>(R.id.barcode_field_recycler_view).apply {
             setHasFixedSize(true)
