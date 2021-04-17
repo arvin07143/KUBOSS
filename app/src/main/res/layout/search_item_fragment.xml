@@ -52,72 +52,17 @@
                 android:layout_height="match_parent"
                 android:id="@+id/relativeLayout">
 
-                <LinearLayout
-                    android:id="@+id/header_row"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginStart="4dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintBottom_toTopOf="@+id/search_item_details"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.4"
-                        android:text="Rack"
-                        android:textAlignment="textStart"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
-                        android:text="Mat ID"
-                        android:textAlignment="textStart"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Name"
-                        android:textAlignment="textStart"/>
-
-                    <TextView
-                        android:id="@+id/material_SKU"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.6"
-                        android:text="SKU"
-                        android:textAlignment="textStart"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
-                        android:width="0dp"
-                        android:text="Quantity"
-                        android:layout_marginStart="4dp"
-                        android:textAlignment="textStart"/>
-
-                </LinearLayout>
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/search_item_details"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="10dp"
                     android:layout_marginStart="4dp"
                     android:scrollbars="vertical"
                     app:layoutManager="LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/header_row"/>
+                    app:layout_constraintTop_toTopOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>

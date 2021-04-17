@@ -1,12 +1,10 @@
 package com.example.kuboss.warehouse
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -36,41 +34,60 @@ class AddRackFragment : Fragment() {
         val dataSource = WarehouseDatabase.getInstance(application).warehouseDatabaseDao
         val viewModelFactory = WarehouseViewModelFactory(dataSource, application)
         val addRackViewModel = ViewModelProvider(
-            requireActivity().viewModelStore, viewModelFactory).get(WarehouseViewModel::class.java)
-
+            requireActivity().viewModelStore, viewModelFactory
+        ).get(WarehouseViewModel::class.java)
 
         //set confirm button listener
         binding!!.confirmBtn.setOnClickListener {
-            val newRackId = binding!!.editTextAisle.text.toString() + "-" + binding!!.editTextUnit.text.toString()
-            addRackViewModel.onAddRack(newRackId)
+            val aisle = binding!!.editTextAisle.text.toString()
+            val unit = binding!!.editTextUnit.text.toString()
+            val newRackId = when{
+                (aisle != "" && unit == "") -> aisle
+                (aisle == "" && unit != "") -> unit
+                (aisle != "" && unit != "") -> "$aisle-$unit"
+                else -> ""
+            }
+
+            if(newRackId == ""){
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Error")
+                    .setMessage("Aisle and Unit cannot be empty")
+                    .setCancelable(false)
+                    .setPositiveButton("Ok") { _, _ ->
+                    }
+                    .show()
+            }else{
+                addRackViewModel.onAddRack(newRackId)
+            }
+
         }
         binding!!.cancelBtn.setOnClickListener {
             findNavController().navigate(R.id.action_addRackFragment_to_warehouseFragment)
         }
 
-        addRackViewModel.isSqlError.observe(viewLifecycleOwner, Observer{
-            if(it == true){
+        addRackViewModel.isSqlError.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
                 MaterialAlertDialogBuilder(requireContext())
-                        .setTitle("Add Rack")
-                        .setMessage("This rack already exist.")
-                        .setCancelable(false)
-                        .setPositiveButton("Ok") { _, _ ->
-                        }
-                        .show()
+                    .setTitle("Add Rack")
+                    .setMessage("This rack already exist.")
+                    .setCancelable(false)
+                    .setPositiveButton("Ok") { _, _ ->
+                    }
+                    .show()
                 addRackViewModel.finishShowingDialog()
             }
         })
 
-        addRackViewModel.isAddRackSuccess.observe(viewLifecycleOwner, Observer{
-            if(it == true){
+        addRackViewModel.isAddRackSuccess.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
                 MaterialAlertDialogBuilder(requireContext())
-                        .setTitle("Add Rack")
-                        .setMessage("Rack added successfully.")
-                        .setCancelable(false)
-                        .setPositiveButton("Ok") { _, _ ->
+                    .setTitle("Add Rack")
+                    .setMessage("Rack added successfully.")
+                    .setCancelable(false)
+                    .setPositiveButton("Ok") { _, _ ->
 
-                        }
-                        .show()
+                    }
+                    .show()
                 addRackViewModel.finishShowingDialog()
             }
         })

@@ -78,10 +78,10 @@
     <string name="sku_search">SKU Search</string>
     <string name="password">Password</string>
     <string name="name">Name</string>
-    <string name="receiving_material_id">Receiving Material ID</string>
-    <string name="receiving_sku">Receiving SKU</string>
-    <string name="receiving_name">Receiving Name</string>
-    <string name="receiving_quantity">Receiving Quantity</string>
+    <string name="receiving_material_id">Received Material ID</string>
+    <string name="receiving_sku">Received Material SKU</string>
+    <string name="receiving_name">Received Material Name</string>
+    <string name="receiving_quantity">Received Material Quantity</string>
     <string name="cancel">Cancel</string>
     <string name="confirm">Confirm</string>
     <string name="print">Print</string>
@@ -95,5 +95,6 @@
     <string name="home">Home</string>
     <string name="user">User</string>
     <string name="remove">Remove</string>
-
+    <string name="change_map">Change Map</string>
+    <string name="sku">SKU :</string>
 </resources>

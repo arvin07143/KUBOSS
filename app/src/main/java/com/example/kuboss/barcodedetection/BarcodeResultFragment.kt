@@ -69,7 +69,7 @@ class BarcodeResultFragment : BottomSheetDialogFragment() {
 
         val mode: Int =
             if (arguments?.containsKey("saveMode") == true) {
-                arguments.getInt("saveMode") ?: 1
+                arguments.getInt("saveMode")
             } else {
                 Log.e(TAG, "No save mode passed in!")
                 1
@@ -82,28 +82,53 @@ class BarcodeResultFragment : BottomSheetDialogFragment() {
             this, viewModelFactory
         ).get(RackDetailsViewModel::class.java)
 
+        val rawData = barcodeFieldList[0].value
+        val barcodeData = rawData.split(',')
+        val scannedMat = Material(barcodeData[0], barcodeData[1], barcodeData[2], barcodeData[3].toInt(), rackID)
+        var matExist = true
+
+        rackDetailsViewModel.allMaterialID.observe(viewLifecycleOwner, Observer {
+            matExist = it.contains(barcodeData[0])
+        })
+
+        var potentialRack = ""
+        rackDetailsViewModel.findRackID(barcodeData[0]).observe(viewLifecycleOwner, Observer {
+            potentialRack = it?:""
+        })
+
         confirmButton.setOnClickListener {
-            val rawData = barcodeFieldList[0].value
-            val barcodeData = rawData.split(',')
-            val scannedMat = Material(barcodeData[0], barcodeData[1], barcodeData[2], barcodeData[3].toInt(), rackID)
             if (mode == 1) {
-                rackDetailsViewModel.storeMaterial(barcodeData[0],rackID).observe(viewLifecycleOwner, Observer {
-                    if (it) {
+                if(matExist){
+                    Log.e("Test",potentialRack.toString())
+                    if(potentialRack != ""){ //item in other rack
                         MaterialAlertDialogBuilder(requireContext())
-                            .setTitle("Store Material")
-                            .setMessage("This material is already stored.")
+                            .setTitle("Store Material Error")
                             .setCancelable(false)
+                            .setMessage("Material Currently at Rack $potentialRack")
                             .setPositiveButton("Ok") { _, _ ->
                             }
                             .show()
-                    } else {
-                        Toast.makeText(context, "Item Added Successfully", Toast.LENGTH_SHORT).show()
-                        activity?.finish()
+                    } else{
+                        rackDetailsViewModel.storeMaterial(barcodeData[0], rackID).observe(viewLifecycleOwner, Observer {
+                            if(it != 0){
+                                Toast.makeText(context, "Item Stored Successfully", Toast.LENGTH_SHORT).show()
+                                activity?.finish()
+                            }
+                        })
                     }
-                })
+                } else{
+                    MaterialAlertDialogBuilder(requireContext())
+                        .setTitle("Store Material Error")
+                        .setCancelable(false)
+                        .setMessage("Material Does Not Exist")
+                        .setPositiveButton("Ok") { _, _ ->
+                        }
+                        .show()
+                }
+
             } else {
                 rackDetailsViewModel.pickMaterial(scannedMat).observe(viewLifecycleOwner, Observer {
-                    Log.e("ts",it.toString())
+                    Log.e("ts", it.toString())
                     if (it == 0) {
                         MaterialAlertDialogBuilder(requireContext())
                             .setTitle("Pick Material")
@@ -124,9 +149,6 @@ class BarcodeResultFragment : BottomSheetDialogFragment() {
             layoutManager = LinearLayoutManager(activity)
             adapter = BarcodeFieldAdapter(barcodeFieldList)
         }
-
-
-
         return view
     }
 

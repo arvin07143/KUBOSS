@@ -40,70 +40,19 @@
                         android:layout_height="match_parent"
                         android:id="@+id/relativeLayout">
 
-                    <LinearLayout
-                            android:id="@+id/header_row"
-                            android:orientation="horizontal"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginBottom="10dp"
-                            app:layout_constraintBottom_toTopOf="@+id/rack_item_details"
-                            app:layout_constraintTop_toTopOf="parent" android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp" android:layout_marginTop="8dp">
-
-                        <TextView
-                                android:text="Mat. ID"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/material_id"
-                                android:layout_weight="0.5"
-                                android:textAlignment="textStart"/>
-
-                        <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/material_name"
-                                android:text="Name"
-                                android:layout_marginStart="4dp"
-                                android:layout_weight="1"
-                                android:textAlignment="textStart"/>
-
-                        <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/material_SKU"
-                                app:layout_constraintTop_toTopOf="@+id/material_name"
-                                app:layout_constraintStart_toEndOf="@+id/material_name"
-                                android:text="SKU"
-                                android:layout_weight="0.5"
-                                android:layout_marginStart="4dp"
-                                android:textAlignment="textStart"/>
-
-                        <TextView
-                                android:text="Quantity"
-                                android:width="0dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/material_qty"
-                                android:layout_weight="0.5"
-                                android:textAlignment="textEnd"/>
-
-                    </LinearLayout>
-
                     <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rack_item_details"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:scrollbars="vertical"
-                            app:layoutManager="LinearLayoutManager"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginTop="6dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/header_row"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:layout_marginBottom="10dp"/>
+                        android:id="@+id/rack_item_details"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginEnd="8dp"
+                        android:scrollbars="vertical"
+                        app:layoutManager="LinearLayoutManager"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -128,8 +77,8 @@
                 android:layout_gravity="bottom|end"
                 android:layout_marginBottom="@dimen/ui_margin_medium"
                 android:layout_marginEnd="@dimen/ui_margin_medium"
-                app:efab_color="#9374DE"
-                app:efab_icon="@drawable/ic_baseline_menu_white_24"
+                app:efab_color="@color/reply_orange_500"
+                app:efab_icon="@drawable/ic_baseline_menu_24"
                 app:efab_iconAnimationRotationDeg="0"
                 app:efab_closingAnticipateTension="0"/>
 
@@ -140,17 +89,18 @@
                 app:fab_color="#FF8800"
                 app:fab_icon="@drawable/ic_baseline_add_24"
                 app:label_text="Store Material"
-                app:label_backgroundColor="#808080"
-                app:label_textColor="#FFC0CB"/>
+                app:label_backgroundColor="@color/white"
+                app:label_textColor="@color/reply_blue_600"/>
 
         <com.nambimobile.widgets.efab.FabOption
                 android:id="@+id/btnRemove"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:fab_color="#5283F5"
+                app:fab_color="#FF8800"
                 app:fab_icon="@drawable/ic_baseline_remove_24"
                 app:label_text="Pick Material"
-                app:label_backgroundColor="#0000FF"/>
+                app:label_backgroundColor="@color/white"
+                app:label_textColor="@color/reply_blue_600"/>
 
         <com.nambimobile.widgets.efab.FabOption
                 android:id="@+id/btnEdit"
@@ -159,8 +109,8 @@
                 app:fab_color="#FF8800"
                 app:fab_icon="@drawable/ic_baseline_edit_24"
                 app:label_text="Edit Rack"
-                app:label_backgroundColor="#808080"
-                app:label_textColor="#FFC0CB"/>
+                app:label_backgroundColor="@color/white"
+                app:label_textColor="@color/reply_blue_600"/>
 
 
     </com.nambimobile.widgets.efab.ExpandableFabLayout>

@@ -19,23 +19,23 @@ class RackDetailsViewModel(
     ): AndroidViewModel(application) {
 
     val materialList = database.getMaterials(rackId)
-    private lateinit var rack: Rack
-    init{
-        getRack()
-        Log.d("materialList", materialList.value?.materials?.size.toString())
-    }
-    fun storeMaterial(materialID:String,newRackID:String): LiveData<Boolean> {
-        val error = MutableLiveData<Boolean>()
+    val allMaterialID = database.getAllMaterialID()
+    private var rackList = listOf<String>()
+
+    fun storeMaterial(materialID:String,newRackID:String): LiveData<Int> {
+        val error = MutableLiveData<Int>()
         viewModelScope.launch {
             try {
-                database.updateMatLocation(materialID,newRackID)
-                error.value = false
+                error.value = database.updateMatLocation(materialID,newRackID)
             } catch (e:Exception){
                 Log.e("DB",e.toString())
-                error.value = true
             }
         }
         return error
+    }
+
+    fun findRackID(materialID: String):LiveData<String>{
+        return database.findRack(materialID)
     }
 
 
@@ -47,7 +47,6 @@ class RackDetailsViewModel(
 
             } catch (e:Exception){
                 Log.e("DB",e.toString())
-                Log.e("test",error.value.toString())
             }
         }
         return error
@@ -79,10 +78,19 @@ class RackDetailsViewModel(
             }
         }
     }
-    private fun getRack(){
+    fun getRackList(){
         viewModelScope.launch {
-            rack = database.getRack(rackId)
+            rackList = database.getRackList()
         }
     }
 
+    fun isRackExist(newRackId: String): Boolean{
+        for(rack: String in rackList){
+            if(newRackId == rack){
+                Log.d("exist", newRackId)
+                return true
+            }
+        }
+        return false
+    }
 }

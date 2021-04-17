@@ -54,9 +54,12 @@ interface WarehouseDatabaseDao {
     @Query("SELECT * FROM material_table WHERE mRackID IS NULL")
     fun getReceivedItems(): LiveData<List<Material>>
 
+    @Query("SELECT mRackId FROM material_table WHERE materialId=:scannedMatID")
+    fun findRack(scannedMatID:String):LiveData<String>
+
     @Transaction
-    @Query("UPDATE material_table SET mRackId=:newRackID WHERE materialId=:materialID")
-    suspend fun updateMatLocation(materialID:String,newRackID: String)
+    @Query("UPDATE material_table SET mRackId=:newRackID WHERE materialId=:materialID AND mRackId IS NULL")
+    suspend fun updateMatLocation(materialID:String,newRackID: String) : Int
 
     @Insert
     suspend fun addUser(user: User)
