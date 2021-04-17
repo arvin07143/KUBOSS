@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/registerFragment2"
         android:name="com.example.kuboss.warehouse.RegisterFragment"
-        android:label="RegisterFragment" >
+        android:label="Register">
         <action
             android:id="@+id/action_registerFragment2_to_mainActivity"
             app:destination="@id/mainActivity" />
@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/loginFragment2"
         android:name="com.example.kuboss.warehouse.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="Login">
         <action
             android:id="@+id/action_loginFragment2_to_mainActivity"
             app:destination="@id/mainActivity" />

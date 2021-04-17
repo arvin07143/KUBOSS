@@ -1,21 +1,25 @@
 package com.example.kuboss.warehouse
 
+import android.app.AlertDialog
+import android.content.ContentValues.TAG
+import android.content.DialogInterface
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.InputType
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.kuboss.R
-import com.example.kuboss.database.User
 import com.example.kuboss.database.WarehouseDatabase
 import com.example.kuboss.databinding.FragmentLoginBinding
-import com.example.kuboss.databinding.FragmentRegisterUserBinding
 import com.example.kuboss.utils.FirebaseUtils
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -45,6 +49,38 @@ class LoginFragment : Fragment() {
             R.layout.fragment_login, container, false
         )
 
+        binding.tvForgetPassword.setOnClickListener {
+            var resetEmail:String
+            val builder = AlertDialog.Builder(activity)
+            builder.setMessage("Are you sure you want to logout?")
+
+// Set up the input
+
+// Set up the input
+            val input = EditText(activity)
+
+            input.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_WEB_EMAIL_ADDRESS
+            builder.setView(input)
+
+// Set up the buttons
+
+// Set up the buttons
+            builder.setPositiveButton("Send",
+                DialogInterface.OnClickListener { dialog, which ->
+                    resetEmail = input.text.toString()
+                    FirebaseAuth . getInstance ().sendPasswordResetEmail(resetEmail)
+                        .addOnCompleteListener(OnCompleteListener<Void?> { task ->
+                            if (task.isSuccessful) {
+                                    Log.d(TAG, "Email sent.")
+                            }
+                        })
+                })
+            builder.setNegativeButton("Cancel",
+                DialogInterface.OnClickListener { dialog, which -> dialog.cancel() })
+
+            builder.show()
+        }
+
 
         binding.btnLogin.setOnClickListener {
             signInEmail = binding.etLoginEmail.editText?.text.toString().trim()
@@ -62,21 +98,32 @@ class LoginFragment : Fragment() {
                                 currentUsername = currentUser.displayName
 
                             }
-                            currentUserProfileEmail = loginViewModel.checkUserExist(signInEmail,signInPassword,currentUsername)
+                            currentUserProfileEmail = loginViewModel.checkUserExist(
+                                signInEmail,
+                                signInPassword,
+                                currentUsername
+                            )
                             if(currentUserProfileEmail == null){
-                                loginViewModel.addUser(signInEmail,signInPassword,currentUsername)
+                                loginViewModel.addUser(signInEmail, currentUsername)
                             }
                             //navigate to main activity
                             findNavController().navigate(R.id.action_loginFragment2_to_mainActivity)
                             Toast.makeText(activity, "Logged in successfully!", Toast.LENGTH_SHORT).show()
 
                         } else {
-                            Toast.makeText(activity, "Invalid email and password combination!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                activity,
+                                "Invalid email and password combination!",
+                                Toast.LENGTH_SHORT
+                            ).show()
 
                         }
                     }
             } else {
-                signInInputsArray = arrayOf(binding.etLoginEmail.editText!!, binding.etLoginPassword.editText!!)
+                signInInputsArray = arrayOf(
+                    binding.etLoginEmail.editText!!,
+                    binding.etLoginPassword.editText!!
+                )
                 signInInputsArray.forEach { input ->
                     if (input.text.toString().trim().isEmpty()) {
                         input.error = "${input.hint} is required"

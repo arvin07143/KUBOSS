@@ -30,7 +30,7 @@ class EditProfileFragment : Fragment() {
     lateinit var epInputsArray: Array<EditText>
     val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
     lateinit var currentUsername:String
-    lateinit var currentUserProfile: User
+    lateinit var currentUserEmail: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,18 +52,23 @@ class EditProfileFragment : Fragment() {
         val currentUser = FirebaseAuth.getInstance().getCurrentUser()
         if (currentUser != null) {
             currentUsername = currentUser.displayName
+            currentUserEmail = currentUser.email
 
         }
-        currentUserProfile = editProfileViewModel.getUser(currentUsername)
-        binding.etInputEPEmail.setText(currentUserProfile.email)
-        binding.etInputEPName.setText(currentUserProfile.name)
+
+
+        binding.etInputEPEmail.setText(currentUserEmail)
+        binding.etInputEPName.setText(currentUsername)
 
 
         binding.btnEPSave.setOnClickListener {
             epEmail = binding.etEPEmail.editText?.text.toString().trim()
+
             epPassword = binding.etEPPassword.editText?.text.toString().trim()
             epConfirmPassword = binding.etEPConfirmPassword.editText?.text.toString().trim()
             epName = binding.etEPName.editText?.text.toString().trim()
+
+
 
 
 
@@ -75,34 +80,30 @@ class EditProfileFragment : Fragment() {
                     var success = ""
                     var notSuccess=""
 
-                    val credential = EmailAuthProvider.getCredential(currentUserProfile.email, currentUserProfile.password)
+                    val credential = EmailAuthProvider.getCredential(currentUserEmail, epPassword)
 
                     if (currentUser != null) {
                         currentUser.reauthenticate(credential)
                             .addOnCompleteListener(object: OnCompleteListener<Void> {
                                 override fun onComplete(@NonNull task: Task<Void>) {
-                                    if(epPassword !=currentUserProfile.password) {
-                                        currentUser.updatePassword(epPassword)
-                                            .addOnCompleteListener(object :
-                                                OnCompleteListener<Void> {
-                                                override fun onComplete(@NonNull task: Task<Void>) {
-                                                    if (task.isSuccessful()) {
-                                                        editProfileViewModel.updatePassword(
-                                                            epPassword,
-                                                            currentUsername
-                                                        )
-                                                        Log.d("TAG", "Password Updated.")
-                                                        success += " password"
-                                                    }else{
-                                                        notSuccess += " password"
-                                                    }
+
+                                    currentUser.updatePassword(epPassword)
+                                        .addOnCompleteListener(object :
+                                            OnCompleteListener<Void> {
+                                            override fun onComplete(@NonNull task: Task<Void>) {
+                                                if (task.isSuccessful()) {
+
+                                                    Log.d("TAG", "Password Updated.")
+                                                    success += " password"
+                                                } else {
+                                                    notSuccess += " password"
                                                 }
-                                            })
-                                    }
+                                            }
+                                        })
                                 }
                             })
 
-                        if(epEmail !=currentUserProfile.email) {
+                        if(epEmail !=currentUserEmail) {
                             currentUser.updateEmail(epEmail)
                                 .addOnCompleteListener(object : OnCompleteListener<Void> {
                                     override fun onComplete(@NonNull task: Task<Void>) {
@@ -121,7 +122,7 @@ class EditProfileFragment : Fragment() {
                                     }
                                 })
                         }
-                        if(epName !=currentUserProfile.name) {
+                        if(epName != currentUsername) {
                             currentUser.updateProfile(
                                 UserProfileChangeRequest.Builder().setDisplayName(epName).build()
                             )
@@ -156,7 +157,7 @@ class EditProfileFragment : Fragment() {
                         }else{
                             Toast.makeText(
                                 activity,
-                                 notSuccess + "update error. Maybe email areadly exist.",
+                                notSuccess + "update error. Maybe email areadly exist.",
                                 Toast.LENGTH_SHORT)
 
                         }

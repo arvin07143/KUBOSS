@@ -68,7 +68,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tvForgetPassword"
                 android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:clickable="true"

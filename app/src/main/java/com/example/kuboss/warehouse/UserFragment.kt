@@ -68,7 +68,7 @@ class UserFragment : Fragment() {
 
         binding.btnRemoveAccount.setOnClickListener{
                 val builder = AlertDialog.Builder(activity)
-                builder.setMessage("Are you sure you want to Delete?")
+                builder.setMessage("Are you sure you want to remove?")
                     .setCancelable(false)
                     .setPositiveButton("Yes") { dialog, id ->
                         // Delete selected note from database
