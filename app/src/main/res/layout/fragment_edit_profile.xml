@@ -37,22 +37,22 @@
             app:layout_constraintTop_toBottomOf="@id/tvEditProfile"
             android:gravity="top|center_horizontal">
 
+
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/etEPEmail"
+                android:id="@+id/etEPName"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/ui_margin_medium"
-                android:hint="Email">
+                android:hint="Name">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etInputEPEmail"
+                    android:id="@+id/etInputEPName"
                     android:layout_width="320dp"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="textPersonName" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/etEPPassword"
@@ -91,21 +91,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/etEPName"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="320dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/ui_margin_medium"
-                android:hint="Name">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etInputEPName"
-                    android:layout_width="320dp"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName" />
-
-            </com.google.android.material.textfield.TextInputLayout>
 
 
 

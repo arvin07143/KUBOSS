@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class UserFragment : Fragment() {
     var currentUsername: String = ""
+    var currentUserEmail: String = ""
     companion object {
         fun newInstance() = UserFragment()
     }
@@ -47,10 +48,10 @@ class UserFragment : Fragment() {
         val currentUser = FirebaseAuth.getInstance().getCurrentUser()
         if (currentUser != null) {
             currentUsername = currentUser.displayName
-
+            currentUserEmail = currentUser.email
         }
 
-        val currentUserEmail = viewModel.getUserEmail(currentUsername)
+
 
         binding.name.text = currentUsername
         binding.email.text = currentUserEmail
