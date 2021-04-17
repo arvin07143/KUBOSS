@@ -15,19 +15,19 @@ class UserViewModel(
     val database: WarehouseDatabaseDao,
     application: Application
 ) : ViewModel() {
-    var userType:String=""
-    fun getUserType(name:String):String{
+    var userEmail:String=""
+    fun getUserEmail(name:String):String{
 
         runBlocking {
 
             val job: Job = launch(context = Dispatchers.Default) {
-                    userType = database.getuserTypeByName(name)
+                userEmail = database.getEmailByName(name)
 
             }
 
             job.join()
         }
-        return userType
+        return userEmail
     }
     fun onDeleteUser(name:String){
         viewModelScope.launch {

@@ -49,27 +49,25 @@ class UserFragment : Fragment() {
             currentUsername = currentUser.displayName
 
         }
-        //check got that name or not
-        val currentUserType = viewModel.getUserType(currentUsername)
-        //val currentUserType:String = ""
+
+        val currentUserEmail = viewModel.getUserEmail(currentUsername)
+
         binding.name.text = currentUsername
 
-        if(currentUserType !="") {
-            binding.type.text = currentUserType
+        if(currentUserEmail !="") {
+            binding.email.text = currentUserEmail
         }else{
-            binding.type.text = "Havent set"
+            binding.email.text = "Havent set"
         }
 
         binding.btnEditProfile.setOnClickListener{
             findNavController().navigate(R.id.action_userFragment_to_editProfileFragment)
         }
 
-        binding.btnManageUser.setOnClickListener{
-            if(currentUserType == "Admin") {
+        binding.btnViewUser.setOnClickListener{
+
                 findNavController().navigate(R.id.action_userFragment_to_viewUserFragment)
-            }else{
-                Toast.makeText(activity, "Only admin is allowed to manage user!", Toast.LENGTH_SHORT).show()
-            }
+
         }
 
         binding.btnRemoveAccount.setOnClickListener{

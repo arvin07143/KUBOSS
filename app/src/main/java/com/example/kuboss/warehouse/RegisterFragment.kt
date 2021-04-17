@@ -23,7 +23,6 @@ class RegisterFragment :  Fragment(){
     lateinit var registerPassword: String
     lateinit var registerConfirmPassword: String
     lateinit var registerName: String
-    var registerType: String = ""
     lateinit var registerInputsArray: Array<EditText>
     val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
 
@@ -53,14 +52,8 @@ class RegisterFragment :  Fragment(){
             registerPassword = binding.etRegisterPassword.editText?.text.toString().trim()
             registerConfirmPassword = binding.etRegisterConfirmPassword.editText?.text.toString().trim()
             registerName = binding.etRegisterName.editText?.text.toString().trim()
-            if(binding.rbAdmin.isChecked){
-                registerType = "Admin"
 
-            }else if(binding.rbWorker.isChecked){
-                registerType = "Worker"
-
-            }
-            fun notEmpty(): Boolean = (registerEmail.isNotEmpty() && registerPassword.isNotEmpty()&&registerConfirmPassword.isNotEmpty()&&registerName.isNotEmpty()&&registerType.isNotEmpty())
+            fun notEmpty(): Boolean = (registerEmail.isNotEmpty() && registerPassword.isNotEmpty()&&registerConfirmPassword.isNotEmpty()&&registerName.isNotEmpty())
             if (notEmpty() && registerPassword.length > 5 && registerPassword ==registerConfirmPassword) {
                 if(registerEmail.matches(emailPattern.toRegex())){
                     //add into firebase
@@ -74,8 +67,7 @@ class RegisterFragment :  Fragment(){
                                 addUserViewModel.onAddUser(
                                     registerEmail,
                                     registerPassword,
-                                    registerName,
-                                    registerType
+                                    registerName
                                 )
                                 val user = FirebaseAuth.getInstance().currentUser
 
@@ -108,8 +100,6 @@ class RegisterFragment :  Fragment(){
                         Toast.LENGTH_SHORT
                     ).show()
 
-                }else if(registerType == ""){
-                    Toast.makeText(activity, "Please choose user type.", Toast.LENGTH_SHORT).show()
 
                 }else {
                     //put in all the input

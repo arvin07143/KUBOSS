@@ -20,7 +20,7 @@ class deleteUserAdapter:RecyclerView.Adapter<deleteUserAdapter.DeleteUserViewHol
         }
     class DeleteUserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val name: TextView = itemView.findViewById(R.id.name)
-        val type: TextView = itemView.findViewById(R.id.type)
+        val email: TextView = itemView.findViewById(R.id.email)
         val userSelected: CheckBox = itemView.findViewById(R.id.cbUserSelected)
     }
 
@@ -41,7 +41,7 @@ class deleteUserAdapter:RecyclerView.Adapter<deleteUserAdapter.DeleteUserViewHol
     override fun onBindViewHolder(holder: DeleteUserViewHolder, position: Int) {
         val user = dataset[position]
         holder.name.text = user.name
-        holder.type.text = user.type
+        holder.email.text = user.email
         holder.userSelected.text = user.name
         holder.userSelected.setOnClickListener{
             selectedUserForDelete.add(user.name)

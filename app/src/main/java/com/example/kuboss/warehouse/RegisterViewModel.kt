@@ -9,10 +9,10 @@ import kotlinx.coroutines.launch
 
 class RegisterViewModel(val database: WarehouseDatabaseDao): ViewModel() {
 
-    fun onAddUser(email: String, password:String, name:String,type: String){
+    fun onAddUser(email: String, password:String, name:String){
         //add new user into local database
         viewModelScope.launch {
-            val newUser = User(email, password, name, type)
+            val newUser = User(email, password, name)
             database.addUser(newUser)
 
         }

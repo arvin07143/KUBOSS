@@ -16,7 +16,7 @@ class ViewUserAdapter(): RecyclerView.Adapter<ViewUserAdapter.UserViewHolder>() 
         }
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val name: TextView = itemView.findViewById(R.id.name)
-        val type: TextView = itemView.findViewById(R.id.type)
+        val email: TextView = itemView.findViewById(R.id.email)
     }
 
     override fun onCreateViewHolder(
@@ -36,7 +36,7 @@ class ViewUserAdapter(): RecyclerView.Adapter<ViewUserAdapter.UserViewHolder>() 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val user = dataset[position]
         holder.name.text = user.name
-        holder.type.text = user.type
+        holder.email.text = user.email
     }
 
     override fun getItemCount(): Int {

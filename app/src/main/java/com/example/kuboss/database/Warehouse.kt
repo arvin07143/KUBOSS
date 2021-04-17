@@ -33,6 +33,5 @@ data class User (
     @PrimaryKey
     val email: String,
     val password: String,
-    val name: String,
-    val type: String
+    val name: String
 )

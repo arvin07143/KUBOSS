@@ -41,7 +41,7 @@
                 tools:text="Name" />
 
             <TextView
-                android:id="@+id/type"
+                android:id="@+id/email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="16dp"
@@ -50,7 +50,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/name"
-                tools:text="type" />
+                tools:text="email" />
 
 
         </LinearLayout>
@@ -72,13 +72,13 @@
             android:textSize="18sp"/>
 
         <Button
-            android:id="@+id/btnManageUser"
+            android:id="@+id/btnViewUser"
             android:layout_width="411dp"
             android:layout_height="85dp"
             android:layout_marginTop="84dp"
             android:backgroundTint="#FFFFFF"
             android:gravity="left|center_vertical"
-            android:text="Manage User"
+            android:text="View Users"
             android:textAllCaps="false"
             android:textColor="#000"
             app:layout_constraintEnd_toEndOf="parent"
