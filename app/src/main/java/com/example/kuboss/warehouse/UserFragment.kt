@@ -53,12 +53,8 @@ class UserFragment : Fragment() {
         val currentUserEmail = viewModel.getUserEmail(currentUsername)
 
         binding.name.text = currentUsername
+        binding.email.text = currentUserEmail
 
-        if(currentUserEmail !="") {
-            binding.email.text = currentUserEmail
-        }else{
-            binding.email.text = "Havent set"
-        }
 
         binding.btnEditProfile.setOnClickListener{
             findNavController().navigate(R.id.action_userFragment_to_editProfileFragment)

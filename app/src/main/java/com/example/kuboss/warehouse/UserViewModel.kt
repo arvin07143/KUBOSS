@@ -15,8 +15,8 @@ class UserViewModel(
     val database: WarehouseDatabaseDao,
     application: Application
 ) : ViewModel() {
-    var userEmail:String=""
-    fun getUserEmail(name:String):String{
+    var userEmail:String?=""
+    fun getUserEmail(name:String):String?{
 
         runBlocking {
 

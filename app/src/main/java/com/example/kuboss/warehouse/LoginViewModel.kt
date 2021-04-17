@@ -10,16 +10,17 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class LoginViewModel (val database: WarehouseDatabaseDao): ViewModel() {
-    lateinit var currentUser:User
+    var currentUser:String? = ""
 
-    fun checkUserExist(userEmail:String, userPassword:String, userName:String):User{
+    fun checkUserExist(userEmail:String, userPassword:String, userName:String):String?{
 
         runBlocking {
 
             val job: Job = launch(context = Dispatchers.Default) {
-                currentUser=database.checkUserExist(userEmail, userPassword,userName)
 
+                    currentUser = database.checkUserExist(userEmail, userPassword, userName)
             }
+
 
             job.join()
         }

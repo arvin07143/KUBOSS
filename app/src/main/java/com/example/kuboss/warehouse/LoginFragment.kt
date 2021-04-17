@@ -24,7 +24,7 @@ class LoginFragment : Fragment() {
     lateinit var signInPassword: String
     lateinit var signInInputsArray: Array<EditText>
     var currentUsername: String = ""
-    lateinit var currentUserProfile:User
+    var currentUserProfileEmail:String? = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,8 +62,8 @@ class LoginFragment : Fragment() {
                                 currentUsername = currentUser.displayName
 
                             }
-                            currentUserProfile = loginViewModel.checkUserExist(signInEmail,signInPassword,currentUsername)
-                            if(currentUserProfile.email==""){
+                            currentUserProfileEmail = loginViewModel.checkUserExist(signInEmail,signInPassword,currentUsername)
+                            if(currentUserProfileEmail == null){
                                 loginViewModel.addUser(signInEmail,signInPassword,currentUsername)
                             }
                             //navigate to main activity
