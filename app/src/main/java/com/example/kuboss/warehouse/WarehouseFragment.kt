@@ -95,7 +95,7 @@ class WarehouseFragment : Fragment() {
     private fun generateReport(){
         val sdf = SimpleDateFormat.getDateTimeInstance()
         val currentDate = sdf.format(Date())
-        val fileName = "Material Report-$currentDate"
+        val fileName = "Material Report-$currentDate.csv"
         val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
             type = "text/csv"

@@ -45,13 +45,15 @@ class WarehouseMapFragment : Fragment() {
         imgView.requestLayout()
 
         val getImg = registerForActivityResult(ActivityResultContracts.GetContent()){ uri: Uri? ->
-            imgView.setImageURI(uri)
-            val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uri)
+            if(uri != null) {
+                imgView.setImageURI(uri)
+                val bitmap =
+                    MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uri)
 
-            requireContext().openFileOutput("warehousemap.jpg", Context.MODE_PRIVATE).use{
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
+                requireContext().openFileOutput("warehousemap.jpg", Context.MODE_PRIVATE).use {
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
+                }
             }
-
 
         }
         val changeMapBtn: Button = view.findViewById(R.id.change_map_btn)
