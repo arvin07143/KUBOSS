@@ -66,7 +66,6 @@ class RegisterFragment :  Fragment(){
                                 //add into local database
                                 addUserViewModel.onAddUser(
                                     registerEmail,
-                                    registerPassword,
                                     registerName
                                 )
                                 val user = FirebaseAuth.getInstance().currentUser

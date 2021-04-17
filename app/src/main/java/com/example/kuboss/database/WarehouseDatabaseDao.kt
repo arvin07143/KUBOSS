@@ -76,14 +76,12 @@ interface WarehouseDatabaseDao {
     @Query("SELECT email FROM user_table WHERE name = :userName")
     suspend fun getEmailByName(userName: String):String
 
-    @Query("SELECT password FROM user_table WHERE name = :userName")
-    suspend fun getPasswordByName(userName: String):String
 
     @Query("SELECT * FROM user_table WHERE name = :userName")
     suspend fun getUserByName(userName: String):User
 
-    @Query("SELECT email FROM user_table WHERE name = :userName AND email =:userEmail AND password =:userPassword")
-    suspend fun checkUserExist(userEmail: String, userPassword: String, userName: String):String
+    @Query("SELECT email FROM user_table WHERE name = :userName AND email =:userEmail")
+    suspend fun checkUserExist(userEmail: String, userName: String):String
 
     @Query("UPDATE user_table SET name=:newName WHERE name=:oldName")
     suspend fun updateUserName(newName:String, oldName:String)
@@ -91,8 +89,7 @@ interface WarehouseDatabaseDao {
     @Query("UPDATE user_table SET email=:newEmail WHERE name=:oldName")
     suspend fun updateUserEmail(newEmail:String, oldName:String)
 
-    @Query("UPDATE user_table SET password=:newPassword WHERE name=:oldName")
-    suspend fun updateUserPassword(newPassword:String, oldName:String)
+
 
 
 }

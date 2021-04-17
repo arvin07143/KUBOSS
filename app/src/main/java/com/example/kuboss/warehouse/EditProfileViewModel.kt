@@ -13,20 +13,6 @@ class EditProfileViewModel(val database: WarehouseDatabaseDao): ViewModel() {
 
     lateinit var user: User
 
-    fun getUser(name:String):User{
-
-        runBlocking {
-
-            val job: Job = launch(context = Dispatchers.Default) {
-                user = database.getUserByName(name)
-
-            }
-
-            job.join()
-        }
-        return user
-    }
-
 
     fun updateEmail(newEmail:String, oldName:String){
 
@@ -56,18 +42,6 @@ class EditProfileViewModel(val database: WarehouseDatabaseDao): ViewModel() {
 
     }
 
-    fun updatePassword(newPassword:String, oldName:String){
 
-        runBlocking {
-
-            val job: Job = launch(context = Dispatchers.Default) {
-                database.updateUserPassword(newPassword, oldName)
-
-            }
-
-            job.join()
-        }
-
-    }
 
 }

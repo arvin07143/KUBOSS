@@ -89,26 +89,19 @@
     <fragment
         android:id="@+id/viewUserFragment"
         android:name="com.example.kuboss.warehouse.ViewUserFragment"
-        android:label="ViewUserFragment" >
-        <action
-            android:id="@+id/action_viewUserFragment_to_deleteUserFragment"
-            app:destination="@id/deleteUserFragment" />
+        android:label="View User">
         <action
             android:id="@+id/action_viewUserFragment_to_searchUserFragment"
             app:destination="@id/searchUserFragment" />
     </fragment>
     <fragment
-        android:id="@+id/deleteUserFragment"
-        android:name="com.example.kuboss.warehouse.DeleteUserFragment"
-        android:label="DeleteUserFragment" />
-    <fragment
         android:id="@+id/searchUserFragment"
         android:name="com.example.kuboss.warehouse.SearchUserFragment"
-        android:label="SearchUserFragment" />
+        android:label="Search User " />
     <fragment
         android:id="@+id/userFragment"
         android:name="com.example.kuboss.warehouse.UserFragment"
-        android:label="UserFragment" >
+        android:label="User">
         <action
             android:id="@+id/action_userFragment_to_viewUserFragment"
             app:destination="@id/viewUserFragment" />
@@ -122,9 +115,9 @@
     <activity
         android:id="@+id/loginActivity"
         android:name="com.example.kuboss.LoginActivity"
-        android:label="LoginActivity" />
+        android:label="Login" />
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.example.kuboss.warehouse.EditProfileFragment"
-        android:label="EditProfileFragment" />
+        android:label="EditProfile" />
 </navigation>

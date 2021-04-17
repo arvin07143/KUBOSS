@@ -18,7 +18,7 @@ class LoginViewModel (val database: WarehouseDatabaseDao): ViewModel() {
 
             val job: Job = launch(context = Dispatchers.Default) {
 
-                    currentUser = database.checkUserExist(userEmail, userPassword, userName)
+                    currentUser = database.checkUserExist(userEmail, userName)
             }
 
 
@@ -28,13 +28,13 @@ class LoginViewModel (val database: WarehouseDatabaseDao): ViewModel() {
 
     }
 
-    fun addUser(userEmail:String, userPassword:String, userName:String){
+    fun addUser(userEmail:String, userName:String){
 
         runBlocking {
 
             val job: Job = launch(context = Dispatchers.Default) {
 
-                database.addUser(User(userEmail, userPassword,userName))
+                database.addUser(User(userEmail,userName))
 
             }
 
