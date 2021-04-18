@@ -11,17 +11,17 @@ import com.example.kuboss.settings.Utils
 
 
 import kotlinx.android.synthetic.main.fragment_login.*
-private lateinit var navController: NavController
-class LoginActivity  : AppCompatActivity(R.layout.activity_login){
 
+class LoginActivity  : AppCompatActivity(R.layout.activity_login){
+    private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
 
 
         //setup nav host
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        navController = navHostFragment.navController
+        val navLoginFragment = supportFragmentManager.findFragmentById(R.id.nav_login_fragment) as NavHostFragment
+        navController = navLoginFragment.navController
         if(savedInstanceState == null){
             navController.setGraph(R.navigation.nav_login)
         }
