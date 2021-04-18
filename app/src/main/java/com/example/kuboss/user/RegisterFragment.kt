@@ -1,4 +1,4 @@
-package com.example.kuboss.warehouse
+package com.example.kuboss.user
 
 import android.os.Bundle
 import android.view.LayoutInflater

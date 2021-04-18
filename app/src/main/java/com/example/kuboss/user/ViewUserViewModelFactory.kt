@@ -1,11 +1,11 @@
-package com.example.kuboss.warehouse
+package com.example.kuboss.user
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.kuboss.database.WarehouseDatabaseDao
 
-class UserViewModelFactory (
+class ViewUserViewModelFactory (
     private val dataSource: WarehouseDatabaseDao,
     private val application: Application,
 ) : ViewModelProvider.Factory {
@@ -13,8 +13,8 @@ class UserViewModelFactory (
     @Suppress("unchecked_cast")
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(UserViewModel::class.java)) {
-            return UserViewModel(dataSource, application) as T
+        if (modelClass.isAssignableFrom(ViewUserViewModel::class.java)) {
+            return ViewUserViewModel(dataSource, application) as T
 
         }
         throw IllegalArgumentException("Unknown ViewModel class")

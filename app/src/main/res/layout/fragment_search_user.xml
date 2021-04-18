@@ -5,7 +5,7 @@
     <data>
         <variable
             name="searchUserViewModel"
-            type="com.example.kuboss.warehouse.SearchUserViewModel" />
+            type="com.example.kuboss.user.SearchUserViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,4 +1,4 @@
-package com.example.kuboss.warehouse
+package com.example.kuboss.user
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
