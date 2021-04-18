@@ -8,15 +8,15 @@
             name="viewUserViewModel"
             type="com.example.kuboss.warehouse.ViewUserViewModel" />
     </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="400dp"
-        android:layout_height="716dp">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/viewUser"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="10dp"
@@ -32,65 +32,14 @@
             android:id="@+id/btnSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.819"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.818"
             app:srcCompat="@drawable/ic_baseline_search_24" />
-
-        <!--        <com.nambimobile.widgets.efab.ExpandableFabLayout-->
-        <!--            android:id="@+id/expandable_fab_layout_user"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            tools:layout_editor_absoluteY="-64dp"-->
-        <!--            tools:layout_editor_absoluteX="29dp">-->
-
-        <!--            <com.nambimobile.widgets.efab.ExpandableFab-->
-        <!--                android:id="@+id/expandable_fab"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_gravity="bottom|end"-->
-        <!--                android:layout_marginBottom="@dimen/ui_margin_medium"-->
-        <!--                android:layout_marginEnd="@dimen/ui_margin_medium"-->
-        <!--                app:efab_color="#9374DE"-->
-        <!--                app:efab_icon="@drawable/ic_baseline_menu_white_24"-->
-        <!--                app:efab_iconAnimationRotationDeg="0"-->
-        <!--                app:efab_closingAnticipateTension="0" />-->
-
-        <!--            <com.nambimobile.widgets.efab.FabOption-->
-        <!--                android:id="@+id/add_user_btn"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                app:fab_color="#FF8800"-->
-        <!--                app:fab_icon="@drawable/ic_baseline_add_24"-->
-        <!--                app:label_text="Add"-->
-        <!--                app:label_backgroundColor="#808080"-->
-        <!--                app:label_textColor="#FFC0CB" />-->
-
-        <!--            <com.nambimobile.widgets.efab.FabOption-->
-        <!--                android:id="@+id/remove_user_btn"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                app:fab_color="#FF8800"-->
-        <!--                app:fab_icon="@drawable/ic_baseline_add_24"-->
-        <!--                app:label_text="Remove"-->
-        <!--                app:label_backgroundColor="#808080"-->
-        <!--                app:label_textColor="#FFC0CB" />-->
-
-        <!--            <com.nambimobile.widgets.efab.FabOption-->
-        <!--                android:id="@+id/search_user_btn"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                app:fab_color="#FF8800"-->
-        <!--                app:fab_icon="@drawable/ic_baseline_search_24"-->
-        <!--                app:label_text="Search"-->
-        <!--                app:label_backgroundColor="#808080"-->
-        <!--                app:label_textColor="#FFC0CB" />-->
-
-        <!--        </com.nambimobile.widgets.efab.ExpandableFabLayout>-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

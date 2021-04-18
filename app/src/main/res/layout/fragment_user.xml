@@ -25,7 +25,9 @@
             android:orientation="vertical"
             android:padding="16dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            app:layout_constraintBottom_toTopOf="@id/svRegister"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -55,69 +57,70 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btnEditProfile"
-            android:layout_width="411dp"
-            android:layout_height="85dp"
-            android:backgroundTint="#FFFFFF"
-            android:gravity="left|center_vertical"
-            android:text="Edit Profile"
-            android:textAllCaps="false"
-            android:textColor="#000"
+        <ScrollView
+            android:id="@+id/svRegister"
+            android:layout_width="match_parent"
+            android:layout_height="480dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nav_header"
-            app:rippleColor="@color/white"
-            android:textSize="18sp"/>
+            app:layout_constraintTop_toBottomOf="@id/nav_header">
 
-        <Button
-            android:id="@+id/btnViewUser"
-            android:layout_width="411dp"
-            android:layout_height="85dp"
-            android:layout_marginTop="84dp"
-            android:backgroundTint="#FFFFFF"
-            android:gravity="left|center_vertical"
-            android:text="View Users"
-            android:textAllCaps="false"
-            android:textColor="#000"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nav_header"
-            android:textSize="18sp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="480dp"
+                android:gravity="top|center_horizontal"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
-        <Button
-            android:id="@+id/btnRemoveAccount"
-            android:layout_width="411dp"
-            android:layout_height="85dp"
-            android:layout_marginTop="168dp"
-            android:backgroundTint="#FFFFFF"
-            android:text="Remove Account"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nav_header"
-            android:textColor="#000"
-            android:gravity="left|center_vertical"
-            android:textAllCaps="false"
-            android:textSize="18sp"/>
+                <Button
+                    android:id="@+id/btnEditProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="85dp"
+                    android:backgroundTint="#FFFFFF"
+                    android:gravity="left|center_vertical"
+                    android:text="Edit Profile"
+                    android:textAllCaps="false"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    app:rippleColor="@color/white" />
 
-        <Button
-            android:id="@+id/btnSignout"
-            android:layout_width="411dp"
-            android:layout_height="85dp"
-            android:layout_marginTop="252dp"
-            android:backgroundTint="#FFFFFF"
-            android:text="Logout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nav_header"
-            android:textColor="#000"
-            android:gravity="left|center_vertical"
-            android:textAllCaps="false"
-            android:textSize="18sp"/>
+                <Button
+                    android:id="@+id/btnViewUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="85dp"
+                    android:backgroundTint="#FFFFFF"
+                    android:gravity="left|center_vertical"
+                    android:text="View Users"
+                    android:textAllCaps="false"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
 
+                <Button
+                    android:id="@+id/btnRemoveAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="85dp"
+                    android:backgroundTint="#FFFFFF"
+                    android:gravity="left|center_vertical"
+                    android:text="Remove Account"
+                    android:textAllCaps="false"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/btnSignout"
+                    android:layout_width="match_parent"
+                    android:layout_height="85dp"
+                    android:backgroundTint="#FFFFFF"
+                    android:gravity="left|center_vertical"
+                    android:text="Logout"
+                    android:textAllCaps="false"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -11,11 +11,24 @@
     <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="top|center_horizontal">
         <TextView
             android:id="@+id/tvEditProfile"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:paddingLeft="24dp"
             android:layout_marginTop="50dp"
             android:text="Edit Profile"
             android:textSize="30sp"
@@ -23,32 +36,20 @@
             app:layout_constraintTop_toTopOf="parent "/>
 
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvEditProfile"
-            android:gravity="top|center_horizontal">
-
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/etEPName"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="320dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
                 android:layout_marginTop="@dimen/ui_margin_medium"
                 android:hint="Name">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etInputEPName"
-                    android:layout_width="320dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName" />
 
@@ -57,15 +58,17 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/etEPPassword"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="320dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
                 android:layout_marginTop="@dimen/ui_margin_medium"
                 android:hint="New Password"
                 app:endIconMode="password_toggle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etInputEPPassword"
-                    android:layout_width="320dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:inputType="textPassword" />
@@ -75,15 +78,17 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/etEPConfirmPassword"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="320dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
                 android:layout_marginTop="@dimen/ui_margin_medium"
                 android:hint="Confirm Password"
                 app:endIconMode="password_toggle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etInputEPConfirmPassword"
-                    android:layout_width="320dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:inputType="textPassword"
@@ -98,16 +103,19 @@
 
             <Button
                 android:id="@+id/btnEPSave"
-                android:layout_width="250dp"
-                android:layout_height="53dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="80dp"
                 android:layout_marginTop="24dp"
+                android:layout_marginBottom="50dp"
                 android:text="Save"/>
 
 
 
 
         </LinearLayout>
-
+        </ScrollView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
