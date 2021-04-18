@@ -12,24 +12,22 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <ScrollView
+            android:id="@+id/svUser"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/nav_header"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:background="@color/colorAccent"
+            android:layout_height="m"
+            android:background="@color/browser_actions_divider_color"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackgroundBorderless"
-            android:gravity="bottom"
             android:orientation="vertical"
-            android:padding="16dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
-            app:layout_constraintBottom_toTopOf="@id/svRegister"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            >
 
             <TextView
                 android:id="@+id/name"
@@ -37,6 +35,8 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="16dp"
                 android:textSize="32sp"
+                android:textColor="@color/browser_actions_text_color"
+                android:layout_marginTop="150dp"
                 app:layout_constraintBottom_toTopOf="@+id/email"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -49,78 +49,61 @@
                 android:paddingLeft="16dp"
                 android:paddingBottom="16dp"
                 android:textSize="20sp"
+                android:textColor="@color/browser_actions_text_color"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/name"
                 tools:text="email" />
 
+            <Button
+                android:id="@+id/btnEditProfile"
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
+                android:backgroundTint="#FFFFFF"
+                android:gravity="left|center_vertical"
+                android:text="Edit Profile"
+                android:textAllCaps="false"
+                android:textColor="#000"
+                android:textSize="18sp"
+                app:rippleColor="@color/white" />
+
+            <Button
+                android:id="@+id/btnViewUser"
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
+                android:backgroundTint="#FFFFFF"
+                android:gravity="left|center_vertical"
+                android:text="View Users"
+                android:textAllCaps="false"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btnRemoveAccount"
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
+                android:backgroundTint="#FFFFFF"
+                android:gravity="left|center_vertical"
+                android:text="Remove Account"
+                android:textAllCaps="false"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btnSignout"
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
+                android:backgroundTint="#FFFFFF"
+                android:gravity="left|center_vertical"
+                android:text="Logout"
+                android:textAllCaps="false"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+
 
         </LinearLayout>
-
-        <ScrollView
-            android:id="@+id/svRegister"
-            android:layout_width="match_parent"
-            android:layout_height="480dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nav_header">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="480dp"
-                android:gravity="top|center_horizontal"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <Button
-                    android:id="@+id/btnEditProfile"
-                    android:layout_width="match_parent"
-                    android:layout_height="85dp"
-                    android:backgroundTint="#FFFFFF"
-                    android:gravity="left|center_vertical"
-                    android:text="Edit Profile"
-                    android:textAllCaps="false"
-                    android:textColor="#000"
-                    android:textSize="18sp"
-                    app:rippleColor="@color/white" />
-
-                <Button
-                    android:id="@+id/btnViewUser"
-                    android:layout_width="match_parent"
-                    android:layout_height="85dp"
-                    android:backgroundTint="#FFFFFF"
-                    android:gravity="left|center_vertical"
-                    android:text="View Users"
-                    android:textAllCaps="false"
-                    android:textColor="#000"
-                    android:textSize="18sp" />
-
-                <Button
-                    android:id="@+id/btnRemoveAccount"
-                    android:layout_width="match_parent"
-                    android:layout_height="85dp"
-                    android:backgroundTint="#FFFFFF"
-                    android:gravity="left|center_vertical"
-                    android:text="Remove Account"
-                    android:textAllCaps="false"
-                    android:textColor="#000"
-                    android:textSize="18sp" />
-
-                <Button
-                    android:id="@+id/btnSignout"
-                    android:layout_width="match_parent"
-                    android:layout_height="85dp"
-                    android:backgroundTint="#FFFFFF"
-                    android:gravity="left|center_vertical"
-                    android:text="Logout"
-                    android:textAllCaps="false"
-                    android:textColor="#000"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
         </ScrollView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
