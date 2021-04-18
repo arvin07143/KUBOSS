@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         //setup bottom nav
         val bottomNav:BottomNavigationView = findViewById(R.id.bottom_navigation)
         bottomNav.setupWithNavController(navController)
-        val appBarConfig = AppBarConfiguration(setOf(R.id.warehouseFragment, R.id.searchItemFragment))
+        val appBarConfig = AppBarConfiguration(setOf(R.id.warehouseFragment, R.id.searchItemFragment, R.id.userFragment))
         setupActionBarWithNavController(navController, appBarConfig)
     }
     override fun onSupportNavigateUp(): Boolean {
