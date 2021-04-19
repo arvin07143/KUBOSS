@@ -87,12 +87,12 @@ class BarcodeResultFragment : BottomSheetDialogFragment() {
         val scannedMat = Material(barcodeData[0], barcodeData[1], barcodeData[2], barcodeData[3].toInt(), rackID)
         var matExist = true
 
-        rackDetailsViewModel.allMaterialID.observe(viewLifecycleOwner, Observer {
+        rackDetailsViewModel.allMaterialID.observe(viewLifecycleOwner, {
             matExist = it.contains(barcodeData[0])
         })
 
         var potentialRack = ""
-        rackDetailsViewModel.findRackID(barcodeData[0]).observe(viewLifecycleOwner, Observer {
+        rackDetailsViewModel.findRackID(barcodeData[0]).observe(viewLifecycleOwner, {
             potentialRack = it ?: ""
         })
 
@@ -105,14 +105,14 @@ class BarcodeResultFragment : BottomSheetDialogFragment() {
                     }
 
                 if (matExist) {
-                    Log.e("Test", potentialRack.toString())
+                    Log.e("Test", potentialRack)
                     if (potentialRack != "") { //item in other rack
                         storeMaterialError
                             .setMessage("Material Currently at Rack $potentialRack,\n\nYou are currently at Rack $rackID")
                             .show()
                     } else {
                         rackDetailsViewModel.storeMaterial(barcodeData[0], rackID)
-                            .observe(viewLifecycleOwner, Observer {
+                            .observe(viewLifecycleOwner, {
                                 if (it != 0) {
                                     Toast.makeText(context, "Item Stored Successfully", Toast.LENGTH_SHORT).show()
                                     activity?.finish()
@@ -141,7 +141,7 @@ class BarcodeResultFragment : BottomSheetDialogFragment() {
                             pickErrorDialog.show()
                         }
                         else -> {
-                            rackDetailsViewModel.pickMaterial(scannedMat).observe(viewLifecycleOwner, Observer {
+                            rackDetailsViewModel.pickMaterial(scannedMat).observe(viewLifecycleOwner, {
                                 if (it == 1) {
                                     Toast.makeText(context, "Item Picked Successfully", Toast.LENGTH_SHORT).show()
                                     activity?.finish()

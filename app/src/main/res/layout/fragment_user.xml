@@ -21,7 +21,7 @@
         <LinearLayout
             android:id="@+id/nav_header"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
 
             android:orientation="vertical"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
@@ -31,7 +31,7 @@
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="16dp"
+                android:paddingStart="16dp"
                 android:textSize="32sp"
                 android:textColor="@color/browser_actions_text_color"
                 android:layout_marginTop="150dp"
@@ -44,7 +44,7 @@
                 android:id="@+id/email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="16dp"
+                android:paddingStart="16dp"
                 android:paddingBottom="16dp"
                 android:textSize="20sp"
                 android:textColor="@color/browser_actions_text_color"

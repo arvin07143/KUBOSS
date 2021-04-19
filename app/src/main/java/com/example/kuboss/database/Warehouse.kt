@@ -1,6 +1,5 @@
 package com.example.kuboss.database
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Entity(tableName="rack_table")

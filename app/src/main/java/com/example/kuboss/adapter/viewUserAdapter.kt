@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kuboss.R
 import com.example.kuboss.database.User
 
-class ViewUserAdapter(): RecyclerView.Adapter<ViewUserAdapter.UserViewHolder>() {
+class ViewUserAdapter : RecyclerView.Adapter<ViewUserAdapter.UserViewHolder>() {
     var dataset = listOf<User>()
         set(value){
             field = value

@@ -35,9 +35,6 @@ class WorkflowModel(application: Application) : AndroidViewModel(application) {
     var isCameraLive = false
         private set
 
-    private val context: Context
-        get() = getApplication<Application>().applicationContext
-
     /**
      * State set of the application workflow.
      */

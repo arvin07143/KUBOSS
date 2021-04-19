@@ -1,7 +1,6 @@
 package com.example.kuboss.user
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.kuboss.database.User
 import com.example.kuboss.database.WarehouseDatabaseDao
 import kotlinx.coroutines.Dispatchers

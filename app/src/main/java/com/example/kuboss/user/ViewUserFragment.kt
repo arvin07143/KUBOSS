@@ -19,12 +19,11 @@ import com.example.kuboss.databinding.FragmentViewUserBinding
 class ViewUserFragment : Fragment() {
 
     companion object {
-        fun newInstance() = ViewUserFragment()
     }
 
     private lateinit var viewModel: ViewUserViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val binding: FragmentViewUserBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_view_user,container,false)
         val application = requireNotNull(this.activity).application
         val dataSource = WarehouseDatabase.getInstance(application).warehouseDatabaseDao
@@ -38,7 +37,7 @@ class ViewUserFragment : Fragment() {
 
         val adapter = ViewUserAdapter()
         binding.viewUser.adapter = adapter
-        viewModel.searchResults.observe(viewLifecycleOwner, Observer {
+        viewModel.searchResults.observe(viewLifecycleOwner, {
             it?.let {
                 adapter.dataset = it
                 Log.e("Test","Update")

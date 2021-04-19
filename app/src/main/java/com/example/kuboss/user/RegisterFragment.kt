@@ -29,7 +29,7 @@ class RegisterFragment :  Fragment(){
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         val application = requireNotNull(this.activity).application
         val dataSource = WarehouseDatabase.getInstance(application).warehouseDatabaseDao

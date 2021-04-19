@@ -1,7 +1,5 @@
 package com.example.kuboss.user
 
-import android.app.Application
-import android.util.Log
 import androidx.annotation.NonNull
 import androidx.lifecycle.ViewModel
 import com.example.kuboss.database.User
@@ -18,7 +16,7 @@ import kotlinx.coroutines.runBlocking
 class EditProfileViewModel(val database: WarehouseDatabaseDao): ViewModel() {
 
     lateinit var user: User
-    var successMSG:String = "Successfull Message\n"
+    var successMSG:String = "Successful Message\n"
     var notSuccessMSG:String = "Error Message\n"
 
 
@@ -70,7 +68,7 @@ class EditProfileViewModel(val database: WarehouseDatabaseDao): ViewModel() {
         runBlocking {
 
             val job: Job = launch(context = Dispatchers.Default) {
-                successMSG = "Successfull Message\n"
+                successMSG = "Successful Message\n"
                 notSuccessMSG = "Error Message\n"
 
             }
@@ -89,11 +87,7 @@ class EditProfileViewModel(val database: WarehouseDatabaseDao): ViewModel() {
                                 .addOnCompleteListener(object :
                                     OnCompleteListener<Void> {
                                     override fun onComplete(@NonNull task: Task<Void>) {
-                                        if (task.isSuccessful()) {
-                                            success = true
-                                        } else {
-                                            success = false
-                                        }
+                                        success = task.isSuccessful
                                     }
                                 })
 

@@ -1,16 +1,14 @@
 package com.example.kuboss.warehouse
 
 import android.app.Application
-import android.database.sqlite.SQLiteConstraintException
 import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.kuboss.database.Material
-import com.example.kuboss.database.Rack
-import com.example.kuboss.database.RackWithMaterials
 import com.example.kuboss.database.WarehouseDatabaseDao
-import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import kotlin.random.Random
 
 class ReceiveItemViewModel(

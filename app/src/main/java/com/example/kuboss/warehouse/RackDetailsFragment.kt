@@ -23,7 +23,7 @@ class RackDetailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         //inflate binding
         val binding: FragmentRackDetailsBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_rack_details, container, false
@@ -39,7 +39,7 @@ class RackDetailsFragment : Fragment() {
         //setup material's adapter
         val adapter = RackItemAdapter()
         binding.rackItemDetails.adapter = adapter
-        rackDetailsViewModel.materialList.observe(viewLifecycleOwner, Observer {
+        rackDetailsViewModel.materialList.observe(viewLifecycleOwner, {
             it?.let {
                 adapter.dataset = it.materials
             }

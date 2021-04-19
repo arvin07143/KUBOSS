@@ -18,7 +18,6 @@ package com.example.kuboss
 
 import android.animation.AnimatorInflater
 import android.animation.AnimatorSet
-import android.content.Intent
 import android.hardware.Camera
 import android.os.Bundle
 import android.util.Log
@@ -27,19 +26,17 @@ import android.view.View.OnClickListener
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.example.kuboss.camera.CameraSource
-import com.example.kuboss.settings.SettingsActivity
-import com.google.android.material.chip.Chip
-import com.google.common.base.Objects
 import com.example.kuboss.barcodedetection.BarcodeField
 import com.example.kuboss.barcodedetection.BarcodeProcessor
 import com.example.kuboss.barcodedetection.BarcodeResultFragment
+import com.example.kuboss.camera.CameraSource
 import com.example.kuboss.camera.CameraSourcePreview
 import com.example.kuboss.camera.GraphicOverlay
 import com.example.kuboss.camera.WorkflowModel
 import com.example.kuboss.camera.WorkflowModel.WorkflowState
+import com.google.android.material.chip.Chip
+import com.google.common.base.Objects
 import java.io.IOException
-import java.util.*
 
 /** Demonstrates the barcode scanning workflow using camera preview.  */
 class LiveBarcodeScanningActivity : AppCompatActivity(), OnClickListener {
@@ -194,7 +191,7 @@ class LiveBarcodeScanningActivity : AppCompatActivity(), OnClickListener {
             }
         })
 
-        workflowModel?.detectedBarcode?.observe(this, Observer { barcode ->
+        workflowModel?.detectedBarcode?.observe(this, { barcode ->
             if (barcode != null) {
                 val barcodeFieldList = ArrayList<BarcodeField>()
                 Log.e(TAG,mode.toString())

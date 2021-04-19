@@ -30,7 +30,7 @@ class EditProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         val application = requireNotNull(this.activity).application
         val dataSource = WarehouseDatabase.getInstance(application).warehouseDatabaseDao
@@ -61,7 +61,7 @@ class EditProfileFragment : Fragment() {
 
             if (currentUser != null) {
                 //for display which is complete updated
-                var success = "Successfull Message\n"
+                var success = "Successful Message\n"
                 var notSuccess = "\nError Message\n"
 
                 if (epPassword.isNotEmpty() && epConfirmPassword.isNotEmpty()) {
@@ -98,7 +98,7 @@ class EditProfileFragment : Fragment() {
 
 
                 val builder = AlertDialog.Builder(activity)
-                if(success == "Successfull Message\n" && notSuccess == "\nError Message\n") {
+                if(success == "Successful Message\n" && notSuccess == "\nError Message\n") {
                     builder.setMessage("Nothing is updated.")
                         .setCancelable(false)
                         .setPositiveButton("OK") { dialog, id ->
@@ -106,7 +106,7 @@ class EditProfileFragment : Fragment() {
 
                         }
 
-                }else if(success != "Successfull Message\n" && notSuccess == "\nError Message\n"){
+                }else if(success != "Successful Message\n" && notSuccess == "\nError Message\n"){
                     builder.setMessage(success )
 
                         .setCancelable(false)
@@ -114,7 +114,7 @@ class EditProfileFragment : Fragment() {
                             dialog.dismiss()
 
                         }
-                }else if(success == "Successfull Message\n" && notSuccess != "\nError Message\n"){
+                }else if(success == "Successful Message\n" && notSuccess != "\nError Message\n"){
                     builder.setMessage(notSuccess)
 
                         .setCancelable(false)

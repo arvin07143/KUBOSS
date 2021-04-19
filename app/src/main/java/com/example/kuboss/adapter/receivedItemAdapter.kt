@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kuboss.R
 import com.example.kuboss.database.Material
 
-class ReceivedItemAdapter(): RecyclerView.Adapter<ReceivedItemAdapter.ItemViewHolder>() {
+class ReceivedItemAdapter : RecyclerView.Adapter<ReceivedItemAdapter.ItemViewHolder>() {
     var dataset = listOf<Material>()
         set(value){
             field = value

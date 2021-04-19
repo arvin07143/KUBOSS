@@ -31,7 +31,7 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val application = requireNotNull(this.activity).application
         val dataSource = WarehouseDatabase.getInstance(application).warehouseDatabaseDao
         val viewModelFactory = LoginViewModelFactory(dataSource)
@@ -58,10 +58,10 @@ class LoginFragment : Fragment() {
             builder.setView(input)
 
             builder.setPositiveButton("Send",
-                DialogInterface.OnClickListener { dialog, which ->
+                { dialog, which ->
                     resetEmail = input.text.toString()
                     FirebaseAuth . getInstance ().sendPasswordResetEmail(resetEmail)
-                        .addOnCompleteListener(OnCompleteListener<Void?> { task ->
+                        .addOnCompleteListener({ task ->
                             if (task.isSuccessful) {
                                 Toast.makeText(activity, "Email sent.", Toast.LENGTH_SHORT).show()
 
@@ -69,7 +69,7 @@ class LoginFragment : Fragment() {
                         })
                 })
             builder.setNegativeButton("Cancel",
-                DialogInterface.OnClickListener { dialog, which -> dialog.cancel() })
+                { dialog, which -> dialog.cancel() })
 
             builder.show()
         }

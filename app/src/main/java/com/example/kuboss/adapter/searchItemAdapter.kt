@@ -7,9 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kuboss.R
 import com.example.kuboss.database.Material
-import com.example.kuboss.database.RackWithMaterials
 
-class SearchItemAdapter(): RecyclerView.Adapter<SearchItemAdapter.ItemViewHolder>() {
+class SearchItemAdapter : RecyclerView.Adapter<SearchItemAdapter.ItemViewHolder>() {
     var dataset = listOf<Material>()
         set(value){
             field = value

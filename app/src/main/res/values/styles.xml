@@ -15,16 +15,5 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
-    <style name="BottomNavigation">
-        <item name="android:background">@color/reply_blue_700</item>
-        <item name="itemIconTint">@color/reply_orange_500</item>
-        <item name="itemTextColor">@color/reply_orange_500</item>
-    </style>
 </resources>

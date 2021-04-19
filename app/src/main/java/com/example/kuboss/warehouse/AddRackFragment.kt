@@ -18,7 +18,7 @@ class AddRackFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         val fragmentBinding = FragmentAddRackBinding.inflate(inflater, container, false)
 
@@ -65,7 +65,7 @@ class AddRackFragment : Fragment() {
             findNavController().navigate(R.id.action_addRackFragment_to_warehouseFragment)
         }
 
-        addRackViewModel.isSqlError.observe(viewLifecycleOwner, Observer {
+        addRackViewModel.isSqlError.observe(viewLifecycleOwner) {
             if (it == true) {
                 MaterialAlertDialogBuilder(requireContext())
                     .setTitle("Add Rack")
@@ -76,9 +76,9 @@ class AddRackFragment : Fragment() {
                     .show()
                 addRackViewModel.finishShowingDialog()
             }
-        })
+        }
 
-        addRackViewModel.isAddRackSuccess.observe(viewLifecycleOwner, Observer {
+        addRackViewModel.isAddRackSuccess.observe(viewLifecycleOwner, {
             if (it == true) {
                 MaterialAlertDialogBuilder(requireContext())
                     .setTitle("Add Rack")

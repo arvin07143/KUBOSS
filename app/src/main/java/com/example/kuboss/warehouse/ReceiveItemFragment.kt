@@ -32,10 +32,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
 import com.google.zxing.qrcode.QRCodeWriter
-import kotlinx.android.synthetic.main.fragment_receive_item_form.view.*
 import java.io.ByteArrayOutputStream
 import java.io.File
-import java.util.*
 
 class ReceiveItemFragment : Fragment() {
     private lateinit var viewPager: ViewPager2
@@ -209,8 +207,7 @@ class ReceiveItemFragment : Fragment() {
                 PrintHelper(context).apply {
                     scaleMode = PrintHelper.SCALE_MODE_FIT
                 }.also { printHelper ->
-                    val bitmap = bmpImage
-                    printHelper.printBitmap("$printJobName Print Job", bitmap)
+                    printHelper.printBitmap("$printJobName Print Job", bmpImage)
                 }
             }
         }
@@ -261,7 +258,7 @@ class ReceiveItemFragment : Fragment() {
             val adapter = ReceivedItemAdapter()
             binding.receiveItemDetails.adapter = adapter
 
-            receiveItemViewModel.receivedItems.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            receiveItemViewModel.receivedItems.observe(viewLifecycleOwner, {
                 it?.let {
                     adapter.dataset = it
                 }

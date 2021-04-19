@@ -18,7 +18,6 @@ import com.example.kuboss.databinding.SearchItemFragmentBinding
 class SearchItemFragment : Fragment() {
 
     companion object {
-        fun newInstance() = SearchItemFragment()
     }
 
     private lateinit var viewModel: SearchItemViewModel
@@ -38,7 +37,7 @@ class SearchItemFragment : Fragment() {
 
         val adapter = SearchItemAdapter()
         binding.searchItemDetails.adapter = adapter
-        viewModel.searchResults.observe(viewLifecycleOwner, Observer {
+        viewModel.searchResults.observe(viewLifecycleOwner, {
             it?.let {
                 adapter.dataset = it
                 Log.e("Test","Update")

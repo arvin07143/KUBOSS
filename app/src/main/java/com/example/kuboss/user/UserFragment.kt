@@ -24,7 +24,6 @@ class UserFragment : Fragment() {
     var currentUsername: String = ""
     var currentUserEmail: String = ""
     companion object {
-        fun newInstance() = UserFragment()
     }
 
     private lateinit var viewModel: UserViewModel

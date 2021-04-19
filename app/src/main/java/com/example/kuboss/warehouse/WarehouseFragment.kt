@@ -45,7 +45,7 @@ class WarehouseFragment : Fragment() {
         //setup recycler view
         val adapter = WarehouseRackAdapter()
         binding.rackRecyclerView.adapter = adapter
-        warehouseViewModel.racks.observe(viewLifecycleOwner, Observer {
+        warehouseViewModel.racks.observe(viewLifecycleOwner, {
             it?.let {
                 adapter.data = it
             }

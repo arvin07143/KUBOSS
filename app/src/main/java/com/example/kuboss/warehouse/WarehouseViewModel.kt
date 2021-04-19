@@ -20,11 +20,11 @@ class WarehouseViewModel(
     val racks = database.getAllRacks()
     private var materialList = listOf<Material>()
 
-    private var _isSqlError = MutableLiveData<Boolean>(false)
+    private var _isSqlError = MutableLiveData(false)
     val isSqlError: LiveData<Boolean>
         get() = _isSqlError
 
-    private var _isAddRackSuccess = MutableLiveData<Boolean>(false)
+    private var _isAddRackSuccess = MutableLiveData(false)
     val isAddRackSuccess: LiveData<Boolean>
         get() = _isAddRackSuccess
 

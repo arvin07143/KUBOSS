@@ -5,12 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.example.kuboss.settings.Utils
-
-
-import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginActivity  : AppCompatActivity(R.layout.activity_login){
     private lateinit var navController: NavController
